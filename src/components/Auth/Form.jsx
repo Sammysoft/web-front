@@ -7,7 +7,7 @@ import {
 } from "../Elements";
 import { Text } from "../Home/Blogs";
 
-import FormImg from "../../assets/Images/form_img.svg";
+import FormImg from "../../assets/Images/signup_form.svg";
 import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
