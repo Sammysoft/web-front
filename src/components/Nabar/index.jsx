@@ -102,7 +102,10 @@ const MenuDetails = ({ navigate }) => {
           <>
             <ImageWrapper image={PersonSVG} height={"40px"} width={"40px"} />
             <LoginText onClick={() => navigate("/login")}>Login</LoginText>
-            <ImageWrapper image={ChartSVG} height={"30px"} width={"30px"} />
+            <div onClick={() => navigate("/checkout")}>
+              <ImageWrapper image={ChartSVG} height={"30px"} width={"30px"} />
+            </div>
+
             <CountText>0</CountText>
           </>
         }

@@ -103,7 +103,7 @@ export const Text = styled.div`
   color: ${(props) => (props.color ? props.color : "#000000")};
   padding: 20px 0px 20px 0px;
   width: ${(props) => (props.width ? props.width : "100%")};
-  line-height: 35px;
+  line-height: ${(props)=> props.line ? props.line : '35px'};
   weight: ${(props) => (props.weight ? props.weight : "")};
   text-align: ${(props) => (props.align ? props.align : "center")};
   cursor: ${(props) => (props.cursor ? props.cursor : "")};

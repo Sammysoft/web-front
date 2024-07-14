@@ -17,11 +17,17 @@ export const HorizontalFlexedWrapper = ({
   width,
   align,
   height,
-  onClick
+  onClick,
 }) => {
   return (
     <>
-      <HFWrapper justify={justify} width={width} align={align} height={height} onClick={onClick}>
+      <HFWrapper
+        justify={justify}
+        width={width}
+        align={align}
+        height={height}
+        onClick={onClick}
+      >
         {elements}
       </HFWrapper>
     </>
@@ -52,7 +58,7 @@ export const VerticalFlexedWrapper = ({
   align,
   height,
   margin,
-  onClick
+  onClick,
 }) => {
   return (
     <>
@@ -198,3 +204,12 @@ DropDownButtonWrapper.propTypes = {
   bgColor: PropTypes.string,
   color: PropTypes.string,
 };
+
+export const BackgroundImage = styled.div`
+  background: url(${(props) => (props.background ? props.background : "")});
+  background-position: cover;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: ${(props) => (props.height ? props.height : "100%")};
+  width: ${(props) => (props.width ? props.width : "100%")};
+`;

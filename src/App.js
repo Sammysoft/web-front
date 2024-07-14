@@ -8,6 +8,7 @@ import Blogs from "./pages/BlogPage";
 import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/contact" exact element={<ContactPage />} />
         <Route path='/login' exact element={<LoginPage />} />
         <Route path="/signup" exact element={<SignupPage />} />
+        <Route path="/checkout" exact element={<CheckoutPage />} />
       </Routes>
     </>
   );
