@@ -8,9 +8,8 @@ import {
 import { Text, BlogCards } from "../Home/Blogs";
 
 const Wrapper = styled.div`
-  margin-top: 15vh;
   width: 80%;
-  margin: 10%;
+  margin: 5% 10% 5% 10%;
 `;
 
 const BlogBody = () => {
@@ -58,8 +57,8 @@ const BlogBody = () => {
           width={"100%"}
           height={"fit-content"}
         />
-        <BlogCards />
       </Wrapper>
+      <BlogCards />
     </>
   );
 };
