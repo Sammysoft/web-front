@@ -31,7 +31,7 @@ const NavBar = () => {
             <>
               <ImageWrapper image={LogoSVG} height={"150px"} width={"150px"} />
               <MenuItems navigate={navigate} />
-              <MenuDetails />
+              <MenuDetails navigate={navigate} />
             </>
           }
         />
@@ -85,6 +85,7 @@ const MenuList = styled.p`
 const LoginText = styled.p`
   font-size: ${Sizes.SECONDARY};
   font-family: ${Fonts.PRIMARY};
+  cursor: pointer;
 `;
 
 const CountText = styled.p`
@@ -92,7 +93,7 @@ const CountText = styled.p`
   font-family: ${Fonts.PRIMARY};
 `;
 
-const MenuDetails = () => {
+const MenuDetails = ({ navigate }) => {
   return (
     <>
       <HorizontalFlexedWrapper
@@ -100,7 +101,7 @@ const MenuDetails = () => {
         elements={
           <>
             <ImageWrapper image={PersonSVG} height={"40px"} width={"40px"} />
-            <LoginText>Login</LoginText>
+            <LoginText onClick={() => navigate("/login")}>Login</LoginText>
             <ImageWrapper image={ChartSVG} height={"30px"} width={"30px"} />
             <CountText>0</CountText>
           </>

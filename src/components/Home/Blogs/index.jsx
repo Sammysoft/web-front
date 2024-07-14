@@ -106,6 +106,7 @@ export const Text = styled.div`
   line-height: 35px;
   weight: ${(props) => (props.weight ? props.weight : "")};
   text-align: ${(props) => (props.align ? props.align : "center")};
+  cursor: ${(props) => (props.cursor ? props.cursor : "")};
 `;
 
 export const BlogCards = () => {
