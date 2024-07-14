@@ -141,6 +141,7 @@ export const BlogCards = () => {
                                   weight={"bolder"}
                                   width={"80%"}
                                   align={"left"}
+                                  line={'24px'}
                                 >
                                   {blog.textHead}
                                 </Text>
@@ -149,6 +150,7 @@ export const BlogCards = () => {
                                   size={"14px"}
                                   width={"80%"}
                                   align={"left"}
+                                  line={'20px'}
                                 >
                                   {blog.textBody}
                                 </Text>
