@@ -17,11 +17,9 @@ const ProductHeader = () => {
           elements={
             <>
               <CustomImageWrapper background={productH1}>
-                {/* <ImageWrapper image={productH1} width={"50%"} height={"100%"} /> */}
                 <Text>Product listing 01</Text>
               </CustomImageWrapper>
               <CustomImageWrapper background={productH2}>
-                {/* <ImageWrapper image={productH2} width={"50%"} height={"100%"} /> */}
                 <Text>Product listing 02</Text>
               </CustomImageWrapper>
             </>
@@ -41,6 +39,11 @@ const CustomImageWrapper = styled.div`
   background-size: 100%;
   background-position: center;
   width: 50%;
+
+
+  @media (max-width: 1400px){
+    height: 20vh;
+  }
 `;
 
 const Text = styled.p`
@@ -52,6 +55,11 @@ const Text = styled.p`
   z-index: 9999;
   color: #FFFFFF;
   font-size: 2rem;
+
+
+  @media (max-width: 1400px){
+    font-size: 1rem
+  }
 `;
 
 export default ProductHeader;

@@ -17,6 +17,10 @@ const Wrapper = styled.div`
   width: 90%;
   height: fit-content;
   padding: 5%;
+
+  @media (max-width: 1400px){
+    margin-bottom: 10vh;
+  }
 `;
 
 const Menu = [
@@ -57,22 +61,42 @@ const ListingMenuWrapper = styled.div`
   width: 80%;
   margin-left: 20%;
   margin-top: 15vh;
+
+  @media (max-width: 1400px) {
+    display: none;
+  }
 `;
+
+const MenuWrapper = styled.div`
+  margin-right: 20px;
+  padding: 10px;
+  height: 100%;
+  text-align: center;
+  font-size: 1rem;
+  font-family: Josefin Sans;
+  border-bottom: ${(props) => (props.border ? "2px solid #fd9017" : "")};
+  text-transform: capitalize;
+  cursor: pointer;
+`;
+
+
+const Text = styled.p`
+font-weight: bolder;
+font-family: Josefin Sans;
+color: #efefef;
+font-size: 2rem;
+text-transform: uppercase;
+
+
+@media (min-width: 1400px){
+  display: none;
+}
+`
+
 
 const ListingMenu = () => {
   const [clicked, setClicked] = useState(0);
 
-  const MenuWrapper = styled.div`
-    margin-right: 20px;
-    padding: 10px;
-    height: 100%;
-    text-align: center;
-    font-size: 1rem;
-    font-family: Josefin Sans;
-    border-bottom: ${(props) => (props.border ? "2px solid #fd9017" : "")};
-    text-transform: capitalize;
-    cursor: pointer;
-  `;
   return (
     <>
       <ListingMenuWrapper>
@@ -103,6 +127,7 @@ const ListingMenu = () => {
 const ProductCatalogue = () => {
   return (
     <>
+    <Text>Product Listings</Text>
       <HorizontalFlexedWrapper
         align={"flex-start"}
         width={"100%"}
@@ -145,6 +170,14 @@ const ProductWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+
+  @media (max-width: 1400px) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 45% 45%;
+    column-gap: 2.5%;
+    row-gap: 2.5%;
+  }
 `;
 
 const ProductWrapping = styled.div`
@@ -152,12 +185,20 @@ const ProductWrapping = styled.div`
   width: 30%;
   height: 350px;
   object-fit: contain;
-  background: url(${(props) =>
-    props.background ? props.background : props.background});
+  background: url(${(props) => props.background ? props.background : props.background});
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
   margin: 20px;
+
+  @media (max-width: 1400px) {
+    background-position: cover;
+    background-size: 200%;
+    height: 200px;
+    width: 100%;
+    margin: 0px;
+
+  }
 `;
 
 const ProductBadge = styled.div`
@@ -176,6 +217,10 @@ const LeftText = styled.div`
   height: 60vh;
   margin-top: 20vh;
   position: relative;
+
+  @media (max-width: 1400px) {
+    display: none;
+  }
 `;
 
 const LongName = styled.p`
