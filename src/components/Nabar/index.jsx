@@ -6,6 +6,7 @@ import { HorizontalFlexedWrapper, ImageWrapper } from "../Elements";
 import LogoSVG from "../../assets/Icons/svg/logo-black.svg";
 import PersonSVG from "../../assets/Icons/svg/person-black.svg";
 import ChartSVG from "../../assets/Icons/svg/chart-black.svg";
+import HarmbuggerSVG from "../../assets/Icons/svg/harmbugger.svg";
 
 import { Fonts, Sizes } from "../../assets/Res/fonts";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,24 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   margin: 0px 5vw 0px 5vw;
+
+  @media (max-width: 1400px) {
+    display: none;
+  }
+`;
+
+const MobileWrapper = styled.div`
+  width: 90vw;
+  height: 10vh;
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0px 5vw 0px 5vw;
+
+  @media (min-width: 1400px) {
+    display: none;
+  }
 `;
 
 const NavBar = () => {
@@ -36,6 +55,41 @@ const NavBar = () => {
           }
         />
       </Wrapper>
+
+      <MobileWrapper>
+        <HorizontalFlexedWrapper
+          width={"100%"}
+          elements={
+            <>
+              <ImageWrapper image={LogoSVG} width={"80px"} height={"80px"} />
+              <HorizontalFlexedWrapper
+                width={"45%"}
+                elements={
+                  <>
+                    <ImageWrapper
+                      image={PersonSVG}
+                      width={"30px"}
+                      height={"30px"}
+                    />
+                    <LoginText>Login</LoginText>
+                    <ImageWrapper
+                      image={ChartSVG}
+                      width={"30px"}
+                      height={"30px"}
+                    />
+                    <LoginText>0</LoginText>
+                    <ImageWrapper
+                      image={HarmbuggerSVG}
+                      width={"30px"}
+                      height={"30px"}
+                    />
+                  </>
+                }
+              />
+            </>
+          }
+        />
+      </MobileWrapper>
     </>
   );
 };

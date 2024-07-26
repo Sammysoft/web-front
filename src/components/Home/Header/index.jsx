@@ -12,8 +12,23 @@ const Wrapper = styled.div`
   width: 90%;
   padding-top: 50vh;
   margin: 0px 5% 0px 5%;
+
+  @media (max-width: 1400px) {
+    display: none;
+  }
 `;
 
+const MobileWrapper = styled.div`
+  height: 120vh;
+  width: 90%;
+  padding-top: 5vh;
+  margin: 0px 5% 0px 5%;
+
+
+  @media (min-width: 1400px) {
+    display: none;
+  }
+`;
 
 const Header = () => {
   return (
@@ -31,6 +46,15 @@ const Header = () => {
           }
         />
       </Wrapper>
+
+      <MobileWrapper>
+        <ItalizedText>928 Apparels</ItalizedText>
+        <OverLayWrapper>
+          <OverLayInnerWrapper background={HomeHero}>
+
+          </OverLayInnerWrapper>
+        </OverLayWrapper>
+      </MobileWrapper>
     </>
   );
 };
@@ -39,14 +63,32 @@ const OverLayWrapper = styled.div`
   width: 60%;
   height: 100%;
   position: relative;
+
+  @media (max-width: 1400px) {
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
 `;
 
 const OverLayInnerWrapper = styled.div`
-position: absolute;
-height: 65vh;
-width: 90vw;
-top: -30vh;
-right:-30vw;
+  position: absolute;
+  height: 70vh;
+  width: 90vw;
+  top: -30vh;
+  right: -30vw;
+
+  @media (max-width: 1400px) {
+    height: 70vh;
+    width: 100%;
+    right: 0px;
+    top: 0vh;
+    left: 0px;
+    background: url(${(props) => (props.background ? props.background : "")});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 220%;
+  }
 `;
 
 const ItalizedText = styled.p`
@@ -54,6 +96,11 @@ const ItalizedText = styled.p`
   font-family: Aguafina Script;
   font-weight: 500;
   color: #000000;
+  text-align: center;
+
+  @media (max-width: 1400px) {
+    font-size: 4rem;
+  }
 `;
 
 const OverLayImage = () => {
@@ -65,7 +112,7 @@ const OverLayImage = () => {
             <ItalizedText>928</ItalizedText>
             <OverLayWrapper>
               <OverLayInnerWrapper>
-                <ImageWrapper image={HomeHero} height={"100%"} width={"100%"}/>
+                <ImageWrapper image={HomeHero} height={"100%"} width={"100%"} />
               </OverLayInnerWrapper>
             </OverLayWrapper>
             <ItalizedText>Apparels</ItalizedText>
