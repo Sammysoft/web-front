@@ -24,6 +24,14 @@ const Wrapper = styled.div`
   background-position: center;
   padding: 10%;
   height: fit-content;
+
+
+  @media (max-width: 1400px){
+    background-position: contain;
+    background-size: cover;
+    padding: 5% 0% 5% 0%;
+    width: 100%;
+  }
 `;
 
 const BlogItems = [
@@ -91,6 +99,10 @@ const BlogWrapper = styled.div`
   width: 100%;
   height: fit-content;
   opacity: 0.9;
+
+  @media (max-width: 1400px){
+    padding: 0px;
+  }
 `;
 
 const BlogHead = styled.div`
@@ -107,6 +119,10 @@ export const Text = styled.div`
   weight: ${(props) => (props.weight ? props.weight : "")};
   text-align: ${(props) => (props.align ? props.align : "center")};
   cursor: ${(props) => (props.cursor ? props.cursor : "")};
+
+  @media (max-width: 1400px){
+    width: 90%;
+  }
 `;
 
 export const BlogCards = () => {
@@ -186,9 +202,6 @@ export const BlogCards = () => {
   );
 };
 
-// const CustomImageWrapper = styled(ImageWrapper)`
-//   object-fit: cover;
-// `;
 
 const BlogCardWrapper = styled.div`
   width: 100%;
@@ -197,12 +210,23 @@ const BlogCardWrapper = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: space-between;
+
+  @media (max-width: 1400px){
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
 `;
 
 const BlogCapsule = styled.div`
   width: 45%;
   height: 60vh;
   margin: 2vh 0px 2vh 0px;
+
+  @media (max-width: 1400px){
+    width: 100%;
+    margin: 2vh 0px 2vh 0px;
+  }
 `;
 
 const Next = styled.div`
