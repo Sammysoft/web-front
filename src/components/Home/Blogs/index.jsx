@@ -122,6 +122,7 @@ export const Text = styled.div`
 
   @media (max-width: 1400px){
     width: 90%;
+    line-height: ${(props)=> props.line ? props.line : '45px'};
   }
 `;
 

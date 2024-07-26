@@ -132,6 +132,11 @@ const Menu = styled.div`
   text-align: center;
   width: 25%;
   cursor: pointer;
+
+
+  @media (max-width: 1400px){
+    font-size: 12px;
+  }
 `;
 
 export default Footer;
