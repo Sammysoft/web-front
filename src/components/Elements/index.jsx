@@ -120,6 +120,11 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
+  @media (max-width: 1400px){
+    font-size: 16px;
+    width: 50%;
+  }
 `;
 
 ButtonWrapper.propTypes = {
@@ -147,6 +152,10 @@ const StyledButtonWrapper = styled.div`
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#FFFFFF")};
   margin: 2vh 0px 2vh 0px;
   cursor: pointer;
+
+  @media (max-width: 1400px){
+    font-size: 12px;
+  }
 `;
 
 StyledButtonWrapper.propTypes = {

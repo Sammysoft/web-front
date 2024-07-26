@@ -49,6 +49,7 @@ const Footer = () => {
                 </i>
               </Text>
               <StyledButton
+                mobileWidth={"40%"}
                 width={"20%"}
                 text={"Contact Us"}
                 bgColor={"#FD9017"}
