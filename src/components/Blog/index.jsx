@@ -17,10 +17,12 @@ const BlogBody = () => {
     <>
       <Wrapper>
         <HorizontalFlexedWrapper
+          invert={true}
           elements={
             <>
               <VerticalFlexedWrapper
                 width={"70%"}
+                mobileWidth={"100%"}
                 height={"fit-content"}
                 elements={
                   <>
@@ -29,11 +31,18 @@ const BlogBody = () => {
                       size={"25px"}
                       weight={"800"}
                       align={"left"}
+                      smallLine={'30px'}
                     >
                       Choosing the right corporate style: A modern noob’s
                       approach
                     </Text>
-                    <Text color={"#696969"} size={"16px"} align={"justify"}>
+                    <Text
+                      color={"#696969"}
+                      size={"16px"}
+                      align={"justify"}
+                      fontSmall={"14px"}
+                      smallLine={"28px"}
+                    >
                       Enim dictum mauris amet eget nunc in. In massa proin urna
                       nulla sed purus ultricies cras elementum. Amet mattis
                       porta sit tortor tempor et. Auctor mauris aenean at quis

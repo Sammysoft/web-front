@@ -28,7 +28,7 @@ export const HorizontalFlexedWrapper = ({
   onClick,
   invert,
   smallHeight,
-  smallWidth
+  smallWidth,
 }) => {
   return (
     <>
@@ -54,7 +54,7 @@ HFWrapper.propTypes = {
   height: PropTypes.string,
   invert: PropTypes.bool,
   smallHeight: PropTypes.string,
-  smallWidth: PropTypes.string
+  smallWidth: PropTypes.string,
 };
 
 const VFWrapper = styled.div`
@@ -69,6 +69,7 @@ const VFWrapper = styled.div`
 
   @media (max-width: 1400px) {
     width: ${(props) => (props.mobileWidth ? props.mobileWidth : props.width)};
+    flex-direction: ${(props) => (props.invert ? "row" : "column")};
   }
 `;
 
@@ -81,6 +82,7 @@ export const VerticalFlexedWrapper = ({
   margin,
   onClick,
   mobileWidth,
+  invert,
 }) => {
   return (
     <>
@@ -92,6 +94,7 @@ export const VerticalFlexedWrapper = ({
         margin={margin}
         onClick={onClick}
         mobileWidth={mobileWidth}
+        invert={invert}
       >
         {elements}
       </VFWrapper>
@@ -103,6 +106,7 @@ VFWrapper.propTypes = {
   justify: PropTypes.string,
   align: PropTypes.string,
   mobileWidth: PropTypes.string,
+  invert: PropTypes.bool,
 };
 
 const IMGWrapper = styled.img`

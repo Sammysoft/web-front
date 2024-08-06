@@ -155,20 +155,23 @@ export const BlogCards = () => {
                               <>
                                 <Text
                                   color={"#000000"}
-                                  size={"18px"}
+                                  size={"24px"}
                                   weight={"bolder"}
                                   width={"80%"}
                                   align={"left"}
-                                  line={"24px"}
+                                  line={"30px"}
+                                  smallLine={'30px'}
                                 >
                                   {blog.textHead}
                                 </Text>
                                 <Text
                                   color={"#696969"}
-                                  size={"14px"}
+                                  size={"18px"}
                                   width={"80%"}
                                   align={"left"}
-                                  line={"20px"}
+                                  line={"24px"}
+                                  fontSmall={'14px'}
+                                  smallLine={'20px'}
                                 >
                                   {blog.textBody}
                                 </Text>
@@ -178,8 +181,8 @@ export const BlogCards = () => {
                           <Next>
                             <ImageWrapper
                               image={Right}
-                              width={"30%"}
-                              height={"30%"}
+                              width={"25%"}
+                              height={"25%"}
                             />
                           </Next>
                         </>
@@ -231,8 +234,8 @@ const BlogCapsule = styled.div`
 `;
 
 const Next = styled.div`
-  height: 70%;
-  width: 20%;
+  height: 50%;
+  width: 15%;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  VerticalFlexedWrapper,
-} from "../Elements";
+import { VerticalFlexedWrapper } from "../Elements";
 import { Text } from "../Home/Blogs";
 import BlogImg from "../../assets/Images/blog1.svg";
 
@@ -10,6 +8,10 @@ const Wrapper = styled.div`
   margin-top: 15vh;
   width: 80%;
   margin: 10% 10% 2% 10%;
+
+  @media (max-width: 1400px) {
+    margin-top: 15vh;
+  }
 `;
 
 const Header = () => {
@@ -30,14 +32,19 @@ const Header = () => {
               >
                 Catch up on the latest ‘gist’
               </Text>
-              <Text color={"#696969"} width={"75%"} size={"18px"}>
+              <Text
+                color={"#696969"}
+                width={"75%"}
+                size={"18px"}
+                smallLine={"28px"}
+                fontSmall={'14px'}
+              >
                 Ornare nec placerat in elit convallis rutrum pellentesque. Ac
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum
                 consequat. Venenatis elit.
               </Text>
               <BlogImage background={BlogImg}></BlogImage>
-
             </>
           }
         />
