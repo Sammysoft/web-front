@@ -151,7 +151,7 @@ const ButtonWrapper = styled.div`
 
   @media (max-width: 1400px) {
     font-size: 16px;
-    width: 50%;
+    width: 60%;
   }
 `;
 
@@ -183,6 +183,7 @@ const StyledButtonWrapper = styled.div`
 
   @media (max-width: 1400px) {
     font-size: 12px;
+    width: 50%
   }
 `;
 
