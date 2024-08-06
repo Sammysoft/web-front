@@ -41,7 +41,7 @@ const Footer = () => {
               >
                 We’d love to hear from you!
               </Text>
-              <Text color={"#FFFFFF"} width={"35%"}>
+              <Text color={"#FFFFFF"} width={"35%"} smallLine={'28px'}>
                 <i>
                   Tortor orci at laoreet eget consectetur et. Id amet dui
                   venenatis id proin lectus. Elementum sed ultricies at diam

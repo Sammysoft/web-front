@@ -9,14 +9,15 @@ import { Text } from "../../../Home/Blogs";
 
 import DropDown from "../../../../assets/Icons/svg/dropdown.svg";
 
-
-
 const Wrapper = styled.div`
   margin-top: 15vh;
   width: 80%;
   margin: 10%;
-`;
 
+  @media (max-width: 1400px) {
+    margin-top: 15vh;
+  }
+`;
 
 const Header = ({ selectedProduct, setSelectedProduct }) => {
   return (
@@ -33,10 +34,17 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
                 size={"44px"}
                 width={"100%"}
                 style={{ textTransform: "capitalize" }}
+                smallLine={"28px"}
               >
                 {selectedProduct && `928 ${selectedProduct?.category}`}
               </Text>
-              <Text color={"#696969"} width={"60%"} size={"20px"}>
+              <Text
+                color={"#696969"}
+                width={"60%"}
+                size={"20px"}
+                fontSmall={"16px"}
+                smallLine={'28px'}
+              >
                 Ornare nec placerat in elit convallis rutrum pellentesque. Ac
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum
@@ -44,6 +52,7 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
               </Text>
               <DropDownButton
                 width={"14%"}
+                smallWidth={'65%'}
                 text={"Change Currency"}
                 bgColor={"#D9D9D9"}
                 Icon={
@@ -61,12 +70,9 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
         />
 
         <br />
-
       </Wrapper>
     </>
   );
 };
-
-
 
 export default Header;

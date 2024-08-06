@@ -25,8 +25,7 @@ const Wrapper = styled.div`
   padding: 10%;
   height: fit-content;
 
-
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     background-position: contain;
     background-size: cover;
     padding: 5% 0% 5% 0%;
@@ -100,7 +99,7 @@ const BlogWrapper = styled.div`
   height: fit-content;
   opacity: 0.9;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     padding: 0px;
   }
 `;
@@ -115,14 +114,16 @@ export const Text = styled.div`
   color: ${(props) => (props.color ? props.color : "#000000")};
   padding: 20px 0px 20px 0px;
   width: ${(props) => (props.width ? props.width : "100%")};
-  line-height: ${(props)=> props.line ? props.line : '35px'};
+  line-height: ${(props) => (props.line ? props.line : "35px")};
   weight: ${(props) => (props.weight ? props.weight : "")};
   text-align: ${(props) => (props.align ? props.align : "center")};
   cursor: ${(props) => (props.cursor ? props.cursor : "")};
 
-  @media (max-width: 1400px){
-    width: 90%;
-    line-height: ${(props)=> props.line ? props.line : '45px'};
+  @media (max-width: 1400px) {
+    width: ${(props) => (props.smallWidth ? props.smallWidth : "100%")};
+    line-height: ${(props) => (props.smallLine ? props.smallLine : "45px")};
+    font-size: ${(props) => (props.fontSmall ? props.fontSmall : "18px")};
+    padding: 5px 0px 5px 0px;
   }
 `;
 
@@ -158,7 +159,7 @@ export const BlogCards = () => {
                                   weight={"bolder"}
                                   width={"80%"}
                                   align={"left"}
-                                  line={'24px'}
+                                  line={"24px"}
                                 >
                                   {blog.textHead}
                                 </Text>
@@ -167,7 +168,7 @@ export const BlogCards = () => {
                                   size={"14px"}
                                   width={"80%"}
                                   align={"left"}
-                                  line={'20px'}
+                                  line={"20px"}
                                 >
                                   {blog.textBody}
                                 </Text>
@@ -203,7 +204,6 @@ export const BlogCards = () => {
   );
 };
 
-
 const BlogCardWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -212,7 +212,7 @@ const BlogCardWrapper = styled.div`
   justify-content: center;
   align-items: space-between;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
@@ -224,7 +224,7 @@ const BlogCapsule = styled.div`
   height: 60vh;
   margin: 2vh 0px 2vh 0px;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     width: 100%;
     margin: 2vh 0px 2vh 0px;
   }

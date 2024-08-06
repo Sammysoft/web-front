@@ -5,10 +5,18 @@ import PropTypes from "prop-types";
 const HFWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  height: ${(props) => (props.height ? props.height : "fit-content")};
   width: ${(props) => (props.width ? props.width : "100%")};
   align-items: ${(props) => (props.align ? props.align : "center")};
   justify-content: ${(props) =>
     props.justify ? props.justify : "space-between"};
+
+  @media (max-width: 1400px) {
+    flex-direction: ${(props) => (props.invert ? "column" : "row")};
+    height: ${(props) =>
+      props.smallHeight ? props.smallHeight : "fit-content"};
+    width: ${(props) => (props.smallWidth ? props.smallWidth : props.width)};
+  }
 `;
 
 export const HorizontalFlexedWrapper = ({
@@ -18,6 +26,9 @@ export const HorizontalFlexedWrapper = ({
   align,
   height,
   onClick,
+  invert,
+  smallHeight,
+  smallWidth
 }) => {
   return (
     <>
@@ -27,6 +38,9 @@ export const HorizontalFlexedWrapper = ({
         align={align}
         height={height}
         onClick={onClick}
+        invert={invert}
+        smallHeight={smallHeight}
+        smallWidth={smallWidth}
       >
         {elements}
       </HFWrapper>
@@ -38,6 +52,9 @@ HFWrapper.propTypes = {
   justify: PropTypes.string,
   align: PropTypes.string,
   height: PropTypes.string,
+  invert: PropTypes.bool,
+  smallHeight: PropTypes.string,
+  smallWidth: PropTypes.string
 };
 
 const VFWrapper = styled.div`
@@ -49,6 +66,10 @@ const VFWrapper = styled.div`
     props.justify ? props.justify : "space-between"};
   height: ${(props) => (props.height ? props.height : "100%")};
   margin: ${(props) => (props.margin ? props.margin : "")};
+
+  @media (max-width: 1400px) {
+    width: ${(props) => (props.mobileWidth ? props.mobileWidth : props.width)};
+  }
 `;
 
 export const VerticalFlexedWrapper = ({
@@ -59,6 +80,7 @@ export const VerticalFlexedWrapper = ({
   height,
   margin,
   onClick,
+  mobileWidth,
 }) => {
   return (
     <>
@@ -69,6 +91,7 @@ export const VerticalFlexedWrapper = ({
         height={height}
         margin={margin}
         onClick={onClick}
+        mobileWidth={mobileWidth}
       >
         {elements}
       </VFWrapper>
@@ -79,6 +102,7 @@ export const VerticalFlexedWrapper = ({
 VFWrapper.propTypes = {
   justify: PropTypes.string,
   align: PropTypes.string,
+  mobileWidth: PropTypes.string,
 };
 
 const IMGWrapper = styled.img`
@@ -121,7 +145,7 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   cursor: pointer;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     font-size: 16px;
     width: 50%;
   }
@@ -153,7 +177,7 @@ const StyledButtonWrapper = styled.div`
   margin: 2vh 0px 2vh 0px;
   cursor: pointer;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     font-size: 12px;
   }
 `;
@@ -171,6 +195,7 @@ export const DropDownButton = ({
   width,
   text,
   height,
+  smallWidth,
 }) => {
   return (
     <>
@@ -180,6 +205,7 @@ export const DropDownButton = ({
         width={width}
         height={height}
         text={text}
+        smallWidth={smallWidth}
       >
         <HorizontalFlexedWrapper
           width={"100%"}
@@ -206,12 +232,17 @@ const DropDownButtonWrapper = styled.div`
   margin: 10px 0px 10px 0px;
   height: ${(props) => (props.height ? props.height : "fit-content")};
   cursor: pointer;
+
+  @media (max-width: 1400px) {
+    width: ${(props) => (props.smallWidth ? props.smallWidth : props.width)};
+  }
 `;
 
 DropDownButtonWrapper.propTypes = {
   width: PropTypes.string,
   bgColor: PropTypes.string,
   color: PropTypes.string,
+  smallWidth: PropTypes.string,
 };
 
 export const BackgroundImage = styled.div`

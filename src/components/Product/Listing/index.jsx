@@ -24,6 +24,19 @@ import { useNavigate } from "react-router";
 const Wrapper = styled.div`
   width: 80%;
   margin: 5% 10% 5% 10%;
+
+  @media (max-width: 1400px) {
+    display: none;
+  }
+`;
+
+const MobileWrapper = styled.div`
+  width: 80%;
+  margin: 5% 10% 5% 10%;
+
+  @media (min-width: 1400px) {
+    display: none;
+  }
 `;
 
 const MenuList = [
@@ -195,6 +208,15 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
           }
         />
       </Wrapper>
+
+      <MobileWrapper>
+        <ProductWrapper>
+          <ProductCard
+            selectedProduct={selectedProduct}
+            setSelectedProduct={setSelectedProduct}
+          />
+        </ProductWrapper>
+      </MobileWrapper>
     </>
   );
 };
@@ -245,6 +267,7 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
             width={"28%"}
             height={"45vh"}
             margin={"1%"}
+            mobileWidth={"48%"}
             elements={
               <>
                 <ProductImage
@@ -266,15 +289,20 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                     <>
                       <Text
                         width={"100%"}
+                        line={'0px'}
                         align={"left"}
-                        style={{ fontWeight: "bold", lineHeight: "0px" }}
+                        fontSmall={'16px'}
+                        smallLine={'20px'}
+                        style={{ fontWeight: "bold"}}
                       >
                         {product.name}
                       </Text>
                       <Text
-                        style={{ lineHeight: "0px" }}
+                        line={'0px'}
                         width={"100%"}
                         align={"left"}
+                        fontSmall={'14px'}
+                        smallLine={'0px'}
                       >
                         {product.details}
                       </Text>
@@ -313,6 +341,7 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
             width={"28%"}
             height={"45vh"}
             margin={"1%"}
+            mobileWidth={"48%"}
             elements={
               <>
                 <ProductImage
@@ -387,6 +416,12 @@ const ProductImage = styled.div`
   height: 70%;
   width: 100%;
   position: relative;
+
+
+  @media (max-width: 1400px){
+    background-size: 150%;
+    background-position: center;
+  }
 `;
 
 const ProductBadge = styled.div`
@@ -408,6 +443,12 @@ const ProductWrapper = styled.div`
   justify-content: left;
   align-items: left;
   height: fit-content;
+
+
+  @media (max-width: 1400px){
+    width: 100%;
+
+  }
 `;
 
 export default Listings;

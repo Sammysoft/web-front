@@ -19,6 +19,10 @@ const Wrapper = styled.div`
   margin-top: 15vh;
   width: 80%;
   margin: 10%;
+
+  @media (max-width: 1400px) {
+    margin-top: 10vh;
+  }
 `;
 
 const CategoryMenu = [
@@ -53,13 +57,20 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
               <Text
                 color={"#2A1C03"}
                 size={"44px"}
+                fontSmall={"30px"}
                 width={"100%"}
                 style={{ textTransform: "capitalize" }}
               >
                 {selectedProduct === null && " Our Product Lineup"}
                 {selectedProduct && `928 ${selectedProduct?.name}`}
               </Text>
-              <Text color={"#696969"} width={"60%"} size={"20px"}>
+              <Text
+                color={"#696969"}
+                width={"60%"}
+                size={"20px"}
+                fontSmall={"14px"}
+                smallLine={"28px"}
+              >
                 Ornare nec placerat in elit convallis rutrum pellentesque. Ac
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum
@@ -69,6 +80,7 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
                 width={"14%"}
                 text={"Change Currency"}
                 bgColor={"#D9D9D9"}
+                smallWidth={"65%"}
                 Icon={
                   <ImageWrapper
                     image={DropDown}
@@ -87,6 +99,7 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
         <HorizontalFlexedWrapper
           width={"100%"}
           height={"fit-content"}
+          invert={true}
           elements={
             <>
               {selectedProduct === null && (
@@ -110,6 +123,7 @@ const CategoryCards = ({ setSelectedProduct }) => {
             onClick={() => setSelectedProduct(menu)}
             height={"40vh"}
             width={"25%"}
+            mobileWidth={"100%"}
             elements={
               <>
                 <ImageWrapper
