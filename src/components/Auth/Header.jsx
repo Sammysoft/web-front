@@ -7,6 +7,10 @@ const Wrapper = styled.div`
   margin-top: 15vh;
   width: 80%;
   margin: 10% 10% 2% 10%;
+
+  @media (max-width: 1400px) {
+    margin-top: 10vh;
+  }
 `;
 
 export const LoginHeader = () => {
@@ -27,7 +31,13 @@ export const LoginHeader = () => {
               >
                 Login to your account
               </Text>
-              <Text color={"#696969"} width={"70%"} size={"18px"}>
+              <Text
+                color={"#696969"}
+                width={"70%"}
+                size={"18px"}
+                fontSmall={"16px"}
+                smallLine={"28px"}
+              >
                 Ornare nec placerat in elit convallis rutrum pellentesque. Ac
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum
@@ -59,7 +69,13 @@ export const SignUpHeader = () => {
               >
                 Create your free account
               </Text>
-              <Text color={"#696969"} width={"70%"} size={"18px"}>
+              <Text
+                color={"#696969"}
+                width={"70%"}
+                size={"18px"}
+                fontSmall={"14px"}
+                smallLine={"28px"}
+              >
                 Ornare nec placerat in elit convallis rutrum pellentesque. Ac
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum

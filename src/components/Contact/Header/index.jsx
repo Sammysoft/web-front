@@ -7,6 +7,10 @@ const Wrapper = styled.div`
   margin-top: 15vh;
   width: 80%;
   margin: 10% 10% 2% 10%;
+
+  @media (max-width: 1400px) {
+    margin-top: 10vh;
+  }
 `;
 
 const Header = () => {
@@ -27,7 +31,13 @@ const Header = () => {
               >
                 Have an inquiry or special request?
               </Text>
-              <Text color={"#696969"} width={"70%"} size={"18px"}>
+              <Text
+                color={"#696969"}
+                width={"70%"}
+                size={"18px"}
+                smallLine={"28px"}
+                fontSmall={"14px"}
+              >
                 Ornare nec placerat in elit convallis rutrum pellentesque. Ac
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum

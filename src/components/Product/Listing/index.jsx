@@ -289,20 +289,20 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                     <>
                       <Text
                         width={"100%"}
-                        line={'0px'}
+                        line={"0px"}
                         align={"left"}
-                        fontSmall={'16px'}
-                        smallLine={'20px'}
-                        style={{ fontWeight: "bold"}}
+                        fontSmall={"16px"}
+                        smallLine={"20px"}
+                        style={{ fontWeight: "bold" }}
                       >
                         {product.name}
                       </Text>
                       <Text
-                        line={'0px'}
+                        line={"0px"}
                         width={"100%"}
                         align={"left"}
-                        fontSmall={'14px'}
-                        smallLine={'0px'}
+                        fontSmall={"14px"}
+                        smallLine={"0px"}
                       >
                         {product.details}
                       </Text>
@@ -363,15 +363,20 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                     <>
                       <Text
                         width={"100%"}
+                        line={"0px"}
                         align={"left"}
-                        style={{ fontWeight: "bold", lineHeight: "0px" }}
+                        fontSmall={"16px"}
+                        smallLine={"20px"}
+                        style={{ fontWeight: "bold" }}
                       >
                         {product?.name}
                       </Text>
                       <Text
-                        style={{ lineHeight: "0px" }}
+                        line={"0px"}
                         width={"100%"}
                         align={"left"}
+                        fontSmall={"14px"}
+                        smallLine={"0px"}
                       >
                         {product?.details}
                       </Text>
@@ -417,8 +422,7 @@ const ProductImage = styled.div`
   width: 100%;
   position: relative;
 
-
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     background-size: 150%;
     background-position: center;
   }
@@ -444,10 +448,8 @@ const ProductWrapper = styled.div`
   align-items: left;
   height: fit-content;
 
-
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     width: 100%;
-
   }
 `;
 

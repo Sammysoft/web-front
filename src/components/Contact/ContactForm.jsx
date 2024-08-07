@@ -18,6 +18,13 @@ const Wrapper = styled.div`
   box-shadow: -11px 21px 53px 0px #8787871a, -45px 86px 97px 0px #87878717,
     -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
     -284px 536px 170px 0px #87878700;
+
+  @media (max-width: 1400px) {
+    width: 90%;
+    margin: 10% 5% 5% 5%;
+    height: fit-content;
+    padding: 0px;
+  }
 `;
 
 const ContactForm = () => {
@@ -25,6 +32,7 @@ const ContactForm = () => {
     <>
       <Wrapper>
         <HorizontalFlexedWrapper
+          invert={true}
           elements={
             <>
               <VerticalFlexedWrapper
@@ -35,6 +43,9 @@ const ContactForm = () => {
                       align={"left"}
                       size={"30px"}
                       width={"90%"}
+                      fontSmall={"20px"}
+                      smallLine={"22px"}
+                      smallWidth={"100%"}
                     >
                       Send us a message
                     </Text>
@@ -58,6 +69,7 @@ const ContactForm = () => {
                                           width={"20%"}
                                           height={"50%"}
                                           align={"left"}
+                                          smallWidth={"10%"}
                                         >
                                           Name
                                         </Text>
@@ -65,16 +77,15 @@ const ContactForm = () => {
                                           <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
+                                            mobileWidth={"70%"}
                                             elements={
                                               <>
-                                                <Text>
+                                                <Text
+                                                  fontSmall={"14px"}
+                                                  smallLine={"28px"}
+                                                >
                                                   Enter your full name
                                                 </Text>
-                                                {/* <ImageWrapper
-                                                  image={DropDownIcon}
-                                                  width={30}
-                                                  height={30}
-                                                /> */}
                                               </>
                                             }
                                           />
@@ -110,6 +121,7 @@ const ContactForm = () => {
                                           width={"20%"}
                                           height={"50%"}
                                           align={"left"}
+                                          smallWidth={"10%"}
                                         >
                                           Phone
                                         </Text>
@@ -117,14 +129,15 @@ const ContactForm = () => {
                                           <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
+                                            smallWidth={"60%"}
                                             elements={
                                               <>
-                                                <Text>Enter phone number</Text>
-                                                {/* <ImageWrapper
-                                                  image={DropDownIcon}
-                                                  width={30}
-                                                  height={30}
-                                                /> */}
+                                                <Text
+                                                  fontSmall={"14px"}
+                                                  smallLine={"28px"}
+                                                >
+                                                  Enter phone number
+                                                </Text>
                                               </>
                                             }
                                           />
@@ -159,6 +172,7 @@ const ContactForm = () => {
                                           width={"20%"}
                                           height={"50%"}
                                           align={"left"}
+                                          smallWidth={"10%"}
                                         >
                                           Email
                                         </Text>
@@ -166,14 +180,15 @@ const ContactForm = () => {
                                           <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
+                                            smallWidth={"60%"}
                                             elements={
                                               <>
-                                                <Text>Enter your email</Text>
-                                                {/* <ImageWrapper
-                                                  image={DropDownIcon}
-                                                  width={30}
-                                                  height={30}
-                                                /> */}
+                                                <Text
+                                                  fontSmall={"14px"}
+                                                  smallLine={"28px"}
+                                                >
+                                                  Enter your email
+                                                </Text>
                                               </>
                                             }
                                           />
@@ -209,6 +224,7 @@ const ContactForm = () => {
                                           width={"20%"}
                                           height={"50%"}
                                           align={"left"}
+                                          smallWidth={"10%"}
                                         >
                                           Message
                                         </Text>
@@ -216,14 +232,15 @@ const ContactForm = () => {
                                           <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
+                                            smallWidth={"60%"}
                                             elements={
                                               <>
-                                                <Text>Type your message</Text>
-                                                {/* <ImageWrapper
-                                                  image={DropDownIcon}
-                                                  width={30}
-                                                  height={30}
-                                                /> */}
+                                                <Text
+                                                  fontSmall={"14px"}
+                                                  smallLine={"28px"}
+                                                >
+                                                  Type your message
+                                                </Text>
                                               </>
                                             }
                                           />
@@ -249,6 +266,7 @@ const ContactForm = () => {
                 }
                 height={"100%"}
                 width={"60%"}
+                mobileWidth={"90%"}
               />
               <FormImage background={FormImg}></FormImage>
             </>
@@ -265,6 +283,11 @@ const ButtonWrap = styled.div`
   width: 90%;
   text-align: left;
   margin-top: 20px;
+
+  @media (max-width: 1400px){
+    width: 50%;
+    margin-left: auto;
+  }
 `;
 
 const FormImage = styled.div`
@@ -274,6 +297,11 @@ const FormImage = styled.div`
   background-repeat: no-repeat;
   height: 60vh;
   width: 40%;
+
+   @media (max-width: 1400px) {
+    width: 100%;
+    height: 40vh;
+  }
 `;
 
 const TextField = styled.div`
@@ -293,6 +321,11 @@ const SelectWrap = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+
+  @media (max-width: 1400px) {
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
 `;
 
 export default ContactForm;
