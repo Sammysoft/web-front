@@ -9,6 +9,7 @@ import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import AdminDashboard from "./pages/AdminPages";
 
 function App() {
   return (
@@ -19,9 +20,10 @@ function App() {
         <Route path="/product/*" exact element={<ProductsDetails />} />
         <Route path="/blog" exact element={<Blogs />} />
         <Route path="/contact" exact element={<ContactPage />} />
-        <Route path='/login' exact element={<LoginPage />} />
+        <Route path="/login" exact element={<LoginPage />} />
         <Route path="/signup" exact element={<SignupPage />} />
         <Route path="/checkout" exact element={<CheckoutPage />} />
+        <Route path="/admin" exact element={<AdminDashboard />} />
       </Routes>
     </>
   );

@@ -10,6 +10,7 @@ const HFWrapper = styled.div`
   align-items: ${(props) => (props.align ? props.align : "center")};
   justify-content: ${(props) =>
     props.justify ? props.justify : "space-between"};
+  margin: ${(props) => (props.margin ? props.margin : "")};
 
   @media (max-width: 1400px) {
     flex-direction: ${(props) => (props.invert ? "column" : "row")};
@@ -29,6 +30,7 @@ export const HorizontalFlexedWrapper = ({
   invert,
   smallHeight,
   smallWidth,
+  margin,
 }) => {
   return (
     <>
@@ -41,6 +43,7 @@ export const HorizontalFlexedWrapper = ({
         invert={invert}
         smallHeight={smallHeight}
         smallWidth={smallWidth}
+        margin={margin}
       >
         {elements}
       </HFWrapper>
@@ -70,6 +73,7 @@ const VFWrapper = styled.div`
   @media (max-width: 1400px) {
     width: ${(props) => (props.mobileWidth ? props.mobileWidth : props.width)};
     flex-direction: ${(props) => (props.invert ? "row" : "column")};
+    height: ${(props)=> props.mobileHeight ? props.mobileHeight : props.height}
   }
 `;
 
@@ -83,6 +87,7 @@ export const VerticalFlexedWrapper = ({
   onClick,
   mobileWidth,
   invert,
+  mobileHeight
 }) => {
   return (
     <>
@@ -95,6 +100,7 @@ export const VerticalFlexedWrapper = ({
         onClick={onClick}
         mobileWidth={mobileWidth}
         invert={invert}
+        mobileHeight={mobileHeight}
       >
         {elements}
       </VFWrapper>
@@ -128,10 +134,23 @@ IMGWrapper.propTypes = {
   width: PropTypes.string,
 };
 
-export const BoxedButton = ({ width, text }) => {
+export const BoxedButton = ({
+  width,
+  text,
+  smallWidth,
+  onPress,
+  fontSmall,
+}) => {
   return (
     <>
-      <ButtonWrapper width={width}>{text}</ButtonWrapper>
+      <ButtonWrapper
+        width={width}
+        smallWidth={smallWidth}
+        onClick={onPress}
+        fontSmall={fontSmall}
+      >
+        {text}
+      </ButtonWrapper>
     </>
   );
 };
@@ -150,8 +169,9 @@ const ButtonWrapper = styled.div`
   cursor: pointer;
 
   @media (max-width: 1400px) {
-    font-size: 16px;
-    width: 60%;
+    font-size: ${(props) => (props.fontSmall ? props.fontSmall : "14px")};
+    width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
+    padding: 15px;
   }
 `;
 
@@ -183,7 +203,7 @@ const StyledButtonWrapper = styled.div`
 
   @media (max-width: 1400px) {
     font-size: 12px;
-    width: 50%
+    width: 50%;
   }
 `;
 
