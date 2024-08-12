@@ -8,6 +8,7 @@ import {
 import { Text } from "../Home/Blogs";
 
 import FormImg from "../../assets/Images/form_img.svg";
+import { Fonts } from "../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   height: 60vh;
@@ -73,8 +74,8 @@ const ContactForm = () => {
                                         >
                                           Name
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                          {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             mobileWidth={"70%"}
@@ -89,7 +90,7 @@ const ContactForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -125,8 +126,8 @@ const ContactForm = () => {
                                         >
                                           Phone
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                          {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"60%"}
@@ -141,7 +142,7 @@ const ContactForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -176,8 +177,8 @@ const ContactForm = () => {
                                         >
                                           Email
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                          {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"60%"}
@@ -192,7 +193,7 @@ const ContactForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -228,8 +229,8 @@ const ContactForm = () => {
                                         >
                                           Message
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                          {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"60%"}
@@ -244,7 +245,7 @@ const ContactForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -304,14 +305,28 @@ const FormImage = styled.div`
   }
 `;
 
-const TextField = styled.div`
-  width: 80%;
+const TextField = styled.input`
+  width: 70%;
   height: 100%;
   border-bottom: 1px solid #000000;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: none; /* Removes all borders */
+  border-bottom: 2px solid #000; /* Initial bottom border, hidden */
+  outline: none; /* Removes the default outline on focus */
+  padding: 8px 0; /* Adjust padding as needed */
+  font-family: ${Fonts.PRIMARY};
+  text-align: center;
+
+  &:focus {
+    border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */
+  }
+
+  &:active {
+    border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
+  }
 `;
 
 const SelectWrap = styled.div`

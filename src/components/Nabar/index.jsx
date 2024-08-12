@@ -1,7 +1,11 @@
 import React from "react";
 
 import styled from "styled-components";
-import { HorizontalFlexedWrapper, ImageWrapper } from "../Elements";
+import {
+  BoxedButton,
+  HorizontalFlexedWrapper,
+  ImageWrapper,
+} from "../Elements";
 
 import LogoSVG from "../../assets/Icons/svg/logo-black.svg";
 import PersonSVG from "../../assets/Icons/svg/person-black.svg";
@@ -10,6 +14,7 @@ import HarmbuggerSVG from "../../assets/Icons/svg/harmbugger.svg";
 
 import { Fonts, Sizes } from "../../assets/Res/fonts";
 import { useNavigate } from "react-router-dom";
+import { Text } from "../Home/Blogs";
 
 const Wrapper = styled.div`
   width: 90vw;
@@ -41,6 +46,7 @@ const MobileWrapper = styled.div`
 
 const NavBar = () => {
   const navigate = useNavigate();
+  const [toggle, setToggle] = React.useState(Boolean);
   return (
     <>
       <Wrapper>
@@ -71,7 +77,7 @@ const NavBar = () => {
                       width={"30px"}
                       height={"30px"}
                     />
-                    <LoginText>Login</LoginText>
+                    <LoginText onClick={()=> navigate('/login')}>Login</LoginText>
                     <ImageWrapper
                       image={ChartSVG}
                       width={"30px"}
@@ -79,6 +85,9 @@ const NavBar = () => {
                     />
                     <LoginText>0</LoginText>
                     <ImageWrapper
+                      onClick={() => {
+                        setToggle(!toggle);
+                      }}
                       image={HarmbuggerSVG}
                       width={"30px"}
                       height={"30px"}
@@ -90,9 +99,50 @@ const NavBar = () => {
           }
         />
       </MobileWrapper>
+      {toggle ? (
+        <MobileNavCapsule toggle={toggle} setToggle={setToggle} />
+      ) : null}
     </>
   );
 };
+
+const MobileNavCapsule = ({ setToggle, toggle }) => {
+  const navigate = useNavigate();
+  return (
+    <>
+      <NavCapsuleWrapper>
+        <Cancel onClick={() => setToggle(!toggle)}>
+          <Text align={"right"} fontSmall={"30px"}>
+            x
+          </Text>
+        </Cancel>
+        <BoxedButton text={"Home"} onPress={() => navigate("/")} />
+        <BoxedButton text={"Products"} onPress={() => navigate("/product")} />
+        <BoxedButton text={"Blog"} onPress={() => navigate("/blog")} />
+        <BoxedButton text={"Contact"} onPress={() => navigate("/contact")} />
+      </NavCapsuleWrapper>
+    </>
+  );
+};
+
+const NavCapsuleWrapper = styled.div`
+  width: 100%;
+  height: 40vh;
+  background: #ffffff;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  padding: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Cancel = styled.div`
+  width: 100%;
+`;
 
 const MenuItems = ({ navigate }) => {
   return (

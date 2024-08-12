@@ -9,6 +9,7 @@ import { Text } from "../Home/Blogs";
 
 import FormImg from "../../assets/Images/signup_form.svg";
 import { useNavigate } from "react-router";
+import { Fonts } from "../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   height: 60vh;
@@ -75,8 +76,8 @@ export const LoginForm = () => {
                                         >
                                           Email
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                        {/* <HorizontalFlexedWrapper
                                             width={"70%"}
                                             height={"100%"}
                                             mobileWidth={"70%"}
@@ -91,7 +92,7 @@ export const LoginForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -127,8 +128,8 @@ export const LoginForm = () => {
                                         >
                                           Password
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"60%"}
@@ -143,7 +144,7 @@ export const LoginForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -268,8 +269,8 @@ export const SignupForm = () => {
                                         >
                                           Name
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"70%"}
@@ -284,7 +285,7 @@ export const SignupForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -320,8 +321,8 @@ export const SignupForm = () => {
                                         >
                                           Phone
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"70%"}
@@ -336,7 +337,7 @@ export const SignupForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -371,8 +372,8 @@ export const SignupForm = () => {
                                         >
                                           Email
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"70%"}
@@ -387,7 +388,7 @@ export const SignupForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -423,8 +424,8 @@ export const SignupForm = () => {
                                         >
                                           Password
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"70%"}
@@ -439,7 +440,7 @@ export const SignupForm = () => {
                                               </>
                                             }
                                           />
-                                        </TextField>
+                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -474,8 +475,8 @@ export const SignupForm = () => {
                                         >
                                           Confirm
                                         </Text>
-                                        <TextField>
-                                          <HorizontalFlexedWrapper
+                                        <TextField />
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"70%"}
@@ -489,8 +490,8 @@ export const SignupForm = () => {
                                                 </Text>
                                               </>
                                             }
-                                          />
-                                        </TextField>
+                                          /> */}
+                                        {/* </TextField> */}
                                       </>
                                     }
                                   />
@@ -514,7 +515,7 @@ export const SignupForm = () => {
                             />
                             <HorizontalFlexedWrapper
                               width={"75%"}
-                              smallWidth={'100%'}
+                              smallWidth={"100%"}
                               elements={
                                 <>
                                   <Text
@@ -523,8 +524,8 @@ export const SignupForm = () => {
                                     width={"90%"}
                                     align={"left"}
                                     smallWidth={"70%"}
-                                    smallLine={'28px'}
-                                    fontSmall={'14px'}
+                                    smallLine={"28px"}
+                                    fontSmall={"14px"}
                                   >
                                     Already have an account?
                                   </Text>
@@ -532,7 +533,7 @@ export const SignupForm = () => {
                                     color={"#FD9017"}
                                     align={"left"}
                                     cursor={"pointer"}
-                                    smallWidth={'30%'}
+                                    smallWidth={"30%"}
                                     onClick={() => navigate("/login")}
                                   >
                                     Login
@@ -581,19 +582,29 @@ const FormImage = styled.div`
   }
 `;
 
-const TextField = styled.div`
-  width: 80%;
+const TextField = styled.input`
+  width: 70%;
   height: 100%;
   border-bottom: 1px solid #000000;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: none; /* Removes all borders */
+  border-bottom: 2px solid #000; /* Initial bottom border, hidden */
+  outline: none; /* Removes the default outline on focus */
+  padding: 8px 0; /* Adjust padding as needed */
+  text-align: center;
+  font-family: ${Fonts.PRIMARY};
 
-  // @media (max-width: 1400px) {
-  //   width: 65%;
-  //   height: 60%;
-  // }
+  &:focus {
+    border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */
+  }
+
+  &:active {
+    border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
+  }
+
 `;
 
 const SelectWrap = styled.div`

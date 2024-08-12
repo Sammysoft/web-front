@@ -8,6 +8,7 @@ import {
   VerticalFlexedWrapper,
 } from "../Elements";
 import { Text } from "../Home/Blogs";
+import { Fonts } from "../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -45,8 +46,8 @@ const ProductForm = () => {
                       >
                         Product Name
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -58,7 +59,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -88,8 +89,8 @@ const ProductForm = () => {
                       >
                         Description
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -101,7 +102,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -132,8 +133,8 @@ const ProductForm = () => {
                       >
                         Tags
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -145,7 +146,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -176,8 +177,8 @@ const ProductForm = () => {
                       >
                         Colour Options
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -189,7 +190,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -220,8 +221,8 @@ const ProductForm = () => {
                       >
                         Product Images
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -233,7 +234,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -264,8 +265,8 @@ const ProductForm = () => {
                       >
                         Price ($)
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -277,7 +278,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -308,8 +309,8 @@ const ProductForm = () => {
                       >
                         Category
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -321,7 +322,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -352,8 +353,8 @@ const ProductForm = () => {
                       >
                         Size Tags
                       </Text>
-                      <TextField>
-                        <HorizontalFlexedWrapper
+                      <TextField />
+                        {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -365,7 +366,7 @@ const ProductForm = () => {
                             </>
                           }
                         />
-                      </TextField>
+                      </TextField> */}
                     </>
                   }
                 />
@@ -393,6 +394,19 @@ const TextField = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: none; /* Removes all borders */
+  border-bottom: 2px solid #000; /* Initial bottom border, hidden */
+  outline: none; /* Removes the default outline on focus */
+  padding: 8px 0; /* Adjust padding as needed */
+  font-family: ${Fonts.PRIMARY};
+
+  &:focus {
+    border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */
+  }
+
+  &:active {
+    border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
+  }
 
   // @media (max-width: 1400px) {
   //   width: 65%;

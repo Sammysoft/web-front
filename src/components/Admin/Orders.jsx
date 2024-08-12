@@ -10,6 +10,7 @@ import {
 import ArrowDown from "../../assets/Icons/svg/arrow_down.svg";
 import prodImage from "../../assets/Images/prod3.svg";
 import { Text } from "../Home/Blogs";
+import { Fonts } from "../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -90,8 +91,8 @@ const Orders = ({ prod }) => {
                                   >
                                     Status
                                   </Text>
-                                  <TextField>
-                                    <HorizontalFlexedWrapper
+                                  <TextField />
+                                    {/* <HorizontalFlexedWrapper
                                       width={"50%"}
                                       height={"100%"}
                                       smallWidth={"70%"}
@@ -106,7 +107,7 @@ const Orders = ({ prod }) => {
                                         </>
                                       }
                                     />
-                                  </TextField>
+                                  </TextField> */}
                                 </>
                               }
                             />
@@ -149,7 +150,7 @@ const ProductWrapping = styled.div`
   }
 `;
 
-const TextField = styled.div`
+const TextField = styled.input`
   width: 80%;
   height: 100%;
   border-bottom: 1px solid #000000;
@@ -157,6 +158,49 @@ const TextField = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: none; /* Removes all borders */
+  border-bottom: 2px solid #000; /* Initial bottom border, hidden */
+  outline: none; /* Removes the default outline on focus */
+  padding: 8px 0; /* Adjust padding as needed */
+  font-family: ${Fonts.PRIMARY};
+  text-align: center;
+
+  &:focus {
+    border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */
+  }
+
+  &:active {
+    border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
+  }
+
+  // @media (max-width: 1400px) {
+  //   width: 65%;
+  //   height: 60%;
+  // }
+`;
+
+const TextAreaField = styled.textarea`
+  width: 80%;
+  height: 100%;
+  border-bottom: 1px solid #000000;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none; /* Removes all borders */
+  border-bottom: 2px solid #000; /* Initial bottom border, hidden */
+  outline: none; /* Removes the default outline on focus */
+  padding: 8px 0; /* Adjust padding as needed */
+  font-family: ${Fonts.PRIMARY};
+  text-align: center;
+
+  &:focus {
+    border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */
+  }
+
+  &:active {
+    border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
+  }
 
   // @media (max-width: 1400px) {
   //   width: 65%;

@@ -23,6 +23,7 @@ import Prod6 from "../../../assets/Images/prod6.svg";
 import Prod7 from "../../../assets/Images/prod7.svg";
 import Prod8 from "../../../assets/Images/prod8.svg";
 import { useNavigate } from "react-router-dom";
+import { Fonts } from "../../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -310,8 +311,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     >
                                       Order Type:
                                     </Text>
-                                    <TextField>
-                                      <HorizontalFlexedWrapper
+                                    <TextField />
+                                      {/* <HorizontalFlexedWrapper
                                         width={"30%"}
                                         height={"100%"}
                                         elements={
@@ -325,7 +326,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                           </>
                                         }
                                       />
-                                    </TextField>
+                                    </TextField> */}
                                   </>
                                 }
                               />
@@ -353,22 +354,17 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     >
                                       Colour
                                     </Text>
-                                    <TextField>
-                                      <HorizontalFlexedWrapper
+                                    <TextField />
+                                      {/* <HorizontalFlexedWrapper
                                         width={"30%"}
                                         height={"100%"}
                                         elements={
                                           <>
                                             <Text>Wine Only</Text>
-                                            {/* <ImageWrapper
-                                              image={DropDownIcon}
-                                              width={30}
-                                              height={30}
-                                            /> */}
                                           </>
                                         }
                                       />
-                                    </TextField>
+                                    </TextField> */}
                                   </>
                                 }
                               />
@@ -396,8 +392,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     >
                                       Thigh
                                     </Text>
-                                    <TextField>
-                                      <HorizontalFlexedWrapper
+                                    <TextField />
+                                      {/* <HorizontalFlexedWrapper
                                         width={"30%"}
                                         height={"100%"}
                                         elements={
@@ -411,7 +407,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                           </>
                                         }
                                       />
-                                    </TextField>
+                                    </TextField> */}
                                   </>
                                 }
                               />
@@ -439,8 +435,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     >
                                       Waist
                                     </Text>
-                                    <TextField>
-                                      <HorizontalFlexedWrapper
+                                    <TextField />
+                                      {/* <HorizontalFlexedWrapper
                                         width={"30%"}
                                         height={"100%"}
                                         elements={
@@ -454,7 +450,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                           </>
                                         }
                                       />
-                                    </TextField>
+                                    </TextField> */}
                                   </>
                                 }
                               />
@@ -482,8 +478,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     >
                                       Trouser Length
                                     </Text>
-                                    <TextField>
-                                      <HorizontalFlexedWrapper
+                                    <TextField />
+                                      {/* <HorizontalFlexedWrapper
                                         width={"30%"}
                                         height={"100%"}
                                         elements={
@@ -497,7 +493,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                           </>
                                         }
                                       />
-                                    </TextField>
+                                    </TextField> */}
                                   </>
                                 }
                               />
@@ -627,8 +623,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                               >
                                 Order Type:
                               </Text>
-                              <TextField>
-                                <HorizontalFlexedWrapper
+                              <TextField />
+                              {/* <HorizontalFlexedWrapper
                                   width={"30%"}
                                   height={"100%"}
                                   smallWidth={"100%"}
@@ -643,7 +639,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     </>
                                   }
                                 />
-                              </TextField>
+                              </TextField> */}
                             </>
                           }
                         />
@@ -672,8 +668,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                               >
                                 Colour
                               </Text>
-                              <TextField>
-                                <HorizontalFlexedWrapper
+                              <TextField />
+                              {/* <HorizontalFlexedWrapper
                                   width={"30%"}
                                   height={"100%"}
                                   smallWidth={"100%"}
@@ -683,7 +679,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     </>
                                   }
                                 />
-                              </TextField>
+                              </TextField> */}
                             </>
                           }
                         />
@@ -712,8 +708,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                               >
                                 Thigh
                               </Text>
-                              <TextField>
-                                <HorizontalFlexedWrapper
+                              <TextField />
+                              {/* <HorizontalFlexedWrapper
                                   width={"30%"}
                                   height={"100%"}
                                   smallWidth={"100%"}
@@ -728,7 +724,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     </>
                                   }
                                 />
-                              </TextField>
+                              </TextField> */}
                             </>
                           }
                         />
@@ -757,8 +753,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                               >
                                 Waist
                               </Text>
-                              <TextField>
-                                <HorizontalFlexedWrapper
+                              <TextField />
+                              {/* <HorizontalFlexedWrapper
                                   width={"30%"}
                                   height={"100%"}
                                   smallWidth={"100%"}
@@ -773,7 +769,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     </>
                                   }
                                 />
-                              </TextField>
+                              </TextField> */}
                             </>
                           }
                         />
@@ -802,8 +798,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                               >
                                 Trouser Length
                               </Text>
-                              <TextField>
-                                <HorizontalFlexedWrapper
+                              <TextField />
+                              {/* <HorizontalFlexedWrapper
                                   width={"30%"}
                                   height={"100%"}
                                   smallWidth={"100%"}
@@ -818,7 +814,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                     </>
                                   }
                                 />
-                              </TextField>
+                              </TextField> */}
                             </>
                           }
                         />
@@ -837,7 +833,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
   );
 };
 
-const TextField = styled.div`
+const TextField = styled.input`
   width: 80%;
   height: 60%;
   border-bottom: 1px solid #000000;
@@ -845,6 +841,20 @@ const TextField = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  border: none; /* Removes all borders */
+  border-bottom: 2px solid #000; /* Initial bottom border, hidden */
+  outline: none; /* Removes the default outline on focus */
+  padding: 8px 0; /* Adjust padding as needed */
+  font-family: ${Fonts.PRIMARY};
+  text-align: center;
+
+  &:focus {
+    border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */
+  }
+
+  &:active {
+    border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
+  }
 
   @media (max-width: 1400px) {
     width: 65%;

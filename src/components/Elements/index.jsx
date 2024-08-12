@@ -73,7 +73,8 @@ const VFWrapper = styled.div`
   @media (max-width: 1400px) {
     width: ${(props) => (props.mobileWidth ? props.mobileWidth : props.width)};
     flex-direction: ${(props) => (props.invert ? "row" : "column")};
-    height: ${(props)=> props.mobileHeight ? props.mobileHeight : props.height}
+    height: ${(props) =>
+      props.mobileHeight ? props.mobileHeight : props.height};
   }
 `;
 
@@ -87,7 +88,7 @@ export const VerticalFlexedWrapper = ({
   onClick,
   mobileWidth,
   invert,
-  mobileHeight
+  mobileHeight,
 }) => {
   return (
     <>
@@ -121,10 +122,16 @@ const IMGWrapper = styled.img`
   width: ${(props) => (props.width ? props.width : "100%")};
 `;
 
-export const ImageWrapper = ({ height, width, image, fit }) => {
+export const ImageWrapper = ({ height, width, image, fit, onClick }) => {
   return (
     <>
-      <IMGWrapper height={height} width={width} src={image} fit={fit} />
+      <IMGWrapper
+        height={height}
+        width={width}
+        src={image}
+        fit={fit}
+        onClick={onClick}
+      />
     </>
   );
 };
@@ -132,6 +139,7 @@ export const ImageWrapper = ({ height, width, image, fit }) => {
 IMGWrapper.propTypes = {
   height: PropTypes.string,
   width: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export const BoxedButton = ({
