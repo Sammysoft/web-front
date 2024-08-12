@@ -73,10 +73,23 @@ const HomeBlogs = () => {
                   <Text size={"18px"} color="#fd9017">
                     928 Blog
                   </Text>
-                  <Text size={"30px"} color={"#000000"} width={"25%"}>
+                  <Text
+                    size={"30px"}
+                    color={"#000000"}
+                    width={"25%"}
+                    smallWidth={"80%"}
+                  >
                     Fashion tales from an 'eye' in the frenzy
                   </Text>
-                  <Text width={"30%"} color={"#696969"} size={"20px"}>
+                  <Text
+                    width={"30%"}
+                    color={"#696969"}
+                    size={"20px"}
+                    smallLine={"22px"}
+                    fontSmall={"14px"}
+                    align={"center"}
+                    smallWidth={"80%"}
+                  >
                     Ornare nec placerat in elit convallis rutrum pellentesque.
                     Ac dis volutpat pellentesque et tortor elementum consequat.
                     Venenatis elit.
@@ -160,7 +173,7 @@ export const BlogCards = () => {
                                   width={"80%"}
                                   align={"left"}
                                   line={"30px"}
-                                  smallLine={'30px'}
+                                  smallLine={"30px"}
                                 >
                                   {blog.textHead}
                                 </Text>
@@ -170,8 +183,8 @@ export const BlogCards = () => {
                                   width={"80%"}
                                   align={"left"}
                                   line={"24px"}
-                                  fontSmall={'14px'}
-                                  smallLine={'20px'}
+                                  fontSmall={"14px"}
+                                  smallLine={"20px"}
                                 >
                                   {blog.textBody}
                                 </Text>

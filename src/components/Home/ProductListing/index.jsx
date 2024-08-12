@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   height: fit-content;
   padding: 5%;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     margin-bottom: 10vh;
   }
 `;
@@ -53,6 +53,9 @@ const ProductListing = () => {
         <ListingMenu />
         <ProductCatalogue />
       </Wrapper>
+      <ButtonWrappings>
+        <BoxedButton width={"10%"} text={"See More"} />
+      </ButtonWrappings>
     </>
   );
 };
@@ -79,20 +82,17 @@ const MenuWrapper = styled.div`
   cursor: pointer;
 `;
 
-
 const Text = styled.p`
-font-weight: bolder;
-font-family: Josefin Sans;
-color: #efefef;
-font-size: 2rem;
-text-transform: uppercase;
+  font-weight: bolder;
+  font-family: Josefin Sans;
+  color: #efefef;
+  font-size: 2rem;
+  text-transform: uppercase;
 
-
-@media (min-width: 1400px){
-  display: none;
-}
-`
-
+  @media (min-width: 1400px) {
+    display: none;
+  }
+`;
 
 const ListingMenu = () => {
   const [clicked, setClicked] = useState(0);
@@ -127,11 +127,11 @@ const ListingMenu = () => {
 const ProductCatalogue = () => {
   return (
     <>
-    <Text>Product Listings</Text>
+      <Text>Product Listings</Text>
       <HorizontalFlexedWrapper
         align={"flex-start"}
         width={"100%"}
-        height={"80vh"}
+        height={"fit-content"}
         elements={
           <>
             <LeftText>
@@ -143,9 +143,6 @@ const ProductCatalogue = () => {
                   <ProductBadge>New</ProductBadge>
                 </ProductWrapping>
               ))}
-              <ButtonWrappings>
-                <BoxedButton width={"10%"} text={"See More"} />
-              </ButtonWrappings>
             </ProductWrapper>
           </>
         }
@@ -185,7 +182,8 @@ const ProductWrapping = styled.div`
   width: 30%;
   height: 350px;
   object-fit: contain;
-  background: url(${(props) => props.background ? props.background : props.background});
+  background: url(${(props) =>
+    props.background ? props.background : props.background});
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;

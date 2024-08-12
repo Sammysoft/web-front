@@ -14,6 +14,8 @@ const ProductHeader = () => {
     <>
       <Wrapper>
         <HorizontalFlexedWrapper
+          invert={true}
+          smallWidth={'100%'}
           elements={
             <>
               <CustomImageWrapper background={productH1}>
@@ -40,9 +42,9 @@ const CustomImageWrapper = styled.div`
   background-position: center;
   width: 50%;
 
-
-  @media (max-width: 1400px){
-    height: 20vh;
+  @media (max-width: 1400px) {
+    height: 35vh;
+    width: 100%;
   }
 `;
 
@@ -53,12 +55,11 @@ const Text = styled.p`
   bottom: 20px;
   left: 20px;
   z-index: 9999;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: 2rem;
 
-
-  @media (max-width: 1400px){
-    font-size: 1rem
+  @media (max-width: 1400px) {
+    font-size: 1rem;
   }
 `;
 

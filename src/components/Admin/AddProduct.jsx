@@ -242,11 +242,11 @@ const ProductForm = () => {
           }
         />
 
-<HorizontalFlexedWrapper
+        <HorizontalFlexedWrapper
           align={"flex-start"}
           width={"90%"}
           height={"18%"}
-          smallWidth={'100%'}
+          smallWidth={"100%"}
           elements={
             <>
               <SelectWrap>
@@ -260,7 +260,7 @@ const ProductForm = () => {
                         height={"50%"}
                         align={"left"}
                         smallWidth={"25%"}
-                        fontSmall={'12px'}
+                        fontSmall={"12px"}
                       >
                         Price ($)
                       </Text>
@@ -286,11 +286,11 @@ const ProductForm = () => {
           }
         />
 
-<HorizontalFlexedWrapper
+        <HorizontalFlexedWrapper
           align={"flex-start"}
           width={"90%"}
           height={"18%"}
-          smallWidth={'100%'}
+          smallWidth={"100%"}
           elements={
             <>
               <SelectWrap>
@@ -304,7 +304,7 @@ const ProductForm = () => {
                         height={"50%"}
                         align={"left"}
                         smallWidth={"25%"}
-                        fontSmall={'12px'}
+                        fontSmall={"12px"}
                       >
                         Category
                       </Text>
@@ -330,11 +330,11 @@ const ProductForm = () => {
           }
         />
 
-<HorizontalFlexedWrapper
+        <HorizontalFlexedWrapper
           align={"flex-start"}
           width={"90%"}
           height={"18%"}
-          smallWidth={'100%'}
+          smallWidth={"100%"}
           elements={
             <>
               <SelectWrap>
@@ -348,9 +348,9 @@ const ProductForm = () => {
                         height={"50%"}
                         align={"left"}
                         smallWidth={"25%"}
-                        fontSmall={'12px'}
+                        fontSmall={"12px"}
                       >
-                       Size Tags
+                        Size Tags
                       </Text>
                       <TextField>
                         <HorizontalFlexedWrapper
@@ -360,7 +360,7 @@ const ProductForm = () => {
                           elements={
                             <>
                               <Text fontSmall={"11px"} smallLine={"22px"}>
-                               Select options for sizes
+                                Select options for sizes
                               </Text>
                             </>
                           }

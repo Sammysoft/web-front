@@ -28,6 +28,7 @@ import Blog2 from "../../assets/Images/blog2.svg";
 import Blog3 from "../../assets/Images/blog3.svg";
 import Blog4 from "../../assets/Images/blog4.svg";
 import Blog from "./Blogs";
+import AddBlog from "./AddBlog";
 
 const Wrapper = styled.div`
   width: 70%;
@@ -154,7 +155,7 @@ const AdminListings = () => {
                     </Text>
                     <Text
                       weight={tab === "blogs" ? "900" : ""}
-                      size={tab === "blogs" ? "30px" : "18px"}
+                      size={tab === "blogs" || tab === "showBlogForm" ? "30px" : "18px"}
                       onClick={() => setTab("blogs")}
                       fontSmall={"14px"}
                     >
@@ -174,6 +175,18 @@ const AdminListings = () => {
                   }}
                 />
               )}
+
+              {tab === "blogs" && (
+                <BoxedButton
+                  text={"Add new Blog Post"}
+                  width={"25%"}
+                  smallWidth={"20%"}
+                  fontSmall={"12px"}
+                  onPress={() => {
+                    setTab("showBlogForm");
+                  }}
+                />
+              )}
             </>
           }
         />
@@ -190,6 +203,8 @@ const AdminListings = () => {
 
         {tab === "blogs" &&
           Blogs.map((blog, index) => <Blog key={index} Blog={blog} />)}
+
+        {tab === "showBlogForm" && <AddBlog />}
       </Wrapper>
     </>
   );
@@ -210,10 +225,10 @@ const GridWrapper = styled.div`
   column-gap: 10%;
   row-gap: 10%;
   margin: 5%;
-//   background: red;
+  //   background: red;
   height: fit-content;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     display: block;
     margin: 10px;
     width: 90%;

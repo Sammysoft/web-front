@@ -18,11 +18,6 @@ const Wrapper = styled.div`
   background-image: url(${BackgroundImage});
 `;
 
-const HeadText = styled.p`
-  font-size: 2rem;
-  font-weight: 900;
-  font-family: Josefin Sans;
-`;
 
 const HomePage = () => {
   return (
