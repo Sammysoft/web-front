@@ -56,7 +56,7 @@ export const LoginForm = () => {
 
   return (
     <>
-      <Toaster />
+      {/* <Toaster toastOptions={{ style: { fontFamily: Fonts.PRIMARY } }} /> */}
       <Wrapper>
         <HorizontalFlexedWrapper
           invert={true}
@@ -275,23 +275,25 @@ export const SignupForm = () => {
       phone,
     };
 
-  if(password === confirmPassword){
-    try {
-      const response = await AuthDataService.onboard(payload);
-      if (response) {
-        console.log(response);
-        navigate("/login");
+    if (password === confirmPassword) {
+      try {
+        const response = await AuthDataService.onboard(payload);
+        if (response) {
+          console.log(response);
+          toast.success(response.data.message);
+          navigate("/login");
+        }
+      } catch (error) {
+        toast.error(error.response.data.message);
       }
-    } catch (error) {
-      toast.error(error.response.data.message);
+    } else {
+      toast.error("Passwords doesn't match");
     }
-  }else{
-    toast.error("Passwords doesn't match")
-  }
   };
 
   return (
     <>
+      {/* <Toaster toastOptions={{ style: { fontFamily: Fonts.PRIMARY } }} /> */}
       <Wrapper>
         <HorizontalFlexedWrapper
           invert={true}

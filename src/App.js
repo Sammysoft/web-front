@@ -11,11 +11,15 @@ import SignupPage from "./pages/SignupPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import AdminDashboard from "./pages/AdminPages";
 import { Toaster } from "react-hot-toast";
+import { Fonts } from "./assets/Res/fonts";
 
 function App() {
   return (
     <>
-      <Toaster />
+      <Toaster
+        // position="top-right"
+        toastOptions={{ style: { fontFamily: Fonts.PRIMARY } }}
+      />
       <Routes>
         <Route path="/" exact element={<HomePage />} />
         <Route path="/product" exact element={<ProductsPage />} />
