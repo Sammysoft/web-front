@@ -8,13 +8,18 @@ import {
   VerticalFlexedWrapper,
 } from "../Elements";
 import ArrowDown from "../../assets/Icons/svg/arrow_down.svg";
-import prodImage from "../../assets/Images/prod3.svg";
 import { Text } from "../Home/Blogs";
 import { Fonts } from "../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   width: 80%;
   padding: 5%;
+
+  @media (max-width: 1400px) {
+    width: 90%;
+    margin: 5%;
+    padding: 0%;
+  }
 `;
 
 const Orders = ({ prod }) => {
@@ -23,9 +28,12 @@ const Orders = ({ prod }) => {
       <Wrapper>
         <HorizontalFlexedWrapper
           width={"70%"}
+          smallWidth={"100%"}
           elements={
             <>
-              <Text align={"left"}>1. Omotayo Olubunmi (3)</Text>
+              <Text align={"left"} fontSmall={"14px"}>
+                1. Omotayo Olubunmi (3)
+              </Text>
               <ImageWrapper image={ArrowDown} width={"20px"} height={"20px"} />
             </>
           }
@@ -33,6 +41,7 @@ const Orders = ({ prod }) => {
         <HorizontalFlexedWrapper
           width={"80%"}
           margin={"0% 10% 0% 0%"}
+          smallWidth={"100%"}
           elements={
             <>
               {/* <ProductWrapping background={prod.image}></ProductWrapping> */}
@@ -42,35 +51,65 @@ const Orders = ({ prod }) => {
                 height={"100%"}
                 elements={
                   <>
-                    <Text
-                      weight={"800"}
-                      size={"22px"}
-                      align={"left"}
-                      style={{ padding: "5px" }}
-                    >
-                      {prod.name}
-                    </Text>
-                    <Text
-                      weight={"800"}
-                      size={"22px"}
-                      align={"left"}
-                      style={{ padding: "5px" }}
-                    >
-                      {prod.price}
-                    </Text>
-
-                    <Text style={{ padding: "5px" }} align={"left"}>
-                      Colour: Brown
-                    </Text>
-                    <Text style={{ padding: "5px" }} align={"left"}>
-                      Thigh: 20
-                    </Text>
-                    <Text style={{ padding: "5px" }} align={"left"}>
-                      Waist: 34
-                    </Text>
-                    <Text style={{ padding: "5px" }} align={"left"}>
-                      Length: 49
-                    </Text>
+                    <VerticalFlexedWrapper
+                      height={"40%"}
+                      elements={
+                        <>
+                          <Text
+                            weight={"800"}
+                            size={"22px"}
+                            align={"left"}
+                            fontSmall={"14px"}
+                            smallLine={"20px"}
+                            style={{ padding: "5px" }}
+                          >
+                            {prod.name}
+                          </Text>
+                          <Text
+                            weight={"800"}
+                            size={"22px"}
+                            align={"left"}
+                            fontSmall={"14px"}
+                            smallLine={"20px"}
+                            style={{ padding: "5px" }}
+                          >
+                            {prod.price}
+                          </Text>
+                          <Text
+                            style={{ padding: "5px" }}
+                            align={"left"}
+                            fontSmall={"14px"}
+                            smallLine={"20px"}
+                          >
+                            Colour: Brown
+                          </Text>
+                          <Text
+                            style={{ padding: "5px" }}
+                            align={"left"}
+                            fontSmall={"14px"}
+                            smallLine={"20px"}
+                          >
+                            Thigh: 20
+                          </Text>
+                          <Text
+                            style={{ padding: "5px" }}
+                            align={"left"}
+                            fontSmall={"14px"}
+                            smallLine={"20px"}
+                          >
+                            Waist: 34
+                          </Text>
+                          <Text
+                            style={{ padding: "5px" }}
+                            align={"left"}
+                            fontSmall={"14px"}
+                            smallLine={"20px"}
+                          >
+                            Length: 49
+                          </Text>
+                        </>
+                      }
+                    />
                     <HorizontalFlexedWrapper
                       align={"flex-start"}
                       width={"100%"}
@@ -88,11 +127,12 @@ const Orders = ({ prod }) => {
                                     height={"50%"}
                                     align={"left"}
                                     smallWidth={"10%"}
+                                    fontSmall={"14px"}
                                   >
                                     Status
                                   </Text>
                                   <TextField />
-                                    {/* <HorizontalFlexedWrapper
+                                  {/* <HorizontalFlexedWrapper
                                       width={"50%"}
                                       height={"100%"}
                                       smallWidth={"70%"}
@@ -116,7 +156,7 @@ const Orders = ({ prod }) => {
                       }
                     />
 
-                    <Text align={"left"} color={"#FD9017"}>
+                    <Text align={"left"} color={"#FD9017"} fontSmall={"14px"}>
                       {"View delivery details >>>"}
                     </Text>
                   </>
@@ -151,7 +191,7 @@ const ProductWrapping = styled.div`
 `;
 
 const TextField = styled.input`
-  width: 80%;
+  width: 70%;
   height: 100%;
   border-bottom: 1px solid #000000;
   display: flex;
@@ -164,6 +204,7 @@ const TextField = styled.input`
   padding: 8px 0; /* Adjust padding as needed */
   font-family: ${Fonts.PRIMARY};
   text-align: center;
+  background: transparent;
 
   &:focus {
     border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */

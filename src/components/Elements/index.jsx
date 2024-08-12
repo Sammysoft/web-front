@@ -187,10 +187,15 @@ ButtonWrapper.propTypes = {
   width: PropTypes.string,
 };
 
-export const StyledButton = ({ width, color, bgColor, text }) => {
+export const StyledButton = ({ width, color, bgColor, text, onPress }) => {
   return (
     <>
-      <StyledButtonWrapper width={width} color={color} bgColor={bgColor}>
+      <StyledButtonWrapper
+        width={width}
+        color={color}
+        bgColor={bgColor}
+        onClick={onPress}
+      >
         {text}
       </StyledButtonWrapper>
     </>
@@ -219,6 +224,7 @@ StyledButtonWrapper.propTypes = {
   width: PropTypes.string,
   color: PropTypes.string,
   bgColor: PropTypes.string,
+  onPress: PropTypes.func
 };
 
 export const DropDownButton = ({

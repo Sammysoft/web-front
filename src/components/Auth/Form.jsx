@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import styled from "styled-components";
 import {
@@ -10,6 +12,8 @@ import { Text } from "../Home/Blogs";
 import FormImg from "../../assets/Images/signup_form.svg";
 import { useNavigate } from "react-router";
 import { Fonts } from "../../assets/Res/fonts";
+import AuthDataService from "../../Services/AuthDataService";
+import toast, { Toaster } from "react-hot-toast";
 
 const Wrapper = styled.div`
   height: 60vh;
@@ -31,8 +35,28 @@ const Wrapper = styled.div`
 
 export const LoginForm = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
+
+  const handleLogin = async () => {
+    const payload = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await AuthDataService.login(payload);
+      if (response) console.log(response);
+      toast.success("Login successful");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error.response);
+    }
+  };
+
   return (
     <>
+      <Toaster />
       <Wrapper>
         <HorizontalFlexedWrapper
           invert={true}
@@ -76,7 +100,13 @@ export const LoginForm = () => {
                                         >
                                           Email
                                         </Text>
-                                        <TextField />
+                                        <TextField
+                                          placeholder="Enter your email"
+                                          value={email}
+                                          onChange={(e) =>
+                                            setEmail(e.target.value)
+                                          }
+                                        />
                                         {/* <HorizontalFlexedWrapper
                                             width={"70%"}
                                             height={"100%"}
@@ -128,7 +158,13 @@ export const LoginForm = () => {
                                         >
                                           Password
                                         </Text>
-                                        <TextField />
+                                        <TextField
+                                          placeholder="Type your password"
+                                          value={password}
+                                          onChange={(e) =>
+                                            setPassword(e.target.value)
+                                          }
+                                        />
                                         {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
@@ -169,6 +205,7 @@ export const LoginForm = () => {
                         elements={
                           <>
                             <StyledButton
+                              onPress={() => handleLogin()}
                               bgColor={"#8787871A"}
                               text={"Login"}
                               width={"20%"}
@@ -224,6 +261,35 @@ export const LoginForm = () => {
 
 export const SignupForm = () => {
   const navigate = useNavigate();
+  const [fullName, setFullName] = React.useState();
+  const [email, setEmail] = React.useState();
+  const [phone, setPhone] = React.useState();
+  const [password, setPassword] = React.useState();
+  const [confirmPassword, setConfirmPassword] = React.useState();
+
+  const handleSignUp = async () => {
+    const payload = {
+      email,
+      password,
+      fullName,
+      phone,
+    };
+
+  if(password === confirmPassword){
+    try {
+      const response = await AuthDataService.onboard(payload);
+      if (response) {
+        console.log(response);
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  }else{
+    toast.error("Passwords doesn't match")
+  }
+  };
+
   return (
     <>
       <Wrapper>
@@ -269,7 +335,13 @@ export const SignupForm = () => {
                                         >
                                           Name
                                         </Text>
-                                        <TextField />
+                                        <TextField
+                                          placeholder="Enter full name"
+                                          value={fullName}
+                                          onChange={(e) =>
+                                            setFullName(e.target.value)
+                                          }
+                                        />
                                         {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
@@ -321,7 +393,13 @@ export const SignupForm = () => {
                                         >
                                           Phone
                                         </Text>
-                                        <TextField />
+                                        <TextField
+                                          placeholder="Enter your phone number"
+                                          value={phone}
+                                          onChange={(e) =>
+                                            setPhone(e.target.value)
+                                          }
+                                        />
                                         {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
@@ -372,7 +450,15 @@ export const SignupForm = () => {
                                         >
                                           Email
                                         </Text>
-                                        <TextField />
+                                        <TextField
+                                          placeholder={
+                                            "Enter your active email address"
+                                          }
+                                          value={email}
+                                          onChange={(e) =>
+                                            setEmail(e.target.value)
+                                          }
+                                        />
                                         {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
@@ -424,7 +510,13 @@ export const SignupForm = () => {
                                         >
                                           Password
                                         </Text>
-                                        <TextField />
+                                        <TextField
+                                          placeholder="Enter Secret Password"
+                                          value={password}
+                                          onChange={(e) =>
+                                            setPassword(e.target.value)
+                                          }
+                                        />
                                         {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
@@ -475,7 +567,13 @@ export const SignupForm = () => {
                                         >
                                           Confirm
                                         </Text>
-                                        <TextField />
+                                        <TextField
+                                          placeholder="Confirm Password"
+                                          value={confirmPassword}
+                                          onChange={(e) =>
+                                            setConfirmPassword(e.target.value)
+                                          }
+                                        />
                                         {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
@@ -509,6 +607,7 @@ export const SignupForm = () => {
                         elements={
                           <>
                             <StyledButton
+                              onPress={() => handleSignUp()}
                               bgColor={"#8787871A"}
                               text={"Create"}
                               width={"15%"}
@@ -604,7 +703,6 @@ const TextField = styled.input`
   &:active {
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
-
 `;
 
 const SelectWrap = styled.div`

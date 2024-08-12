@@ -386,10 +386,11 @@ const ProductForm = () => {
   );
 };
 
-const TextField = styled.div`
+const TextField = styled.input`
   width: 70%;
   height: 100%;
   border-bottom: 1px solid #000000;
+  font-size: 18px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -399,6 +400,7 @@ const TextField = styled.div`
   outline: none; /* Removes the default outline on focus */
   padding: 8px 0; /* Adjust padding as needed */
   font-family: ${Fonts.PRIMARY};
+  background: transparent;
 
   &:focus {
     border-bottom: 2px solid #000; /* Adds a visible bottom border on focus */
@@ -408,10 +410,9 @@ const TextField = styled.div`
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
 
-  // @media (max-width: 1400px) {
-  //   width: 65%;
-  //   height: 60%;
-  // }
+  @media (max-width: 1400px) {
+    font-size: 14px;
+  }
 `;
 
 const SelectWrap = styled.div`
