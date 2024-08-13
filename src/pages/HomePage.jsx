@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-image: url(${BackgroundImage});
+
 `;
 
 

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { Loader } from "semantic-ui-react";
 
 const HFWrapper = styled.div`
   display: flex;
@@ -71,7 +72,7 @@ const VFWrapper = styled.div`
   margin: ${(props) => (props.margin ? props.margin : "")};
 
   @media (max-width: 1400px) {
-    width: ${(props) => (props.mobileWidth ? props.mobileWidth : props.width)};
+    width: ${(props) => (props.mobileWidth ? props.mobileWidth : "100%")};
     flex-direction: ${(props) => (props.invert ? "row" : "column")};
     height: ${(props) =>
       props.mobileHeight ? props.mobileHeight : props.height};
@@ -148,6 +149,7 @@ export const BoxedButton = ({
   smallWidth,
   onPress,
   fontSmall,
+  loading,
 }) => {
   return (
     <>
@@ -157,7 +159,7 @@ export const BoxedButton = ({
         onClick={onPress}
         fontSmall={fontSmall}
       >
-        {text}
+        {loading ? <Loader active={loading} inline="centered" /> : text}
       </ButtonWrapper>
     </>
   );
@@ -185,9 +187,17 @@ const ButtonWrapper = styled.div`
 
 ButtonWrapper.propTypes = {
   width: PropTypes.string,
+  loading: PropTypes.bool,
 };
 
-export const StyledButton = ({ width, color, bgColor, text, onPress }) => {
+export const StyledButton = ({
+  width,
+  color,
+  bgColor,
+  text,
+  onPress,
+  loading,
+}) => {
   return (
     <>
       <StyledButtonWrapper
@@ -196,7 +206,7 @@ export const StyledButton = ({ width, color, bgColor, text, onPress }) => {
         bgColor={bgColor}
         onClick={onPress}
       >
-        {text}
+        {loading ? <Loader active={loading} inline={"centered"} /> : text}
       </StyledButtonWrapper>
     </>
   );
@@ -224,7 +234,7 @@ StyledButtonWrapper.propTypes = {
   width: PropTypes.string,
   color: PropTypes.string,
   bgColor: PropTypes.string,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
 };
 
 export const DropDownButton = ({

@@ -20,6 +20,8 @@ const Wrapper = styled.div`
 
   @media (max-width: 1400px) {
     margin-bottom: 10vh;
+    width: 100%;
+    padding:20px;
   }
 `;
 
@@ -131,6 +133,7 @@ const ProductCatalogue = () => {
       <HorizontalFlexedWrapper
         align={"flex-start"}
         width={"100%"}
+        smallWidth={'100%'}
         height={"fit-content"}
         elements={
           <>

@@ -4,5 +4,5 @@ export const Fonts = {
 
 export const Sizes = {
     PRIMARY: '1.5rem',
-    SECONDARY:'1rem'
+    SECONDARY:'1.2rem'
 }

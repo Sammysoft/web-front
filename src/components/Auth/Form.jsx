@@ -14,6 +14,8 @@ import { useNavigate } from "react-router";
 import { Fonts } from "../../assets/Res/fonts";
 import AuthDataService from "../../Services/AuthDataService";
 import toast, { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../Redux/Slices/userSlice";
 
 const Wrapper = styled.div`
   height: 60vh;
@@ -37,8 +39,11 @@ export const LoginForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = React.useState();
   const [password, setPassword] = React.useState();
+  const [loading, setLoading] = React.useState(Boolean);
+  const dispatch = useDispatch();
 
   const handleLogin = async () => {
+    setLoading(true);
     const payload = {
       email,
       password,
@@ -46,10 +51,25 @@ export const LoginForm = () => {
 
     try {
       const response = await AuthDataService.login(payload);
-      if (response) console.log(response);
-      toast.success("Login successful");
+      if (response) {
+        console.log(response.data.data.token);
+        await localStorage.setItem("928-token", response.data.data.token);
+        const details = await AuthDataService.fetchDetails();
+        if (details) {
+          console.log(details.data.data);
+          dispatch(setUser(details.data.data));
+          setLoading(false);
+          toast.success("Login successful");
+          navigate('/');
+        } else {
+          toast.error("Could not reach server, try again later");
+        }
+      } else {
+        toast.error("Could not reach server, try again later");
+      }
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false);
       console.log(error.response);
     }
   };
@@ -205,6 +225,7 @@ export const LoginForm = () => {
                         elements={
                           <>
                             <StyledButton
+                              loading={loading}
                               onPress={() => handleLogin()}
                               bgColor={"#8787871A"}
                               text={"Login"}
@@ -267,7 +288,10 @@ export const SignupForm = () => {
   const [password, setPassword] = React.useState();
   const [confirmPassword, setConfirmPassword] = React.useState();
 
+  const [loading, setLoading] = React.useState(Boolean);
+
   const handleSignUp = async () => {
+    setLoading(true);
     const payload = {
       email,
       password,
@@ -279,15 +303,18 @@ export const SignupForm = () => {
       try {
         const response = await AuthDataService.onboard(payload);
         if (response) {
+          setLoading(false);
           console.log(response);
           toast.success(response.data.message);
           navigate("/login");
         }
       } catch (error) {
         toast.error(error.response.data.message);
+        setLoading(false);
       }
     } else {
       toast.error("Passwords doesn't match");
+      setLoading(false);
     }
   };
 
@@ -609,6 +636,7 @@ export const SignupForm = () => {
                         elements={
                           <>
                             <StyledButton
+                              loading={loading}
                               onPress={() => handleSignUp()}
                               bgColor={"#8787871A"}
                               text={"Create"}

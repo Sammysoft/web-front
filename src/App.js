@@ -1,5 +1,5 @@
 import React from "react";
-
+import 'semantic-ui-css/semantic.min.css'
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
@@ -12,6 +12,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import AdminDashboard from "./pages/AdminPages";
 import { Toaster } from "react-hot-toast";
 import { Fonts } from "./assets/Res/fonts";
+import VerificationPage from "./pages/VerificationPage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/signup" exact element={<SignupPage />} />
         <Route path="/checkout" exact element={<CheckoutPage />} />
         <Route path="/admin" exact element={<AdminDashboard />} />
+        <Route path="/verify/*" exact element={<VerificationPage />} />
       </Routes>
     </>
   );

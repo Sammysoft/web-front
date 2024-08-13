@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 const MobileWrapper = styled.div`
   height: 120vh;
   width: 90%;
-  padding-top: 5vh;
+  padding-top: 10vh;
   margin: 0px 5% 0px 5%;
 
 

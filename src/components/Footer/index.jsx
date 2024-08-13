@@ -19,6 +19,11 @@ const Wrapper = styled.div`
   width: 80%;
   background: #221602;
   padding: 5% 10% 5% 10%;
+
+  @media (max-width: 1400px){
+    width: 100%;
+    padding: 5%
+  }
 `;
 
 const Footer = () => {

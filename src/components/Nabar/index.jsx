@@ -202,6 +202,8 @@ const MenuDetails = ({ navigate }) => {
     <>
       <HorizontalFlexedWrapper
         width={"10%"}
+        align={'center'}
+        justify={'center'}
         elements={
           <>
             <ImageWrapper image={PersonSVG} height={"40px"} width={"40px"} />
