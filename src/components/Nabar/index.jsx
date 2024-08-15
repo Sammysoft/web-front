@@ -77,7 +77,9 @@ const NavBar = () => {
                       width={"30px"}
                       height={"30px"}
                     />
-                    <LoginText onClick={()=> navigate('/login')}>Login</LoginText>
+                    <LoginText onClick={() => navigate("/login")}>
+                      Login
+                    </LoginText>
                     <ImageWrapper
                       image={ChartSVG}
                       width={"30px"}
@@ -202,11 +204,11 @@ const MenuDetails = ({ navigate }) => {
     <>
       <HorizontalFlexedWrapper
         width={"10%"}
-        align={'center'}
-        justify={'center'}
+        // align={"center"}
+        // justify={"center"}
         elements={
           <>
-            <ImageWrapper image={PersonSVG} height={"40px"} width={"40px"} />
+            <ImageWrapper image={PersonSVG} height={"30px"} width={"30px"} />
             <LoginText onClick={() => navigate("/login")}>Login</LoginText>
             <div onClick={() => navigate("/checkout")}>
               <ImageWrapper image={ChartSVG} height={"30px"} width={"30px"} />

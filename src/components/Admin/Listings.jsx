@@ -168,7 +168,7 @@ const AdminListings = () => {
                 <BoxedButton
                   text={"Add new Product"}
                   width={"25%"}
-                  smallWidth={"20%"}
+                  smallWidth={"30%"}
                   fontSmall={"12px"}
                   onPress={() => {
                     setTab("showProductForm");
@@ -180,7 +180,7 @@ const AdminListings = () => {
                 <BoxedButton
                   text={"Add new Blog Post"}
                   width={"25%"}
-                  smallWidth={"20%"}
+                  smallWidth={"30%"}
                   fontSmall={"12px"}
                   onPress={() => {
                     setTab("showBlogForm");

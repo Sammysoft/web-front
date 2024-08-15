@@ -17,7 +17,7 @@ import Blog4 from "../../../assets/Images/blog4.svg";
 import Right from "../../../assets/Icons/svg/right.svg";
 
 const Wrapper = styled.div`
-  width: 80%;
+  width: 100%;
   background: url(${background});
   background-repeat: no-repeat;
   background-size: 100%;

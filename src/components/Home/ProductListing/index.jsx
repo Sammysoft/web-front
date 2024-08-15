@@ -14,7 +14,7 @@ import Prod8 from "../../../assets/Images/prod8.svg";
 import Prod9 from "../../../assets/Images/prod9.svg";
 
 const Wrapper = styled.div`
-  width: 90%;
+  width: 100%;
   height: fit-content;
   padding: 5%;
 

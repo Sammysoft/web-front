@@ -181,7 +181,7 @@ const ButtonWrapper = styled.div`
   @media (max-width: 1400px) {
     font-size: ${(props) => (props.fontSmall ? props.fontSmall : "14px")};
     width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
-    padding: 15px;
+    padding: 5px;
   }
 `;
 

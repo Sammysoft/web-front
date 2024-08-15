@@ -16,7 +16,7 @@ import Instagram from "../../assets/Icons/svg/instagram.svg";
 import LinkedIn from "../../assets/Icons/svg/linkedin.svg";
 
 const Wrapper = styled.div`
-  width: 80%;
+  width: 100%;
   background: #221602;
   padding: 5% 10% 5% 10%;
 
