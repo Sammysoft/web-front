@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
   BoxedButton,
@@ -29,6 +29,7 @@ import Blog3 from "../../assets/Images/blog3.svg";
 import Blog4 from "../../assets/Images/blog4.svg";
 import Blog from "./Blogs";
 import AddBlog from "./AddBlog";
+import ProductDataService from "../../Services/ProductDataService";
 
 const Wrapper = styled.div`
   width: 70%;
@@ -46,6 +47,8 @@ const Wrapper = styled.div`
     padding: 0px;
   }
 `;
+
+
 
 const Products = [
   {
@@ -123,7 +126,26 @@ const Blogs = [
 
 const AdminListings = () => {
   const [tab, setTab] = useState("products");
+ const [ProductList, setProductList] = useState([]);
   console.log(tab);
+
+  const fetchAllProducts = async () => {
+    try {
+      const response = await ProductDataService.getAllProduct();
+      if (response) {
+        console.log(response.data.data);
+        setProductList(response.data.data)
+      } else {
+        console.log("error has occured");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
 
   return (
     <>
@@ -155,7 +177,11 @@ const AdminListings = () => {
                     </Text>
                     <Text
                       weight={tab === "blogs" ? "900" : ""}
-                      size={tab === "blogs" || tab === "showBlogForm" ? "30px" : "18px"}
+                      size={
+                        tab === "blogs" || tab === "showBlogForm"
+                          ? "30px"
+                          : "18px"
+                      }
                       onClick={() => setTab("blogs")}
                       fontSmall={"14px"}
                     >
@@ -192,7 +218,7 @@ const AdminListings = () => {
         />
         {tab === "products" && (
           <ProductCardWrapper
-            ProductItems={Products.map((prod, index) => (
+            ProductItems={ProductList.map((prod, index) => (
               <ProductCard key={index} prod={prod} />
             ))}
           />
@@ -244,7 +270,8 @@ const ProductCard = ({ prod }) => {
         mobileHeight={"fit-content"}
         elements={
           <>
-            <ProductWrapping background={prod.image}></ProductWrapping>
+          {console.log(prod.images[0])}
+            <ProductWrapping background={`'${prod.images[0]}'`}></ProductWrapping>
             <VerticalFlexedWrapper
               elements={
                 <>

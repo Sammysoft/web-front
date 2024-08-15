@@ -1,7 +1,8 @@
 /* eslint-disable */
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { storage } from "../../firebase";
 import {
   BoxedButton,
   HorizontalFlexedWrapper,
@@ -13,6 +14,8 @@ import {
   getDownloadURL,
   getStorage,
 } from "firebase/storage";
+
+import { v4 } from "uuid";
 import { Text } from "../Home/Blogs";
 import { Fonts } from "../../assets/Res/fonts";
 import toast from "react-hot-toast";
@@ -33,8 +36,8 @@ const ProductForm = () => {
 
   const [newCatgory, setNewCategory] = React.useState();
   const [loadingAddCategory, setLoadingAddCategory] = React.useState(Boolean);
-const [price, setPrice]=React.useState();
-const [description, setDescription] = React.useState();
+  const [price, setPrice] = React.useState();
+  const [description, setDescription] = React.useState();
 
   const [categories, setCategories] = React.useState([]);
 
@@ -84,20 +87,38 @@ const [description, setDescription] = React.useState();
   const [imageLoad, setImageLoad] = React.useState(Boolean);
   const [itemPictures, setItemPictures] = React.useState([]);
   const [productName, setProductName] = React.useState("");
-  const [tags, setTages] = React.useState('');
-  
+  const [tag, setTag] = React.useState("");
+  const [picture, setPicture] = React.useState([]);
+  const [uploadStatus, setUploadStatus] = React.useState("");
+  const [productCategory, setProductCategory] = React.useState("");
+
+  const [loading, setLoading] = useState(Boolean);
 
   const handleAddProduct = async () => {
+    setLoading(true);
     try {
       const payload = {
         images: itemPictures,
-        color: selectedColors,
-        tag: selectedTags,
+        colors: selectedColors,
+        sizeTag: selectedTags,
         name: productName,
+        price: price,
+        description: description,
+        category: productCategory,
       };
-      const response = await ProductDataService.createProduct();
+      console.log(payload);
+      const response = await ProductDataService.createProduct(payload);
+      if (response) {
+        console.log(response);
+        toast.success(response.data.message)
+        setLoading(false);
+      } else {
+        toast.error("Could not add product, please try again later.");
+        setLoading(false);
+      }
     } catch (error) {
       toast.error(error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -150,12 +171,26 @@ const [description, setDescription] = React.useState();
   ];
 
   const pick = React.useRef(null);
+
+  const handlePictureChange = (e) => {
+    const fileArray = Array.from(e.target.files).map((file) =>
+      URL.createObjectURL(file)
+    );
+    const uploadableFile = Array.from(e.target.files).map((files) => files);
+    if (fileArray.length === 5 || fileArray.length === 6) {
+      setPicture((prevImages) => prevImages.concat(fileArray));
+      uploadFile(uploadableFile);
+    } else {
+      toast.error("Images should be about 5 or 6");
+    }
+  };
+
   const uploadFile = (file) => {
+    console.log(file);
     setImageLoad(true);
     if (picture == null) {
       return null;
     } else {
-      //   setOpacity(true);
       file.map((image) => {
         const imageRef = ref(
           getStorage(),
@@ -169,10 +204,10 @@ const [description, setDescription] = React.useState();
           (snapshot) => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            // setUploadStatus(`${Math.round(progress)}%`);
+            setUploadStatus(`${Math.round(progress)}%`);
             switch (snapshot.state) {
               case "paused":
-                // setUploadStatus("Paused");
+                setUploadStatus("Paused");
                 break;
               case "running":
                 break;
@@ -192,37 +227,10 @@ const [description, setDescription] = React.useState();
           }
         );
         Promise.all(promise).then(() => {
-          // Swal.fire({
-          //   position: "bottom",
-          //   text: "All images uploaded, you can now proceed",
-          //   title: "Image uploaded 👍",
-          //   timer: 1500,
-          // });
+          toast.success("Images added, proceed!");
           setImageLoad(false);
         });
       });
-    }
-  };
-
-  const handlePictureChange = (e) => {
-    const fileArray = Array.from(e.target.files).map((file) =>
-      URL.createObjectURL(file)
-    );
-    const uploadableFile = Array.from(e.target.files).map((files) => files);
-    if (fileArray.length === 5 || fileArray.length === 6) {
-      setPicture((prevImages) => prevImages.concat(fileArray));
-      uploadFile(uploadableFile);
-    } else {
-      // Swal.fire({
-      //   title: "Upload the right amount!",
-      //   text: "Please ensure the images you upload is 5 or 6 images only",
-      //   position: "bottom",
-      // });
-      //   setShow(true);
-      //   setMessage(
-      //     `Oops, Please ensure the images you upload is 5 or 6 images only`
-      //   );
-      //   setColor("red");
     }
   };
 
@@ -449,7 +457,14 @@ const [description, setDescription] = React.useState();
                       >
                         Product Images
                       </Text>
-                      <BoxedButton width={"70%"} smallWidth={"70%"} />
+                      <BoxedButton
+                        onPress={() => {
+                          pick.current.click();
+                        }}
+                        width={"70%"}
+                        smallWidth={"70%"}
+                        text={imageLoad ? uploadStatus : "Add Images"}
+                      />
                       {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
@@ -575,8 +590,14 @@ const [description, setDescription] = React.useState();
                               </>
                             ) : (
                               <>
-                                <SelectField width={"80%"}>
-                                  <option value={"Select Category"}>
+                                <SelectField
+                                  width={"80%"}
+                                  value={productCategory}
+                                  onChange={(e) =>
+                                    setProductCategory(e.target.value)
+                                  }
+                                >
+                                  <option value={""} disabled>
                                     {"Select Category"}
                                   </option>
                                   {categories.length > 0 &&
@@ -679,7 +700,7 @@ const [description, setDescription] = React.useState();
           width={"100%"}
           elements={
             <BoxedButton
-            loading={loading}
+              loading={loading}
               text={"Upload Product"}
               width={"20%"}
               onPress={() => handleAddProduct()}

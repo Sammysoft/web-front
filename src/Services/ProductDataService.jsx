@@ -9,9 +9,13 @@ class ProductDataService {
   async getCategory() {
     return apiCall.get("/category/get");
   }
-  
-  async createProduct(product){
-    return tokenApiCall.post('/', product)
+
+  async createProduct(product) {
+    return tokenApiCall.post("/product/create", product);
+  }
+
+  async getAllProduct() {
+    return apiCall.get("/product/get/all");
   }
 }
 
