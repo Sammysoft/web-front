@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable */
+
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   DropDownButton,
@@ -45,6 +47,8 @@ const CategoryMenu = [
 ];
 
 const Header = ({ selectedProduct, setSelectedProduct }) => {
+  const [currency, setCurrency] = useState("Change Currency");
+
   return (
     <>
       <Wrapper>
@@ -81,13 +85,14 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
                 text={"Change Currency"}
                 bgColor={"#D9D9D9"}
                 smallWidth={"65%"}
-                Icon={
-                  <ImageWrapper
-                    image={DropDown}
-                    width={"20%"}
-                    height={"30px"}
-                  />
-                }
+                change={currency}
+                list={[
+                  { name: "Dollar" },
+                  { name: "Naira" },
+                ]}
+                onSelect={(option, index) => {
+                  setCurrency(option.name);
+                }}
               />
             </>
           }

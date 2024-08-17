@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Loader } from "semantic-ui-react";
+import { Fonts } from "../../assets/Res/fonts";
 
 const HFWrapper = styled.div`
   display: flex;
@@ -245,7 +246,16 @@ export const DropDownButton = ({
   text,
   height,
   smallWidth,
+  onSelect,
+  change,
+  list,
 }) => {
+  const handleChange = (event) => {
+    const selectedIndex = event.target.selectedIndex;
+    const selectedValue = list[selectedIndex - 1];
+    onSelect(selectedValue, selectedIndex);
+  };
+
   return (
     <>
       <DropDownButtonWrapper
@@ -255,8 +265,10 @@ export const DropDownButton = ({
         height={height}
         text={text}
         smallWidth={smallWidth}
+        // value={change}
+        onChange={handleChange}
       >
-        <HorizontalFlexedWrapper
+        {/* <HorizontalFlexedWrapper
           width={"100%"}
           height={"fit-content"}
           elements={
@@ -267,13 +279,22 @@ export const DropDownButton = ({
               {Icon}
             </>
           }
-        />
+        /> */}
+        <option value={text} disabled>
+          {text}
+        </option>
+        {list &&
+          list.map((item, index) => (
+            <option key={index} value={item}>
+              {item.name}
+            </option>
+          ))}
       </DropDownButtonWrapper>
     </>
   );
 };
 
-const DropDownButtonWrapper = styled.div`
+const DropDownButtonWrapper = styled.select`
   width: ${(props) => (props.width ? props.width : "100%")};
   padding: 10px;
   text-align: center;
@@ -281,6 +302,19 @@ const DropDownButtonWrapper = styled.div`
   margin: 10px 0px 10px 0px;
   height: ${(props) => (props.height ? props.height : "fit-content")};
   cursor: pointer;
+  outline: none;
+  font-size: 18px;
+  font-family: ${Fonts.PRIMARY};
+  option {
+    background-color: #ffffff;
+    font-family: ${Fonts.PRIMARY};
+    font-size: 18px;
+    color: #000000;
+  }
+
+  option:checked {
+    background-color: #fd9017;
+  }
 
   @media (max-width: 1400px) {
     width: ${(props) => (props.smallWidth ? props.smallWidth : props.width)};

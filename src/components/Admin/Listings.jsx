@@ -30,6 +30,9 @@ import Blog4 from "../../assets/Images/blog4.svg";
 import Blog from "./Blogs";
 import AddBlog from "./AddBlog";
 import ProductDataService from "../../Services/ProductDataService";
+import { Loader } from "semantic-ui-react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Wrapper = styled.div`
   width: 70%;
@@ -47,8 +50,6 @@ const Wrapper = styled.div`
     padding: 0px;
   }
 `;
-
-
 
 const Products = [
   {
@@ -126,26 +127,55 @@ const Blogs = [
 
 const AdminListings = () => {
   const [tab, setTab] = useState("products");
- const [ProductList, setProductList] = useState([]);
-  console.log(tab);
+  const [searchParams] = useSearchParams();
+  const productId = searchParams.get("id");
+
+  const [DisplayProduct, setDisplayProduct] = useState({});
+  const [ProductList, setProductList] = useState([]);
+  const [loading, setLoading] = useState(Boolean);
 
   const fetchAllProducts = async () => {
     try {
+      setLoading(true);
       const response = await ProductDataService.getAllProduct();
       if (response) {
         console.log(response.data.data);
-        setProductList(response.data.data)
+        setProductList(response.data.data);
+        setLoading(false);
       } else {
         console.log("error has occured");
+        setLoading(true);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const fetchAProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await ProductDataService.getAProduct(productId);
+      if (response) {
+        setDisplayProduct(response.data.data);
+        setLoading(false);
+      } else {
+        console.log("error has occured");
+        setLoading(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchAllProducts();
   }, []);
+
+  useEffect(() => {
+    if (productId) fetchAProducts();
+  }, [productId]);
 
   return (
     <>
@@ -190,7 +220,7 @@ const AdminListings = () => {
                   </>
                 }
               />
-              {tab === "products" && (
+              {tab === "products" && !productId && (
                 <BoxedButton
                   text={"Add new Product"}
                   width={"25%"}
@@ -216,14 +246,17 @@ const AdminListings = () => {
             </>
           }
         />
-        {tab === "products" && (
+        {tab === "products" && !productId && (
           <ProductCardWrapper
+            loading={loading}
             ProductItems={ProductList.map((prod, index) => (
               <ProductCard key={index} prod={prod} />
             ))}
           />
         )}
-        {tab === "showProductForm" && <ProductForm />}
+        {(tab === "showProductForm" || productId) && (
+          <ProductForm DisplayProduct={DisplayProduct} />
+        )}
         {tab === "orders" &&
           Products.map((prod, index) => <Orders key={index} prod={prod} />)}
 
@@ -236,10 +269,16 @@ const AdminListings = () => {
   );
 };
 
-const ProductCardWrapper = ({ ProductItems }) => {
+const ProductCardWrapper = ({ ProductItems, loading }) => {
   return (
     <>
-      <GridWrapper>{ProductItems}</GridWrapper>
+      <GridWrapper>
+        {loading ? (
+          <Loader active={loading} inline={"centered"} />
+        ) : (
+          ProductItems
+        )}
+      </GridWrapper>
     </>
   );
 };
@@ -262,6 +301,20 @@ const GridWrapper = styled.div`
 `;
 
 const ProductCard = ({ prod }) => {
+  const navigate = useNavigate();
+  const handleDelete = async (id) => {
+    try {
+      const response = await ProductDataService.deleteProduct(id);
+      if (response) {
+        toast.success(response.data.message);
+        window.location.reload();
+      }
+      if (!response) console.log("could not delete, please try again later");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+    }
+  };
   return (
     <>
       <VerticalFlexedWrapper
@@ -270,8 +323,10 @@ const ProductCard = ({ prod }) => {
         mobileHeight={"fit-content"}
         elements={
           <>
-          {console.log(prod.images[0])}
-            <ProductWrapping background={`'${prod.images[0]}'`}></ProductWrapping>
+            {/* {console.log(prod.images[0])} */}
+            <ProductWrapping
+              background={`'${prod.images[0]}'`}
+            ></ProductWrapping>
             <VerticalFlexedWrapper
               elements={
                 <>
@@ -325,6 +380,9 @@ const ProductCard = ({ prod }) => {
                     elements={
                       <>
                         <Text
+                          onClick={() => {
+                            navigate(`/admin?id=${prod.id}`);
+                          }}
                           align={"left"}
                           width={"40%"}
                           size={"14px"}
@@ -334,6 +392,9 @@ const ProductCard = ({ prod }) => {
                           Edit Listing
                         </Text>
                         <Text
+                          onClick={() => {
+                            handleDelete(prod.id);
+                          }}
                           align={"left"}
                           width={"55%"}
                           size={"14px"}

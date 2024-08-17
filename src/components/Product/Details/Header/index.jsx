@@ -1,13 +1,11 @@
-import React from "react";
+/* eslint-disable */
+
+import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  DropDownButton,
-  VerticalFlexedWrapper,
-  ImageWrapper,
-} from "../../../Elements";
+import { DropDownButton, VerticalFlexedWrapper } from "../../../Elements";
 import { Text } from "../../../Home/Blogs";
 
-import DropDown from "../../../../assets/Icons/svg/dropdown.svg";
+// import DropDown from "../../../../assets/Icons/svg/dropdown.svg";
 
 const Wrapper = styled.div`
   margin-top: 15vh;
@@ -20,6 +18,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = ({ selectedProduct, setSelectedProduct }) => {
+  const [currency, setCurrency] = useState("Change Currency");
   return (
     <>
       <Wrapper>
@@ -43,7 +42,7 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
                 width={"60%"}
                 size={"20px"}
                 fontSmall={"16px"}
-                smallLine={'28px'}
+                smallLine={"28px"}
               >
                 Ornare nec placerat in elit convallis rutrum pellentesque. Ac
                 dis volutpat pellentesque et tortor elementum consequat.
@@ -52,16 +51,14 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
               </Text>
               <DropDownButton
                 width={"14%"}
-                smallWidth={'65%'}
                 text={"Change Currency"}
                 bgColor={"#D9D9D9"}
-                Icon={
-                  <ImageWrapper
-                    image={DropDown}
-                    width={"20%"}
-                    height={"30px"}
-                  />
-                }
+                smallWidth={"65%"}
+                change={currency}
+                list={[{ name: "Dollar" }, { name: "Naira" }]}
+                onSelect={(option, index) => {
+                  setCurrency(option.name);
+                }}
               />
             </>
           }

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable */
+
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   DropDownButton,
@@ -20,6 +22,9 @@ import Prod6 from "../../../assets/Images/prod6.svg";
 import Prod7 from "../../../assets/Images/prod7.svg";
 import Prod8 from "../../../assets/Images/prod8.svg";
 import { useNavigate } from "react-router";
+import ProductDataService from "../../../Services/ProductDataService";
+import { Loader } from "semantic-ui-react";
+import { TruncateText } from "../../../utils";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -110,6 +115,27 @@ const ProductListing = [
 
 const Listings = ({ selectedProduct, setSelectedProduct }) => {
   console.log(selectedProduct);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(Boolean);
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await ProductDataService.getCategory();
+      if (response) {
+        console.log(response.data.data);
+        setCategories([{ name: "All Products" }, ...response.data.data]);
+      } else {
+        console.log("Could not get categories");
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   // const navigate = useNavigate();
 
@@ -210,6 +236,15 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
       </Wrapper>
 
       <MobileWrapper>
+        <DropDownButton
+          bgColor={"#D9D9D9"}
+          list={categories}
+          change={selectedProduct?.name}
+          text={"All Products"}
+          onSelect={(option, index) => {
+            setSelectedProduct(option);
+          }}
+        />
         <ProductWrapper>
           <ProductCard
             selectedProduct={selectedProduct}
@@ -223,10 +258,52 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
 
 const Menu = ({ selectedProduct, setSelectedProduct }) => {
   const [clicked, setClicked] = useState(0);
+
+  const [loading, setLoading] = useState(Boolean);
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await ProductDataService.getCategory();
+      if (response) {
+        console.log(response.data.data);
+        setCategories(response.data.data);
+      } else {
+        console.log("Could not get categories");
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
   return (
     <>
-      {MenuList &&
-        MenuList.map((item, index) => (
+      <Text
+        width={"10%"}
+        size={"20px"}
+        onClick={() => {
+          setClicked("all");
+          setSelectedProduct({ name: "All Products" });
+        }}
+        style={
+          clicked === "all"
+            ? {
+                fontWeight: "bolder",
+                cursor: "pointer",
+                textTransform: "capitalize",
+              }
+            : { cursor: "pointer", textTransform: "capitalize" }
+        }
+      >
+        {"All Products"}
+      </Text>
+      {categories &&
+        categories.map((item, index) => (
           <Text
             key={index}
             width={"15%"}
@@ -237,11 +314,15 @@ const Menu = ({ selectedProduct, setSelectedProduct }) => {
             }}
             style={
               index === clicked
-                ? { fontWeight: "bolder", cursor: "pointer" }
-                : { cursor: "pointer" }
+                ? {
+                    fontWeight: "bolder",
+                    cursor: "pointer",
+                    textTransform: "capitalize",
+                  }
+                : { cursor: "pointer", textTransform: "capitalize" }
             }
           >
-            {item.text}
+            {item.name}
           </Text>
         ))}
     </>
@@ -250,18 +331,64 @@ const Menu = ({ selectedProduct, setSelectedProduct }) => {
 
 const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
   const navigate = useNavigate();
+  const [ProductList, setProductList] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const [loading, setLoading] = useState(Boolean);
+  // console.log(selectedProduct?.name);
+
   const ProductFilteredByCategory =
     selectedProduct?.name === "All Products" ||
     selectedProduct?.name === "Best Sellers"
-      ? ProductListing
-      : ProductListing.filter(
-          (prod) => prod.category === selectedProduct?.name
-        );
+      ? ProductList
+      : ProductList.filter((prod) => prod.category === selectedProduct?.name);
+
+  const fetchAllProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await ProductDataService.getAllProduct();
+      if (response) {
+        // console.log(response.data.data);
+        setProductList(response.data.data);
+        setLoading(false);
+      } else {
+        console.log("error has occured");
+        setLoading(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      setLoading(true);
+      const response = await ProductDataService.getCategory();
+      if (response) {
+        console.log(response.data.data);
+        setCategories(response.data.data);
+      } else {
+        console.log("Could not get categories");
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+    fetchCategories();
+    // setSelectedProduct({ name: "All Products" });
+  }, []);
+
   return (
     <>
-      {selectedProduct === null &&
-        ProductListing &&
-        ProductListing.map((product, index) => (
+      {selectedProduct === null && ProductList && loading ? (
+        <Loader active={loading} inline="centered" />
+      ) : selectedProduct?.name === undefined ||
+        selectedProduct?.name === "All Products" ? (
+        ProductList.map((product, index) => (
           <VerticalFlexedWrapper
             onClick={() => setSelectedProduct(product)}
             width={"28%"}
@@ -271,11 +398,11 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
             elements={
               <>
                 <ProductImage
-                  background={product.image}
+                  background={`'${product.images[0]}'`}
                   key={index}
                   onClick={() =>
                     navigate(
-                      `/product/${product.name}?category=${product.category}&name=${product.name}&price=${product.price}&details=${product.details}`
+                      `/product/${product.name}?category=${product.category}&name=${product.name}&price=${product.price}&details=${product.description}&id=${product.id}`
                     )
                   }
                 >
@@ -298,13 +425,13 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                         {product.name}
                       </Text>
                       <Text
-                        line={"0px"}
+                        line={"18px"}
                         width={"100%"}
                         align={"left"}
                         fontSmall={"14px"}
-                        smallLine={"0px"}
+                        smallLine={"14px"}
                       >
-                        {product.details}
+                        {product.category} | {TruncateText(product.description)}
                       </Text>
 
                       <HorizontalFlexedWrapper
@@ -334,8 +461,8 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
               </>
             }
           />
-        ))}
-      {selectedProduct !== null &&
+        ))
+      ) : (
         ProductFilteredByCategory.map((product, index) => (
           <VerticalFlexedWrapper
             width={"28%"}
@@ -345,11 +472,11 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
             elements={
               <>
                 <ProductImage
-                  background={product?.image}
+                  background={`'${product?.images[0]}'`}
                   key={index}
                   onClick={() =>
                     navigate(
-                      `/product/${product.name}?category=${product.category}&name=${product.name}&price=${product.price}&details=${product.details}`
+                      `/product/${product.name}?category=${product.category}&name=${product.name}&price=${product.price}&details=${product.description}&id=${product.id}`
                     )
                   }
                 >
@@ -372,13 +499,13 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                         {product?.name}
                       </Text>
                       <Text
-                        line={"0px"}
+                        line={"18px"}
                         width={"100%"}
                         align={"left"}
                         fontSmall={"14px"}
-                        smallLine={"0px"}
+                        smallLine={"14px"}
                       >
-                        {product?.details}
+                        {product?.description}
                       </Text>
 
                       <HorizontalFlexedWrapper
@@ -408,7 +535,10 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
               </>
             }
           />
-        ))}
+        ))
+      )}
+      {/* {selectedProduct !== null &&
+} */}
     </>
   );
 };

@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { storage } from "../../firebase";
 import {
@@ -20,6 +20,7 @@ import { Text } from "../Home/Blogs";
 import { Fonts } from "../../assets/Res/fonts";
 import toast from "react-hot-toast";
 import ProductDataService from "../../Services/ProductDataService";
+import { useSearchParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -32,12 +33,50 @@ const Wrapper = styled.div`
 `;
 
 const ProductForm = () => {
-  const [addCategory, setAddCategory] = React.useState(Boolean);
+  const [searchParams] = useSearchParams();
+  const productId = searchParams.get("id");
+  const [DisplayProduct, setDisplayProduct] = useState({});
 
+  const fetchAProducts = async () => {
+    try {
+      // setLoading(true);
+      const response = await ProductDataService.getAProduct(productId);
+      if (response) {
+        console.log(response.data.data);
+        setDisplayProduct(response.data.data);
+        // setLoading(false);
+      } else {
+        console.log("error has occured");
+        // setLoading(true);
+      }
+    } catch (error) {
+      console.log(error);
+      // setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (productId) fetchAProducts();
+  }, [productId]);
+
+  useEffect(() => {
+    if (DisplayProduct) {
+      setProductName(DisplayProduct.name || "");
+      setDescription(DisplayProduct.description || "");
+      setSelectedTags(DisplayProduct.sizeTag || []);
+      setSelectedColors(DisplayProduct.colors || []);
+      console.log(categories.find((cat)=> cat.name === DisplayProduct.category)?.name)
+      setProductCategory(categories.find((cat)=> cat.name === DisplayProduct.category)?.id || "");
+      setPrice(DisplayProduct.price || "");
+      // Add more fields as needed
+    }
+  }, [DisplayProduct]);
+
+  const [addCategory, setAddCategory] = React.useState(Boolean);
   const [newCatgory, setNewCategory] = React.useState();
   const [loadingAddCategory, setLoadingAddCategory] = React.useState(Boolean);
   const [price, setPrice] = React.useState();
-  const [description, setDescription] = React.useState();
+  const [description, setDescription] = React.useState("");
 
   const [categories, setCategories] = React.useState([]);
 
@@ -86,7 +125,7 @@ const ProductForm = () => {
   const [selectedColors, setSelectedColors] = React.useState([]);
   const [imageLoad, setImageLoad] = React.useState(Boolean);
   const [itemPictures, setItemPictures] = React.useState([]);
-  const [productName, setProductName] = React.useState("");
+  const [productName, setProductName] = React.useState(DisplayProduct?.name);
   const [tag, setTag] = React.useState("");
   const [picture, setPicture] = React.useState([]);
   const [uploadStatus, setUploadStatus] = React.useState("");
@@ -110,10 +149,38 @@ const ProductForm = () => {
       const response = await ProductDataService.createProduct(payload);
       if (response) {
         console.log(response);
-        toast.success(response.data.message)
+        toast.success(response.data.message);
         setLoading(false);
       } else {
         toast.error("Could not add product, please try again later.");
+        setLoading(false);
+      }
+    } catch (error) {
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
+  const handleEditProduct = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        images: itemPictures,
+        colors: selectedColors,
+        sizeTag: selectedTags,
+        name: productName,
+        price: price,
+        description: description,
+        category: productCategory,
+      };
+      console.log(payload);
+      const response = await ProductDataService.editProduct(payload, productId);
+      if (response) {
+        console.log(response);
+        toast.success(response.data.message);
+        setLoading(false);
+      } else {
+        toast.error("Could not edit product, please try again later.");
         setLoading(false);
       }
     } catch (error) {
@@ -147,7 +214,6 @@ const ProductForm = () => {
     "Back",
     "Sleeve Length",
     "Round Sleeve",
-    "Lenght",
     "Waist",
     "Sit/hips",
     "Laps",
@@ -701,9 +767,11 @@ const ProductForm = () => {
           elements={
             <BoxedButton
               loading={loading}
-              text={"Upload Product"}
+              text={productId ? "Edit Product" : "Upload Product"}
               width={"20%"}
-              onPress={() => handleAddProduct()}
+              onPress={() =>
+                productId ? handleEditProduct() : handleAddProduct()
+              }
             />
           }
         />

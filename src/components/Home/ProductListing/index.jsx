@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+/* eslint-disable */
+
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ProductHeader from "./Header";
 import { BoxedButton, HorizontalFlexedWrapper } from "../../Elements";
@@ -12,6 +14,8 @@ import Prod6 from "../../../assets/Images/prod6.svg";
 import Prod7 from "../../../assets/Images/prod7.svg";
 import Prod8 from "../../../assets/Images/prod8.svg";
 import Prod9 from "../../../assets/Images/prod9.svg";
+import ProductDataService from "../../../Services/ProductDataService";
+import { Loader } from "semantic-ui-react";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,7 +25,7 @@ const Wrapper = styled.div`
   @media (max-width: 1400px) {
     margin-bottom: 10vh;
     width: 100%;
-    padding:20px;
+    padding: 20px;
   }
 `;
 
@@ -127,13 +131,38 @@ const ListingMenu = () => {
 };
 
 const ProductCatalogue = () => {
+  const [ProductList, setProductList] = useState([]);
+  const [loading, setLoading] = useState(Boolean);
+
+  const fetchAllProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await ProductDataService.getAllProduct();
+      if (response) {
+        console.log(response.data.data);
+        setProductList(response.data.data);
+        setLoading(false);
+      } else {
+        console.log("error has occured");
+        setLoading(true);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
   return (
     <>
       <Text>Product Listings</Text>
       <HorizontalFlexedWrapper
         align={"flex-start"}
         width={"100%"}
-        smallWidth={'100%'}
+        smallWidth={"100%"}
         height={"fit-content"}
         elements={
           <>
@@ -141,11 +170,15 @@ const ProductCatalogue = () => {
               <LongName>Product listings</LongName>
             </LeftText>
             <ProductWrapper>
-              {ProductMenu.map((prod, index) => (
-                <ProductWrapping background={prod} key={index}>
-                  <ProductBadge>New</ProductBadge>
-                </ProductWrapping>
-              ))}
+              {loading ? (
+                <Loader inline={"centered"} active={loading} />
+              ) : (
+                ProductList.map((prod, index) => (
+                  <ProductWrapping background={`'${prod.images[0]}'`} key={index}>
+                    <ProductBadge>New</ProductBadge>
+                  </ProductWrapping>
+                ))
+              )}
             </ProductWrapper>
           </>
         }

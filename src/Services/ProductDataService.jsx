@@ -17,6 +17,18 @@ class ProductDataService {
   async getAllProduct() {
     return apiCall.get("/product/get/all");
   }
+
+  async getAProduct(id) {
+    return apiCall.get(`/product/get/${id}`);
+  }
+
+  async editProduct(payload, id) {
+    return tokenApiCall.put(`/product/edit/${id}`, payload);
+  }
+
+  async deleteProduct(id){
+    return tokenApiCall.delete(`/product/delete/${id}`);
+  }
 }
 
 export default new ProductDataService();
