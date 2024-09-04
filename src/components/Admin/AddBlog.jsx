@@ -1,9 +1,23 @@
+/* eslint-disable */
+
 import React from "react";
 import styled from "styled-components";
 import { HorizontalFlexedWrapper, VerticalFlexedWrapper } from "../Elements";
 import { Text } from "../Home/Blogs";
 import { BoxedButton } from "../Elements";
+import toast from "react-hot-toast";
+import { storage } from "../../firebase";
 import { Fonts } from "../../assets/Res/fonts";
+
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  getStorage,
+} from "firebase/storage";
+
+import { v4 } from "uuid";
+import BlogDataService from "../../Services/BlogDataService";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -16,6 +30,93 @@ const Wrapper = styled.div`
 `;
 
 const AddBlog = () => {
+  const [imageLoad, setImageLoad] = React.useState(Boolean);
+  const [picture, setPicture] = React.useState("");
+  const [uploadStatus, setUploadStatus] = React.useState("");
+
+  const [title, setTitle] = React.useState("");
+  const [post, setPost] = React.useState("");
+  const [tags, setTags] = React.useState([]);
+  const [loading, setLoading] = React.useState(Boolean);
+
+  const pick = React.useRef(null);
+
+  const uploadFile = (pickFile) => {
+    setImageLoad(true);
+    if (pickFile == null) {
+      return null;
+    } else {
+      const imageRef = ref(getStorage(), `images/${pickFile.name + v4()}`);
+      const uploadTask = uploadBytesResumable(imageRef, pickFile);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(Math.round(progress) + "% ");
+          setUploadStatus(`${Math.round(progress)}%`);
+          switch (snapshot.state) {
+            case "paused":
+              setUploadStatus("Paused");
+              break;
+            case "running":
+              // setUploadStatus("Uploading...");
+              break;
+          }
+        },
+        (error) => {
+          alert("Sorry, upload denied at the moment, Please try again later!");
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+            toast.success(`Image uploaded 👍. please proceed!`);
+            setPicture(downloadURL);
+            setImageLoad(false);
+          });
+        }
+      );
+    }
+  };
+
+  const handlePictureChange = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setPicture(reader.result);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+    uploadFile(e.target.files[0]);
+  };
+
+  const handleAddPost = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        thumbnail: picture,
+        title,
+        post,
+        tags,
+      };
+
+      const response = await BlogDataService.createBlog(payload);
+      if (response) {
+        console.log(response);
+        toast.success(response.data.message);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+      setLoading(false);
+    }
+  };
+
+  const handleAddTags = (e)=>{
+    setTags((prev) => [...prev, e.target.value])
+  }
+
   return (
     <>
       <Wrapper>
@@ -41,8 +142,11 @@ const AddBlog = () => {
                       >
                         Blog Title
                       </Text>
-                      <TextField />
-                        {/* <HorizontalFlexedWrapper
+                      <TextField
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                      />
+                      {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -85,8 +189,13 @@ const AddBlog = () => {
                       >
                         Tags
                       </Text>
-                      <TextField />
-                        {/* <HorizontalFlexedWrapper
+                      <TextField
+                        value={tags}
+                        onChange={(e) =>
+                         handleAddTags(e)
+                        }
+                      />
+                      {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -129,8 +238,16 @@ const AddBlog = () => {
                       >
                         Thumbnail
                       </Text>
-                      <TextField />
-                        {/* <HorizontalFlexedWrapper
+                      <BoxedButton
+                        onPress={() => {
+                          pick.current.click();
+                        }}
+                        width={"70%"}
+                        smallWidth={"70%"}
+                        text={imageLoad ? uploadStatus : "Add Blog Image"}
+                      />
+                      {/* <TextField /> */}
+                      {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -150,20 +267,28 @@ const AddBlog = () => {
             </>
           }
         />
+        <input
+          onChange={(e) => {
+            handlePictureChange(e);
+          }}
+          ref={pick}
+          style={{ display: "none" }}
+          type="file"
+          accept="image/*"
+        />
 
         <HorizontalFlexedWrapper
           align={"flex-start"}
           width={"90%"}
           height={"18%"}
           smallWidth={"100%"}
-
           elements={
             <>
               <SelectWrap>
                 <HorizontalFlexedWrapper
                   width={"100%"}
                   height={"100%"}
-                  align={'flex-start'}
+                  align={"flex-start"}
                   elements={
                     <>
                       <Text
@@ -175,8 +300,11 @@ const AddBlog = () => {
                       >
                         Blog Post
                       </Text>
-                      <TextAreaField />
-                        {/* <HorizontalFlexedWrapper
+                      <TextAreaField
+                        value={post}
+                        onChange={(e) => setPost(e.target.value)}
+                      />
+                      {/* <HorizontalFlexedWrapper
                           width={"50%"}
                           height={"100%"}
                           smallWidth={"70%"}
@@ -201,7 +329,14 @@ const AddBlog = () => {
           height={"20vh"}
           justify={"center"}
           width={"100%"}
-          elements={<BoxedButton text={"Make Post"} width={"20%"} />}
+          elements={
+            <BoxedButton
+              loading={loading}
+              text={"Make Post"}
+              width={"20%"}
+              onPress={() => handleAddPost()}
+            />
+          }
         />
       </Wrapper>
     </>
@@ -231,7 +366,6 @@ const TextField = styled.input`
   &:active {
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
-
 
   // @media (max-width: 1400px) {
   //   width: 65%;

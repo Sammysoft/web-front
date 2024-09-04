@@ -169,7 +169,7 @@ export const BoxedButton = ({
 const ButtonWrapper = styled.div`
   text-align: center;
   border: 2px solid #000000;
-  padding: 20px;
+  padding: 15px;
   font-family: Josefin Sans;
   width: ${(props) => (props.width ? props.width : "100%")};
   color: #000000;

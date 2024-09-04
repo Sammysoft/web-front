@@ -10,7 +10,6 @@ import {
 } from "../../Elements";
 import { Text } from "../../Home/Blogs";
 
-import DropDown from "../../../assets/Icons/svg/dropdown.svg";
 
 import Prod1 from "../../../assets/Images/prodM1.svg";
 import Prod2 from "../../../assets/Images/prodM2.svg";

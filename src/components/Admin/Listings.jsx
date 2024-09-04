@@ -33,6 +33,7 @@ import ProductDataService from "../../Services/ProductDataService";
 import { Loader } from "semantic-ui-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
+import BlogDataService from "../../Services/BlogDataService";
 
 const Wrapper = styled.div`
   width: 70%;
@@ -134,6 +135,24 @@ const AdminListings = () => {
   const [ProductList, setProductList] = useState([]);
   const [loading, setLoading] = useState(Boolean);
 
+  const [blog, setBlog] = useState([]);
+  const [blogLoading, setBlogLoading] = useState(Boolean);
+
+  const fetchAllBlogs = async () => {
+    try {
+      setBlogLoading(true);
+      const response = await BlogDataService.getAllBlogs();
+      if (response) {
+        console.log(response.data.data);
+        setBlog(response.data.data);
+        setBlogLoading(false);
+      }
+    } catch (error) {
+      console.log("error has occured");
+      setBlogLoading(true);
+    }
+  };
+
   const fetchAllProducts = async () => {
     try {
       setLoading(true);
@@ -171,6 +190,7 @@ const AdminListings = () => {
 
   useEffect(() => {
     fetchAllProducts();
+    fetchAllBlogs();
   }, []);
 
   useEffect(() => {

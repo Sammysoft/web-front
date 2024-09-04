@@ -160,7 +160,7 @@ const ProductForm = () => {
       setLoading(false);
     }
   };
-
+z
   const handleEditProduct = async () => {
     setLoading(true);
     try {
@@ -173,7 +173,7 @@ const ProductForm = () => {
         description: description,
         category: productCategory,
       };
-      console.log(payload);
+      // console.log(payload);
       const response = await ProductDataService.editProduct(payload, productId);
       if (response) {
         console.log(response);
@@ -531,19 +531,6 @@ const ProductForm = () => {
                         smallWidth={"70%"}
                         text={imageLoad ? uploadStatus : "Add Images"}
                       />
-                      {/* <HorizontalFlexedWrapper
-                          width={"50%"}
-                          height={"100%"}
-                          smallWidth={"70%"}
-                          elements={
-                            <>
-                              <Text fontSmall={"11px"} smallLine={"22px"}>
-                                Upload images (Not more than 5mb per image)
-                              </Text>
-                            </>
-                          }
-                        />
-                      </TextField> */}
                     </>
                   }
                 />
