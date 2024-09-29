@@ -4,9 +4,14 @@ import { VerticalFlexedWrapper } from "../Elements";
 import { Text } from "../Home/Blogs";
 
 const Wrapper = styled.div`
-  margin-top: 15vh;
+  // margin-top: 15vh;
   width: 80%;
-  margin: 10% 10% 2% 10%;
+  margin: 15vh 10% 2% 10%;
+
+  @media (max-width: 1400px){
+    // margin-top: 20vh;
+    margin: 10vh 10% 2% 10%;
+  }
 `;
 
 const Header = () => {

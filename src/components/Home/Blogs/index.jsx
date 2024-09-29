@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import styled from "styled-components";
 
@@ -15,6 +17,8 @@ import Blog3 from "../../../assets/Images/blog3.svg";
 import Blog4 from "../../../assets/Images/blog4.svg";
 
 import Right from "../../../assets/Icons/svg/right.svg";
+import BlogDataService from "../../../Services/BlogDataService";
+import { addEllipsis } from "../../../utils";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -125,7 +129,7 @@ export const Text = styled.div`
   font-family: Josefin Sans;
   font-size: ${(props) => (props.size ? props.size : "18px")};
   color: ${(props) => (props.color ? props.color : "#000000")};
-  padding: 20px 0px 20px 0px;
+  padding: ${(props) => (props.padding ? props.padding : "20px 0px 20px 0px")};
   width: ${(props) => (props.width ? props.width : "100%")};
   line-height: ${(props) => (props.line ? props.line : "35px")};
   weight: ${(props) => (props.weight ? props.weight : "")};
@@ -141,11 +145,27 @@ export const Text = styled.div`
 `;
 
 export const BlogCards = () => {
+  const [reLoad, setReload] = React.useState();
+  const [Blogs, setBlogs] = React.useState([]);
+
+  const fetchBlogs = async () => {
+    try {
+      const response = await BlogDataService.getAllBlogs();
+      setBlogs(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchBlogs();
+  }, [reLoad]);
+
   return (
     <>
       <BlogCardWrapper>
-        {BlogItems &&
-          BlogItems.map((blog, index) => (
+        {Blogs &&
+          Blogs.map((blog, index) => (
             <BlogCapsule key={index}>
               <VerticalFlexedWrapper
                 width={"100%"}
@@ -155,7 +175,7 @@ export const BlogCards = () => {
                       fit={"cover"}
                       height={"70%"}
                       width={"90%"}
-                      image={blog.image}
+                      image={blog.thumbnail}
                     />
                     <HorizontalFlexedWrapper
                       height={"30%"}
@@ -170,23 +190,23 @@ export const BlogCards = () => {
                                   color={"#000000"}
                                   size={"24px"}
                                   weight={"bolder"}
-                                  width={"80%"}
+                                  width={"100%"}
                                   align={"left"}
                                   line={"30px"}
                                   smallLine={"30px"}
                                 >
-                                  {blog.textHead}
+                                  {blog.title}
                                 </Text>
                                 <Text
                                   color={"#696969"}
                                   size={"18px"}
-                                  width={"80%"}
+                                  width={"100%"}
                                   align={"left"}
                                   line={"24px"}
                                   fontSmall={"14px"}
                                   smallLine={"20px"}
                                 >
-                                  {blog.textBody}
+                                  {addEllipsis(blog.post, 120)}
                                 </Text>
                               </>
                             }

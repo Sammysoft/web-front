@@ -16,6 +16,7 @@ import AuthDataService from "../../Services/AuthDataService";
 import toast, { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../Redux/Slices/userSlice";
+import { addItemToCart } from "../../Redux/Slices/cartSlices";
 
 const Wrapper = styled.div`
   height: 60vh;
@@ -52,15 +53,15 @@ export const LoginForm = () => {
     try {
       const response = await AuthDataService.login(payload);
       if (response) {
-        console.log(response.data.data.token);
         await localStorage.setItem("928-token", response.data.data.token);
         const details = await AuthDataService.fetchDetails();
         if (details) {
           console.log(details.data.data);
           dispatch(setUser(details.data.data));
+          dispatch(addItemToCart(details.data.data.cart_items));
           setLoading(false);
           toast.success("Login successful");
-          navigate('/');
+          navigate("/");
         } else {
           toast.error("Could not reach server, try again later");
         }
@@ -68,6 +69,7 @@ export const LoginForm = () => {
         toast.error("Could not reach server, try again later");
       }
     } catch (error) {
+      console.log(error)
       toast.error(error.response.data.message);
       setLoading(false);
       console.log(error.response);
@@ -298,6 +300,8 @@ export const SignupForm = () => {
       fullName,
       phone,
     };
+
+    console.log(payload);
 
     if (password === confirmPassword) {
       try {

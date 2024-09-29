@@ -34,6 +34,8 @@ import { Loader } from "semantic-ui-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import BlogDataService from "../../Services/BlogDataService";
+import { removeQueryParams } from "../../utils";
+import OrderDataService from "../../Services/OrderDataService";
 
 const Wrapper = styled.div`
   width: 70%;
@@ -103,28 +105,6 @@ const Products = [
   },
 ];
 
-const Blogs = [
-  {
-    head: "Choosing the right corporate style: A modern noob’s approach",
-    body: "Enim dictum mauris amet eget nunc in. In massa proin urna nulla sed purus ultricies cras elementum. Amet mattis porta sit tortor tempor et. Auctor mauris aenean at quis sagittis. Viverra eget mauris mattis sit elementum donec aliquet odio. Arcu est enim eget at. Sit leo ipsum consectetur sit volutpat bibendum rhoncus facilisi. Volutpat purus viver ante vel fermentum amet turpis in lacus.........",
-    image: Blog1,
-  },
-  {
-    head: "Choosing the right corporate style: A modern noob’s approach",
-    body: "Enim dictum mauris amet eget nunc in. In massa proin urna nulla sed purus ultricies cras elementum. Amet mattis porta sit tortor tempor et. Auctor mauris aenean at quis sagittis. Viverra eget mauris mattis sit elementum donec aliquet odio. Arcu est enim eget at. Sit leo ipsum consectetur sit volutpat bibendum rhoncus facilisi. Volutpat purus viver ante vel fermentum amet turpis in lacus.........",
-    image: Blog2,
-  },
-  {
-    head: "Choosing the right corporate style: A modern noob’s approach",
-    body: "Enim dictum mauris amet eget nunc in. In massa proin urna nulla sed purus ultricies cras elementum. Amet mattis porta sit tortor tempor et. Auctor mauris aenean at quis sagittis. Viverra eget mauris mattis sit elementum donec aliquet odio. Arcu est enim eget at. Sit leo ipsum consectetur sit volutpat bibendum rhoncus facilisi. Volutpat purus viver ante vel fermentum amet turpis in lacus.........",
-    image: Blog3,
-  },
-  {
-    head: "Choosing the right corporate style: A modern noob’s approach",
-    body: "Enim dictum mauris amet eget nunc in. In massa proin urna nulla sed purus ultricies cras elementum. Amet mattis porta sit tortor tempor et. Auctor mauris aenean at quis sagittis. Viverra eget mauris mattis sit elementum donec aliquet odio. Arcu est enim eget at. Sit leo ipsum consectetur sit volutpat bibendum rhoncus facilisi. Volutpat purus viver ante vel fermentum amet turpis in lacus.........",
-    image: Blog4,
-  },
-];
 
 const AdminListings = () => {
   const [tab, setTab] = useState("products");
@@ -137,6 +117,8 @@ const AdminListings = () => {
 
   const [blog, setBlog] = useState([]);
   const [blogLoading, setBlogLoading] = useState(Boolean);
+
+  const [orders, setOrders] = useState([]);
 
   const fetchAllBlogs = async () => {
     try {
@@ -188,9 +170,22 @@ const AdminListings = () => {
     }
   };
 
+  const fetchAllOrders = async () => {
+    try {
+      const response = await OrderDataService.getAllOrders();
+      if(response){
+        console.log(response.data.data.orders);
+        setOrders(response.data.data.orders);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     fetchAllProducts();
     fetchAllBlogs();
+    fetchAllOrders();
   }, []);
 
   useEffect(() => {
@@ -210,17 +205,22 @@ const AdminListings = () => {
                 elements={
                   <>
                     <Text
-                      onClick={() => setTab("products")}
+                      onClick={() => {
+                        setTab("products");
+                        removeQueryParams();
+                      }}
                       weight={tab === "products" ? "900" : ""}
                       size={tab === "products" ? "30px" : "18px"}
                       fontSmall={"14px"}
                     >
-                      Products(6)
+                      Products({ProductList.length})
                     </Text>
                     <Text
                       weight={tab === "orders" ? "900" : ""}
                       size={tab === "orders" ? "30px" : "18px"}
-                      onClick={() => setTab("orders")}
+                      onClick={() => {
+                        setTab("orders");
+                      }}
                       fontSmall={"14px"}
                     >
                       Orders(6)
@@ -235,7 +235,7 @@ const AdminListings = () => {
                       onClick={() => setTab("blogs")}
                       fontSmall={"14px"}
                     >
-                      Blogs(6)
+                      Blogs({blog.length})
                     </Text>
                   </>
                 }
@@ -254,7 +254,7 @@ const AdminListings = () => {
 
               {tab === "blogs" && (
                 <BoxedButton
-                  text={"Add new Blog Post"}
+                  text={"Post new Blog"}
                   width={"25%"}
                   smallWidth={"30%"}
                   fontSmall={"12px"}
@@ -278,10 +278,10 @@ const AdminListings = () => {
           <ProductForm DisplayProduct={DisplayProduct} />
         )}
         {tab === "orders" &&
-          Products.map((prod, index) => <Orders key={index} prod={prod} />)}
+          orders.map((prod, index) => <Orders key={index} prod={prod} index={index}/>)}
 
         {tab === "blogs" &&
-          Blogs.map((blog, index) => <Blog key={index} Blog={blog} />)}
+          blog.map((blog, index) => <Blog key={index} Blog={blog} />)}
 
         {tab === "showBlogForm" && <AddBlog />}
       </Wrapper>
@@ -392,7 +392,7 @@ const ProductCard = ({ prod }) => {
                     size={"20px"}
                     style={{ padding: "5px" }}
                   >
-                    {prod.price}
+                    ${prod.price}
                   </Text>
                   <HorizontalFlexedWrapper
                     width={"100%"}

@@ -70,6 +70,8 @@ const ListingMenuWrapper = styled.div`
   width: 80%;
   margin-left: 20%;
   margin-top: 15vh;
+  overflow-x: auto;
+  white-space: no-wrap;
 
   @media (max-width: 1400px) {
     display: none;
@@ -78,7 +80,7 @@ const ListingMenuWrapper = styled.div`
 
 const MenuWrapper = styled.div`
   margin-right: 20px;
-  padding: 10px;
+  padding: 5px 10px;
   height: 100%;
   text-align: center;
   font-size: 1rem;
@@ -86,6 +88,7 @@ const MenuWrapper = styled.div`
   border-bottom: ${(props) => (props.border ? "2px solid #fd9017" : "")};
   text-transform: capitalize;
   cursor: pointer;
+  white-space: no-wrap;
 `;
 
 const Text = styled.p`
@@ -102,6 +105,23 @@ const Text = styled.p`
 
 const ListingMenu = () => {
   const [clicked, setClicked] = useState(0);
+  const [categories, setCategories] = useState([]);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await ProductDataService.getCategory();
+      if (response) {
+        console.log(response.data.data);
+        setCategories([{ name: "All Products" }, ...response.data.data]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
   return (
     <>
@@ -109,20 +129,21 @@ const ListingMenu = () => {
         <HorizontalFlexedWrapper
           elements={
             <>
-              {Menu.map((item, index) => (
-                <MenuWrapper
-                  key={index}
-                  onClick={() => {
-                    setClicked(index);
-                  }}
-                  border={index === clicked}
-                >
-                  {item}
-                </MenuWrapper>
-              ))}
+              {categories.length > 0 &&
+                categories.map((item, index) => (
+                  <MenuWrapper
+                    key={index}
+                    onClick={() => {
+                      setClicked(index);
+                    }}
+                    border={index === clicked}
+                  >
+                    {item.name}
+                  </MenuWrapper>
+                ))}
             </>
           }
-          width={"100%"}
+          width={"auto"}
           height={"100%"}
         />
       </ListingMenuWrapper>
@@ -173,11 +194,27 @@ const ProductCatalogue = () => {
               {loading ? (
                 <Loader inline={"centered"} active={loading} />
               ) : (
-                ProductList.map((prod, index) => (
+                <>
+                  {/* ProductList.length >= 0 && ProductList?.map((prod, index) => (
                   <ProductWrapping background={`'${prod.images[0]}'`} key={index}>
                     <ProductBadge>New</ProductBadge>
                   </ProductWrapping>
-                ))
+                )) */}
+                  {ProductList.length > 0 &&
+                    ProductList?.map((prod, index) => (
+                      <ProductWrapping
+                        background={`'${prod.images[0]}'`}
+                        key={index}
+                      >
+                        <ProductBadge>New</ProductBadge>
+                      </ProductWrapping>
+                    ))}
+                  {ProductList.length <= 0 && (
+                    <>
+                      <Text>No Products yet!</Text>
+                    </>
+                  )}
+                </>
               )}
             </ProductWrapper>
           </>

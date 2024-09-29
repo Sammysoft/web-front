@@ -35,7 +35,7 @@ const ProductsDetails = () => {
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
       />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

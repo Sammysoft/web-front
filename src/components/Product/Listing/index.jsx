@@ -44,6 +44,18 @@ const MobileWrapper = styled.div`
   }
 `;
 
+const ListingMenuWrapper = styled.div`
+  width: 80%;
+  // margin-left: 20%;
+  // margin-top: 15vh;
+  overflow-x: auto;
+  white-space: no-wrap;
+
+  @media (max-width: 1400px) {
+    display: none;
+  }
+`;
+
 const MenuList = [
   { name: "All Products", text: "All Products" },
   { name: "Best Sellers", text: "Best Sellers" },
@@ -150,18 +162,20 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
               <Text width={"20%"}>
                 {selectedProduct === null ? "My Cart (3)" : ""}
               </Text>
-              <HorizontalFlexedWrapper
-                width={"80%"}
-                height={"fit-content"}
-                elements={
-                  <>
-                    <Menu
-                      selectedProduct={selectedProduct}
-                      setSelectedProduct={setSelectedProduct}
-                    />
-                  </>
-                }
-              />
+              <ListingMenuWrapper>
+                <HorizontalFlexedWrapper
+                  width={"100%"}
+                  height={"fit-content"}
+                  elements={
+                    <>
+                      <Menu
+                        selectedProduct={selectedProduct}
+                        setSelectedProduct={setSelectedProduct}
+                      />
+                    </>
+                  }
+                />
+              </ListingMenuWrapper>
             </>
           }
         />
@@ -257,7 +271,7 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
 };
 
 const Menu = ({ selectedProduct, setSelectedProduct }) => {
-  const [clicked, setClicked] = useState(0);
+  const [clicked, setClicked] = useState("all");
 
   const [loading, setLoading] = useState(Boolean);
   const [categories, setCategories] = useState([]);
@@ -284,8 +298,8 @@ const Menu = ({ selectedProduct, setSelectedProduct }) => {
   return (
     <>
       <Text
-        width={"10%"}
-        size={"20px"}
+        width={"15%"}
+        size={"15px"}
         onClick={() => {
           setClicked("all");
           setSelectedProduct({ name: "All Products" });
@@ -306,8 +320,8 @@ const Menu = ({ selectedProduct, setSelectedProduct }) => {
         categories.map((item, index) => (
           <Text
             key={index}
-            width={"15%"}
-            size={"20px"}
+            width={"20%"}
+            size={"15px"}
             onClick={() => {
               setClicked(index);
               setSelectedProduct(item);
@@ -409,7 +423,7 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                   <ProductBadge>New</ProductBadge>
                 </ProductImage>
                 <VerticalFlexedWrapper
-                  height={"25%"}
+                  height={"30%"}
                   width={"100%"}
                   justify={"center"}
                   elements={
@@ -450,7 +464,7 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                               align={"left"}
                               style={{ marginLeft: "10px" }}
                             >
-                              {product.price}
+                              ${product.price}
                             </Text>
                           </>
                         }
@@ -483,7 +497,7 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                   <ProductBadge>New</ProductBadge>
                 </ProductImage>
                 <VerticalFlexedWrapper
-                  height={"25%"}
+                  height={"30%"}
                   width={"100%"}
                   justify={"center"}
                   elements={
@@ -505,7 +519,7 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
                         fontSmall={"14px"}
                         smallLine={"14px"}
                       >
-                        {product?.description}
+                         {product.category} | {TruncateText(product.description)}
                       </Text>
 
                       <HorizontalFlexedWrapper

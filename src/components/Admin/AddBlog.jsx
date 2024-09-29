@@ -36,7 +36,7 @@ const AddBlog = () => {
 
   const [title, setTitle] = React.useState("");
   const [post, setPost] = React.useState("");
-  const [tags, setTags] = React.useState([]);
+  const [tags, setTags] = React.useState("");
   const [loading, setLoading] = React.useState(Boolean);
 
   const pick = React.useRef(null);
@@ -97,7 +97,7 @@ const AddBlog = () => {
         thumbnail: picture,
         title,
         post,
-        tags,
+        tags: tags.split(",").map((s) => s.trim()),
       };
 
       const response = await BlogDataService.createBlog(payload);
@@ -113,9 +113,9 @@ const AddBlog = () => {
     }
   };
 
-  const handleAddTags = (e)=>{
-    setTags((prev) => [...prev, e.target.value])
-  }
+  const handleAddTags = (e) => {
+    setTags(e.target.value);
+  };
 
   return (
     <>
@@ -190,10 +190,9 @@ const AddBlog = () => {
                         Tags
                       </Text>
                       <TextField
+                        placeholder="Seperate tags by comma"
                         value={tags}
-                        onChange={(e) =>
-                         handleAddTags(e)
-                        }
+                        onChange={(e) => handleAddTags(e)}
                       />
                       {/* <HorizontalFlexedWrapper
                           width={"50%"}

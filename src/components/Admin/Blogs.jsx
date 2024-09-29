@@ -24,7 +24,7 @@ const ProductWrapping = styled.div`
     background-position: cover;
     background-size: 300%;
     height: 45vh;
-    width: 40%;
+    width: 100%;
     margin: 0px;
   }
 `;
@@ -35,10 +35,11 @@ const Blog = ({ Blog }) => {
       <HorizontalFlexedWrapper
         height={"45vh"}
         width={"100%"}
+        invert={true}
         elements={
           <>
             {/* <ImageWrapper image={Blog.image} width={"40%"} height={"100%"} /> */}
-            <ProductWrapping background={Blog.image}></ProductWrapping>
+            <ProductWrapping background={Blog.thumbnail}></ProductWrapping>
             <VerticalFlexedWrapper
               elements={
                 <>
@@ -48,13 +49,20 @@ const Blog = ({ Blog }) => {
                     weight={"900"}
                     fontSmall={"16px"}
                     smallLine={"24px"}
+                    style={{ paddingLeft: "10px" }}
                   >
-                    {Blog.head}
+                    {Blog.title}
                   </Text>
-                  <Text align={"justify"} fontSmall={"12px"} smallLine={"22px"}>
-                    {Blog.body}
+                  <Text
+                    align={"justify"}
+                    fontSmall={"12px"}
+                    smallLine={"22px"}
+                    style={{ paddingLeft: "10px" }}
+                  >
+                    {Blog.post}
                   </Text>
                   <HorizontalFlexedWrapper
+                    style={{ paddingLeft: "10px" }}
                     width={"100%"}
                     elements={
                       <>

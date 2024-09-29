@@ -26,8 +26,16 @@ class ProductDataService {
     return tokenApiCall.put(`/product/edit/${id}`, payload);
   }
 
-  async deleteProduct(id){
+  async deleteProduct(id) {
     return tokenApiCall.delete(`/product/delete/${id}`);
+  }
+
+  async addProductToCart(data) {
+    return tokenApiCall.put("/product/cart/add", data);
+  }
+
+  async removeItemFromCart(productID) {
+    return tokenApiCall.put(`/product/cart/remove?productID=${productID}`);
   }
 }
 

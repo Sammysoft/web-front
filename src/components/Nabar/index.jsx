@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable */
+
+import React, { useEffect } from "react";
 
 import styled from "styled-components";
 import {
@@ -15,6 +17,12 @@ import HarmbuggerSVG from "../../assets/Icons/svg/harmbugger.svg";
 import { Fonts, Sizes } from "../../assets/Res/fonts";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../Home/Blogs";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser } from "../../Redux/Slices/userSlice";
+import toast from "react-hot-toast";
+import { addEllipsis } from "../../utils";
+import AuthDataService from "../../Services/AuthDataService";
+import { clearCart } from "../../Redux/Slices/cartSlices";
 
 const Wrapper = styled.div`
   width: 90vw;
@@ -47,6 +55,21 @@ const MobileWrapper = styled.div`
 const NavBar = () => {
   const navigate = useNavigate();
   const [toggle, setToggle] = React.useState(Boolean);
+  const dispatch = useDispatch();
+
+  const {
+    user: { profile },
+  } = useSelector((state) => state.user);
+
+  const { items } = useSelector((state) => state.cart);
+
+  const handleLogout = () => {
+    toast.success("Logged out successfully");
+    dispatch(clearUser());
+    dispatch(clearCart());
+    localStorage.clear();
+  };
+
   return (
     <>
       <Wrapper>
@@ -54,7 +77,12 @@ const NavBar = () => {
           width={"100%"}
           elements={
             <>
-              <ImageWrapper image={LogoSVG} height={"150px"} width={"150px"} />
+              <ImageWrapper
+                image={LogoSVG}
+                height={"150px"}
+                width={"150px"}
+                onClick={() => handleLogout()}
+              />
               <MenuItems navigate={navigate} />
               <MenuDetails navigate={navigate} />
             </>
@@ -67,25 +95,37 @@ const NavBar = () => {
           width={"100%"}
           elements={
             <>
-              <ImageWrapper image={LogoSVG} width={"80px"} height={"80px"} />
+              <ImageWrapper
+                image={LogoSVG}
+                width={"80px"}
+                height={"80px"}
+                onClick={() => handleLogout()}
+              />
               <HorizontalFlexedWrapper
-                width={"45%"}
+                width={"50%"}
                 elements={
                   <>
                     <ImageWrapper
+                      // onClick={() => handleLogout()}
                       image={PersonSVG}
-                      width={"30px"}
-                      height={"30px"}
+                      width={"20px"}
+                      height={"20px"}
                     />
-                    <LoginText onClick={() => navigate("/login")}>
-                      Login
-                    </LoginText>
+                    {!profile?.fullName && (
+                      <LoginText onClick={() => navigate("/login")}>
+                        Login
+                      </LoginText>
+                    )}
+                    {profile?.fullName && (
+                      <LoginText>{addEllipsis(profile?.fullName, 6)}</LoginText>
+                    )}
                     <ImageWrapper
+                      onClick={() => navigate("/checkout")}
                       image={ChartSVG}
-                      width={"30px"}
-                      height={"30px"}
+                      width={"20px"}
+                      height={"20px"}
                     />
-                    <LoginText>0</LoginText>
+                    <LoginText>{items.length}</LoginText>
                     <ImageWrapper
                       onClick={() => {
                         setToggle(!toggle);
@@ -96,6 +136,8 @@ const NavBar = () => {
                     />
                   </>
                 }
+                align={"center"}
+                // justify={"center"}
               />
             </>
           }
@@ -192,6 +234,8 @@ const LoginText = styled.p`
   font-size: ${Sizes.SECONDARY};
   font-family: ${Fonts.PRIMARY};
   cursor: pointer;
+  text-align: center;
+  margin-top: 10px;
 `;
 
 const CountText = styled.p`
@@ -200,21 +244,32 @@ const CountText = styled.p`
 `;
 
 const MenuDetails = ({ navigate }) => {
+  const {
+    user: { profile },
+  } = useSelector((state) => state.user);
+
+  const { items } = useSelector((state) => state.cart);
+
   return (
     <>
       <HorizontalFlexedWrapper
-        width={"10%"}
+        width={"12%"}
         // align={"center"}
         // justify={"center"}
         elements={
           <>
             <ImageWrapper image={PersonSVG} height={"30px"} width={"30px"} />
-            <LoginText onClick={() => navigate("/login")}>Login</LoginText>
+            {profile?.fullName && (
+              <LoginText>{addEllipsis(profile?.fullName, 8)}</LoginText>
+            )}
+            {!profile?.fullName && (
+              <LoginText onClick={() => navigate("/login")}>Login</LoginText>
+            )}
             <div onClick={() => navigate("/checkout")}>
               <ImageWrapper image={ChartSVG} height={"30px"} width={"30px"} />
             </div>
 
-            <CountText>0</CountText>
+            <CountText>{items.length}</CountText>
           </>
         }
       />

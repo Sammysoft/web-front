@@ -65,8 +65,12 @@ const ProductForm = () => {
       setDescription(DisplayProduct.description || "");
       setSelectedTags(DisplayProduct.sizeTag || []);
       setSelectedColors(DisplayProduct.colors || []);
-      console.log(categories.find((cat)=> cat.name === DisplayProduct.category)?.name)
-      setProductCategory(categories.find((cat)=> cat.name === DisplayProduct.category)?.id || "");
+      console.log(
+        categories.find((cat) => cat.name === DisplayProduct.category)?.name
+      );
+      setProductCategory(
+        categories.find((cat) => cat.name === DisplayProduct.category)?.id || ""
+      );
       setPrice(DisplayProduct.price || "");
       // Add more fields as needed
     }
@@ -145,11 +149,10 @@ const ProductForm = () => {
         description: description,
         category: productCategory,
       };
-      console.log(payload);
       const response = await ProductDataService.createProduct(payload);
       if (response) {
-        console.log(response);
         toast.success(response.data.message);
+        window.location.reload();
         setLoading(false);
       } else {
         toast.error("Could not add product, please try again later.");
@@ -160,7 +163,7 @@ const ProductForm = () => {
       setLoading(false);
     }
   };
-z
+
   const handleEditProduct = async () => {
     setLoading(true);
     try {
@@ -178,6 +181,7 @@ z
       if (response) {
         console.log(response);
         toast.success(response.data.message);
+
         setLoading(false);
       } else {
         toast.error("Could not edit product, please try again later.");

@@ -122,9 +122,25 @@ const IMGWrapper = styled.img`
   object-fit: ${(props) => (props.fit ? props.fit : "contain")};
   height: ${(props) => (props.height ? props.height : "100%")};
   width: ${(props) => (props.width ? props.width : "100%")};
+  margin: ${(props) => (props.margin ? props.margin : "")};
+
+  @media (max-width: 1400px) {
+    width: ${(props) => (props.smallWidth ? props.smallWidth : props.width)};
+    height: ${(props) =>
+      props.smallHeight ? props.smallHeight : props.height};
+  }
 `;
 
-export const ImageWrapper = ({ height, width, image, fit, onClick }) => {
+export const ImageWrapper = ({
+  height,
+  width,
+  image,
+  fit,
+  onClick,
+  margin,
+  smallWidth,
+  smallHeight,
+}) => {
   return (
     <>
       <IMGWrapper
@@ -132,7 +148,10 @@ export const ImageWrapper = ({ height, width, image, fit, onClick }) => {
         width={width}
         src={image}
         fit={fit}
+        smallWidth={smallWidth}
         onClick={onClick}
+        margin={margin}
+        smallHeight={smallHeight}
       />
     </>
   );
@@ -142,6 +161,8 @@ IMGWrapper.propTypes = {
   height: PropTypes.string,
   width: PropTypes.string,
   onClick: PropTypes.func,
+  margin: PropTypes.string,
+  smallWidth: PropTypes.string,
 };
 
 export const BoxedButton = ({
@@ -169,7 +190,7 @@ export const BoxedButton = ({
 const ButtonWrapper = styled.div`
   text-align: center;
   border: 2px solid #000000;
-  padding: 15px;
+  padding: 10px;
   font-family: Josefin Sans;
   width: ${(props) => (props.width ? props.width : "100%")};
   color: #000000;
@@ -180,7 +201,7 @@ const ButtonWrapper = styled.div`
   cursor: pointer;
 
   @media (max-width: 1400px) {
-    font-size: ${(props) => (props.fontSmall ? props.fontSmall : "14px")};
+    font-size: ${(props) => (props.fontSmall ? props.fontSmall : "15px")};
     width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
     padding: 5px;
   }
@@ -198,6 +219,8 @@ export const StyledButton = ({
   text,
   onPress,
   loading,
+  margin,
+  padding,
 }) => {
   return (
     <>
@@ -206,6 +229,8 @@ export const StyledButton = ({
         color={color}
         bgColor={bgColor}
         onClick={onPress}
+        margin={margin}
+        padding={padding}
       >
         {loading ? <Loader active={loading} inline={"centered"} /> : text}
       </StyledButtonWrapper>
@@ -216,13 +241,13 @@ export const StyledButton = ({
 const StyledButtonWrapper = styled.div`
   width: ${(props) => (props.width ? props.width : "100%")};
   color: ${(props) => (props.color ? props.color : "#000000")};
-  padding: 20px;
+  padding: ${(props) => (props.padding ? props.padding : "15px")};
   text-align: center;
   font-family: Josefin Sans;
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 16px;
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#FFFFFF")};
-  margin: 2vh 0px 2vh 0px;
+  margin: ${(props) => (props.margin ? props.margin : "2vh 0px 2vh 0px")};
   cursor: pointer;
 
   @media (max-width: 1400px) {
@@ -335,4 +360,9 @@ export const BackgroundImage = styled.div`
   background-repeat: no-repeat;
   height: ${(props) => (props.height ? props.height : "100%")};
   width: ${(props) => (props.width ? props.width : "100%")};
+
+  @media (max-width: 1400px) {
+    height: ${(props) => (props.smallHeight ? props.smallHeight : "100%")};
+    width: ${(props) => (props.smallWidth ? props.smallWidth : "100%")};
+  }
 `;

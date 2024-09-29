@@ -7,6 +7,7 @@ import {
   DropDownButton,
   HorizontalFlexedWrapper,
   ImageWrapper,
+  StyledButton,
   VerticalFlexedWrapper,
 } from "../../Elements";
 import { Text } from "../../Home/Blogs";
@@ -14,21 +15,18 @@ import { Text } from "../../Home/Blogs";
 import Right from "../../../assets/Icons/svg/dropdown-right.svg";
 import BackIcon from "../../../assets/Icons/svg/back-icon.svg";
 
-import Prod1 from "../../../assets/Images/prod1.svg";
-import Prod2 from "../../../assets/Images/prod2.svg";
-import Prod3 from "../../../assets/Images/prod3.svg";
-import Prod4 from "../../../assets/Images/prod4.svg";
-import Prod5 from "../../../assets/Images/prod5.svg";
-import Prod6 from "../../../assets/Images/prod6.svg";
-import Prod7 from "../../../assets/Images/prod7.svg";
-import Prod8 from "../../../assets/Images/prod8.svg";
 import { useNavigate } from "react-router-dom";
 import { Fonts } from "../../../assets/Res/fonts";
 import ProductDataService from "../../../Services/ProductDataService";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { loadUser } from "../../../Redux/Slices/userSlice";
+import { addItemToCart } from "../../../Redux/Slices/cartSlices";
 
 const Wrapper = styled.div`
   width: 80%;
-  margin: 5% 10% 5% 10%;
+  margin: 5% 10% 15% 10%;
+  height: fit-content;
 
   @media (max-width: 1400px) {
     display: none;
@@ -44,74 +42,17 @@ const MobileWrapper = styled.div`
   }
 `;
 
-const MenuList = [
-  { name: "All Products", text: "All Products" },
-  { name: "Best Sellers", text: "Best Sellers" },
-  { name: "Kaftan", text: "Kaftan" },
-  { name: "Athleisure", text: "Athleisure" },
-  { name: "Agbada", text: "Agbada" },
-  { name: "Suits", text: "Suits" },
-  { name: "Art", text: "Art" },
-];
+const ListingMenuWrapper = styled.div`
+  width: 100%;
+  // margin-left: 20%;
+  // margin-top: 15vh;
+  overflow-x: auto;
+  white-space: no-wrap;
 
-const ProductListing = [
-  {
-    name: "Jacquard wine kaftan",
-    details: "Kaftan | Wine",
-    price: "$125.00",
-    image: Prod1,
-    category: "Kaftan",
-  },
-  {
-    name: "Coastline Jacket + Fedora",
-    details: "Jackets | Brown",
-    price: "$200.00",
-    image: Prod2,
-    category: "Athleisure",
-  },
-  {
-    name: "White Double Breasted Suit",
-    details: "Suits | White",
-    price: "$450.00",
-    image: Prod3,
-    category: "Kaftan",
-  },
-  {
-    name: "Jacquard wine kaftan",
-    details: "Kaftan | Wine",
-    price: "$120.00",
-    image: Prod4,
-    category: "Kaftan",
-  },
-  {
-    name: "Coastline Jacket + Fedora",
-    details: "Jackets | Brown",
-    price: "$99.99",
-    image: Prod5,
-    category: "Kaftan",
-  },
-  {
-    name: "White Double Breasted Suit",
-    details: "Suits | White",
-    price: "$45.09",
-    image: Prod6,
-    category: "Suits",
-  },
-  {
-    name: "Jacquard wine kaftan",
-    details: "Kaftan | Wine",
-    price: "$100.09",
-    image: Prod7,
-    category: "Kaftan",
-  },
-  {
-    name: "Coastline Jacket + Fedora",
-    details: "Jackets | Brown",
-    price: "$560.99",
-    image: Prod8,
-    category: "Agbada",
-  },
-];
+  @media (max-width: 1400px) {
+    height: 25%;
+  }
+`;
 
 const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
   const [ProductList, setProductList] = useState([]);
@@ -152,15 +93,60 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
 
   const navigate = useNavigate();
 
-  // const navigate = useNavigate();
+  let [count, setCount] = useState(1);
 
-  // const DisplayProduct =
-  //   ProductList.length > 0 &&
-  //   ProductList.find(
-  //     (product) =>
-  //       product?.description === selectedProduct?.details &&
-  //       product?.price === selectedProduct?.price
-  //   );
+  const handleIncrease = () => {
+    count = count + 1;
+    setCount(count);
+  };
+
+  const handleDecrease = () => {
+    if (count > 1) {
+      count = count - 1;
+      setCount(count);
+    }
+  };
+
+  const [selectedSizes, setSelectedSizes] = useState();
+  const [orderType, setOrderType] = useState("Retail Order");
+  const [color, setColor] = useState();
+  const dispatch = useDispatch();
+
+  const handleAddToCart = async () => {
+    setLoading(true);
+    console.log(orderType, color, selectedSizes);
+    if (!orderType || !color || !selectedSizes) {
+      toast.error("Please select all order choices");
+      setLoading(false);
+    } else {
+      try {
+        const payload = [
+          {
+            orderType,
+            quantity: count,
+            id: DisplayProduct.id,
+            sizes: selectedSizes,
+            color: color,
+            selectedImage: DisplayProduct.images[0],
+            price: Number(DisplayProduct.price),
+          },
+        ];
+        const response = await ProductDataService.addProductToCart(payload);
+        if (response) {
+          // console.log(response.data.data.cart_items);
+          dispatch(addItemToCart(response.data.data.cart_items));
+          dispatch(loadUser());
+          toast.success(response.data.message);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        toast.error(error.response.data.message);
+        setLoading(false);
+      }
+    }
+  };
+
 
   return (
     <>
@@ -254,40 +240,31 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
 
               {DisplayProduct.images && (
                 <ProductWrapper>
-                  {/* {console.log(DisplayProduct)} */}
                   <ProductImage
                     background={`'${DisplayProduct?.images[0]}'`}
                   ></ProductImage>
-                  <HorizontalFlexedWrapper
-                    elements={
-                      <>
-                        <ImageWrapper
-                          image={DisplayProduct?.images[1]}
-                          width={"22%"}
-                          height={"100%"}
-                        />
-                        <ImageWrapper
-                          image={DisplayProduct?.images[2]}
-                          width={"22%"}
-                          height={"100%"}
-                        />
-                        <ImageWrapper
-                          image={DisplayProduct?.images[3]}
-                          width={"22%"}
-                          height={"100%"}
-                        />
-                        <ImageWrapper
-                          image={DisplayProduct?.images[4]}
-                          width={"22%"}
-                          height={"100%"}
-                        />
-                      </>
-                    }
-                    width={"100%"}
-                    height={"25%"}
-                  />
+                  <ListingMenuWrapper>
+                    <HorizontalFlexedWrapper
+                      elements={
+                        <>
+                          {DisplayProduct?.images?.map((img, index) => (
+                            <ImageWrapper
+                              margin={"0px 40px 0px 0px"}
+                              key={index}
+                              image={img}
+                              width={"22%"}
+                              height={"100%"}
+                            />
+                          ))}
+                        </>
+                      }
+                      width={"100%"}
+                      height={"100%"}
+                    />
+                  </ListingMenuWrapper>
+
                   <Text size={"40px"} weight={"900"} align={"left"}>
-                    {DisplayProduct?.name} - {DisplayProduct?.price}
+                    {DisplayProduct?.name} - ${DisplayProduct?.price}
                   </Text>
                   <ProductDescWrapper>
                     <Text
@@ -306,26 +283,6 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                       size={"16px"}
                       color="#696969"
                     >
-                      {/* Enim dictum mauris amet eget nunc in. In massa proin urna
-                    nulla sed purus ultricies cras elementum. Amet mattis porta
-                    sit tortor tempor et. Auctor mauris aenean at quis sagittis.
-                    Viverra eget mauris mattis sit elementum donec aliquet odio.
-                    Arcu est enim eget at. Sit leo ipsum consectetur sit
-                    volutpat bibendum rhoncus facilisi. Volutpat purus viverra
-                    ante vel fermentum amet turpis in lacus. Fringilla nunc
-                    nulla et orci dui lacus. Vel semper dui euismod nisi
-                    iaculis. Enim odio dignissim arcu feugiat egestas aliquam.
-                    Dis dolor lorem amet ut. Egestas aliquet blandit
-                    sollicitudin volutpat. Sem feugiat nibh amet erat volutpat
-                    ut. Tempus viverra et sit etiam massa etiam eu viverra. A
-                    tempor ultrices lectus scelerisque amet. Vitae mattis felis
-                    et velit sit sit sed tincidunt hac. Tempor enim donec est in
-                    urna tincidunt sed. Leo consequat sed pellentesque purus
-                    facilisi. Risus tempor congue orci felis nulla pellentesque
-                    habitant enim. Pulvinar tortor aliquam dictum fermentum
-                    neque viverra posuere amet. Quam adipiscing tellus eget cras
-                    amet dapibus magna. Vulputate amet nec purus sit posuere.
-                    Sed sed massa massa quisque ligula egestas. */}
                       {DisplayProduct?.description}
                     </Text>
                   </ProductDescWrapper>
@@ -346,199 +303,210 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                   elements={
                                     <>
                                       <Text
-                                        width={"10%"}
-                                        height={"50%"}
-                                        align={"left"}
-                                      >
-                                        Order Type:
-                                      </Text>
-                                      <TextField />
-                                      {/* <HorizontalFlexedWrapper
-                                        width={"30%"}
-                                        height={"100%"}
-                                        elements={
-                                          <>
-                                            <Text>Retail Order</Text>
-                                            <ImageWrapper
-                                              image={DropDownIcon}
-                                              width={30}
-                                              height={30}
-                                            />
-                                          </>
-                                        }
-                                      />
-                                    </TextField> */}
-                                    </>
-                                  }
-                                />
-                              </SelectWrap>
-                            </>
-                          }
-                        />
-
-                        <HorizontalFlexedWrapper
-                          align={"flex-start"}
-                          width={"100%"}
-                          height={"18%"}
-                          elements={
-                            <>
-                              <SelectWrap>
-                                <HorizontalFlexedWrapper
-                                  width={"100%"}
-                                  height={"100%"}
-                                  elements={
-                                    <>
-                                      <Text
-                                        width={"10%"}
-                                        height={"50%"}
-                                        align={"left"}
-                                      >
-                                        Colour
-                                      </Text>
-                                      <TextField />
-                                      {/* <HorizontalFlexedWrapper
-                                        width={"30%"}
-                                        height={"100%"}
-                                        elements={
-                                          <>
-                                            <Text>Wine Only</Text>
-                                          </>
-                                        }
-                                      />
-                                    </TextField> */}
-                                    </>
-                                  }
-                                />
-                              </SelectWrap>
-                            </>
-                          }
-                        />
-
-                        <HorizontalFlexedWrapper
-                          align={"flex-start"}
-                          width={"100%"}
-                          height={"18%"}
-                          elements={
-                            <>
-                              <SelectWrap>
-                                <HorizontalFlexedWrapper
-                                  width={"100%"}
-                                  height={"100%"}
-                                  elements={
-                                    <>
-                                      <Text
-                                        width={"10%"}
-                                        height={"50%"}
-                                        align={"left"}
-                                      >
-                                        Thigh
-                                      </Text>
-                                      <TextField />
-                                      {/* <HorizontalFlexedWrapper
-                                        width={"30%"}
-                                        height={"100%"}
-                                        elements={
-                                          <>
-                                            <Text>Please Select</Text>
-                                            <ImageWrapper
-                                              image={DropDownIcon}
-                                              width={30}
-                                              height={30}
-                                            />
-                                          </>
-                                        }
-                                      />
-                                    </TextField> */}
-                                    </>
-                                  }
-                                />
-                              </SelectWrap>
-                            </>
-                          }
-                        />
-
-                        <HorizontalFlexedWrapper
-                          align={"flex-start"}
-                          width={"100%"}
-                          height={"18%"}
-                          elements={
-                            <>
-                              <SelectWrap>
-                                <HorizontalFlexedWrapper
-                                  width={"100%"}
-                                  height={"100%"}
-                                  elements={
-                                    <>
-                                      <Text
-                                        align={"left"}
-                                        width={"10%"}
-                                        height={"50%"}
-                                      >
-                                        Waist
-                                      </Text>
-                                      <TextField />
-                                      {/* <HorizontalFlexedWrapper
-                                        width={"30%"}
-                                        height={"100%"}
-                                        elements={
-                                          <>
-                                            <Text>Please Select</Text>
-                                            <ImageWrapper
-                                              image={DropDownIcon}
-                                              width={30}
-                                              height={30}
-                                            />
-                                          </>
-                                        }
-                                      />
-                                    </TextField> */}
-                                    </>
-                                  }
-                                />
-                              </SelectWrap>
-                            </>
-                          }
-                        />
-
-                        <HorizontalFlexedWrapper
-                          align={"flex-start"}
-                          width={"100%"}
-                          height={"18%"}
-                          elements={
-                            <>
-                              <SelectWrap>
-                                <HorizontalFlexedWrapper
-                                  width={"100%"}
-                                  height={"100%"}
-                                  elements={
-                                    <>
-                                      <Text
                                         width={"20%"}
                                         height={"50%"}
                                         align={"left"}
+                                        smallWidth={"40%"}
                                       >
-                                        Trouser Length
+                                        Order Type:
                                       </Text>
-                                      <TextField />
-                                      {/* <HorizontalFlexedWrapper
-                                        width={"30%"}
-                                        height={"100%"}
-                                        elements={
-                                          <>
-                                            <Text>Please Select</Text>
-                                            <ImageWrapper
-                                              image={DropDownIcon}
-                                              width={30}
-                                              height={30}
-                                            />
-                                          </>
+                                      <SelectField
+                                        value={orderType}
+                                        width={"80%"}
+                                        onChange={(e) =>
+                                          setOrderType(e.target.value)
                                         }
-                                      />
-                                    </TextField> */}
+                                      >
+                                        <option value={"Retail Order"}>
+                                          {"Retail Order"}
+                                        </option>
+                                        <option value={"Beespoke Order"}>
+                                          {"Beespoke Order"}
+                                        </option>
+                                      </SelectField>
                                     </>
                                   }
                                 />
                               </SelectWrap>
+                            </>
+                          }
+                        />
+
+                        <HorizontalFlexedWrapper
+                          align={"flex-start"}
+                          width={"100%"}
+                          height={"18%"}
+                          elements={
+                            <>
+                              <SelectWrap>
+                                <HorizontalFlexedWrapper
+                                  width={"100%"}
+                                  height={"100%"}
+                                  elements={
+                                    <>
+                                      <Text
+                                        width={"10%"}
+                                        height={"50%"}
+                                        align={"left"}
+                                        smallWidth={"40%"}
+                                      >
+                                        Color
+                                      </Text>
+                                      <SelectField
+                                        width={"80%"}
+                                        onChange={(e) =>
+                                          setColor(e.target.value)
+                                        }
+                                      >
+                                        <option value={null}>
+                                          {"Select Color"}
+                                        </option>
+                                        {DisplayProduct?.colors?.map(
+                                          (col, index) => (
+                                            <option key={index} value={col}>
+                                              {col}
+                                            </option>
+                                          )
+                                        )}
+                                      </SelectField>
+                                    </>
+                                  }
+                                />
+                              </SelectWrap>
+                            </>
+                          }
+                        />
+                        {orderType === "Beespoke Order" &&
+                          DisplayProduct?.sizeTag.map((tag, index) => (
+                            <HorizontalFlexedWrapper
+                              key={index}
+                              align={"flex-start"}
+                              width={"100%"}
+                              height={"18%"}
+                              elements={
+                                <>
+                                  <SelectWrap>
+                                    <HorizontalFlexedWrapper
+                                      width={"100%"}
+                                      height={"100%"}
+                                      elements={
+                                        <>
+                                          <Text
+                                            width={"10%"}
+                                            height={"50%"}
+                                            align={"left"}
+                                            smallWidth={"40%"}
+                                          >
+                                            {tag}
+                                          </Text>
+                                          <TextField
+                                            placeholder={`Please enter the size`}
+                                          />
+                                        </>
+                                      }
+                                    />
+                                  </SelectWrap>
+                                </>
+                              }
+                            />
+                          ))}
+
+                        {orderType === "Retail Order" && (
+                          <HorizontalFlexedWrapper
+                            align={"flex-start"}
+                            width={"100%"}
+                            height={"18%"}
+                            elements={
+                              <>
+                                <SelectWrap>
+                                  <HorizontalFlexedWrapper
+                                    width={"100%"}
+                                    height={"100%"}
+                                    elements={
+                                      <>
+                                        <Text
+                                          width={"20%"}
+                                          height={"50%"}
+                                          align={"left"}
+                                          smallWidth={"40%"}
+                                        >
+                                          Size:
+                                        </Text>
+                                        <SelectField
+                                          width={"80%"}
+                                          onChange={(e) =>
+                                            setSelectedSizes(e.target.value)
+                                          }
+                                        >
+                                          <option value={"XL"}>
+                                            {"XL (Extra Large)"}
+                                          </option>
+                                          <option value={"L"}>
+                                            {"L (Large)"}
+                                          </option>
+                                          <option value={"M"}>
+                                            {"M (Medium)"}
+                                          </option>
+                                          <option value={"S"}>
+                                            {"S (Small)"}
+                                          </option>
+                                          <option value={"XS"}>
+                                            {"XS (Extra Small)"}
+                                          </option>
+                                        </SelectField>
+                                      </>
+                                    }
+                                  />
+                                </SelectWrap>
+                              </>
+                            }
+                          />
+                        )}
+
+                        <HorizontalFlexedWrapper
+                          justify={"space-between"}
+                          align={"center"}
+                          margin={"10px"}
+                          width={"40%"}
+                          height={"100%"}
+                          elements={
+                            <>
+                              <WrappedBox width={"35%"} smallWidth={"20%"}>
+                                <HorizontalFlexedWrapper
+                                  width={"100%"}
+                                  height={"fit-content"}
+                                  elements={
+                                    <>
+                                      <StyledButton
+                                        padding={"0px"}
+                                        width={"30%"}
+                                        bgColor={"transparent"}
+                                        text={"-"}
+                                        onPress={() => handleDecrease()}
+                                      />
+                                      <Text
+                                        line={"0px"}
+                                        padding={"0px 0px 0px 0px"}
+                                      >
+                                        {count}
+                                      </Text>
+                                      <StyledButton
+                                        padding={"0px"}
+                                        width={"30%"}
+                                        text={"+"}
+                                        onPress={() => handleIncrease()}
+                                      />
+                                    </>
+                                  }
+                                />
+                              </WrappedBox>
+                              <StyledButton
+                                bgColor={"#D6D6D6"}
+                                text={"Add to cart"}
+                                width={"35%"}
+                                loading={loading}
+                                onPress={handleAddToCart}
+                              />
                             </>
                           }
                         />
@@ -573,37 +541,32 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
               background={`'${DisplayProduct?.images[0]}'`}
             ></ProductImage>
 
-            <HorizontalFlexedWrapper
-              elements={
-                <>
-                  <ImageWrapper
-                    image={DisplayProduct?.images[1]}
-                    width={"22%"}
-                    height={"100%"}
-                  />
-                  <ImageWrapper
-                    image={DisplayProduct?.images[2]}
-                    width={"22%"}
-                    height={"100%"}
-                  />
-                  <ImageWrapper
-                    image={DisplayProduct?.images[3]}
-                    width={"22%"}
-                    height={"100%"}
-                  />
-                  <ImageWrapper
-                    image={DisplayProduct?.images[4]}
-                    width={"22%"}
-                    height={"100%"}
-                  />
-                </>
-              }
-              width={"100%"}
-              height={"25%"}
-              smallHeight={"40%"}
-            />
+            <ListingMenuWrapper>
+              <HorizontalFlexedWrapper
+                elements={
+                  <>
+                    {DisplayProduct?.images.map((img, index) => (
+                      <img
+                        key={index}
+                        src={img}
+                        style={{
+                          objectFit: "contain",
+                          height: "100%",
+                          width: "40%",
+                          marginRight: 20,
+                        }}
+                      />
+                    ))}
+                  </>
+                }
+                width={"100%"}
+                height={"25%"}
+                smallHeight={"100%"}
+              />
+            </ListingMenuWrapper>
+
             <Text size={"40px"} weight={"900"} align={"left"}>
-              {DisplayProduct?.name} - {DisplayProduct?.price}
+              {DisplayProduct?.name} - ${DisplayProduct?.price}
             </Text>
             <ProductDescWrapper>
               <Text
@@ -624,24 +587,6 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                 fontSmall={"14px"}
                 smallLine={"28px"}
               >
-                {/* Enim dictum mauris amet eget nunc in. In massa proin urna nulla
-              sed purus ultricies cras elementum. Amet mattis porta sit tortor
-              tempor et. Auctor mauris aenean at quis sagittis. Viverra eget
-              mauris mattis sit elementum donec aliquet odio. Arcu est enim eget
-              at. Sit leo ipsum consectetur sit volutpat bibendum rhoncus
-              facilisi. Volutpat purus viverra ante vel fermentum amet turpis in
-              lacus. Fringilla nunc nulla et orci dui lacus. Vel semper dui
-              euismod nisi iaculis. Enim odio dignissim arcu feugiat egestas
-              aliquam. Dis dolor lorem amet ut. Egestas aliquet blandit
-              sollicitudin volutpat. Sem feugiat nibh amet erat volutpat ut.
-              Tempus viverra et sit etiam massa etiam eu viverra. A tempor
-              ultrices lectus scelerisque amet. Vitae mattis felis et velit sit
-              sit sed tincidunt hac. Tempor enim donec est in urna tincidunt
-              sed. Leo consequat sed pellentesque purus facilisi. Risus tempor
-              congue orci felis nulla pellentesque habitant enim. Pulvinar
-              tortor aliquam dictum fermentum neque viverra posuere amet. Quam
-              adipiscing tellus eget cras amet dapibus magna. Vulputate amet nec
-              purus sit posuere. Sed sed massa massa quisque ligula egestas. */}
                 {DisplayProduct?.description}
               </Text>
             </ProductDescWrapper>
@@ -669,27 +614,18 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                 >
                                   Order Type:
                                 </Text>
-                                <SelectField width={"80%"}>
-                                  <option value={"Select Order Type"} disabled>
-                                    {"Select Order Type"}
+                                <SelectField
+                                  width={"80%"}
+                                  value={orderType}
+                                  onChange={(e) => setOrderType(e.target.value)}
+                                >
+                                  <option value={"Retail Order"}>
+                                    {"Retail Order"}
+                                  </option>
+                                  <option value={"Beespoke Order"}>
+                                    {"Beespoke Order"}
                                   </option>
                                 </SelectField>
-                                {/* <HorizontalFlexedWrapper
-                                  width={"30%"}
-                                  height={"100%"}
-                                  smallWidth={"100%"}
-                                  elements={
-                                    <>
-                                      <Text>Retail Order</Text>
-                                      <ImageWrapper
-                                        image={DropDownIcon}
-                                        width={30}
-                                        height={30}
-                                      />
-                                    </>
-                                  }
-                                />
-                              </TextField> */}
                               </>
                             }
                           />
@@ -716,29 +652,19 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                                   align={"left"}
                                   smallWidth={"40%"}
                                 >
-                                  Colour
+                                  Color
                                 </Text>
-                                <SelectField>
-                                  <option value={"Select Color"} disabled>
-                                    {"Select Color"}
-                                  </option>
+                                <SelectField
+                                  width={"80%"}
+                                  onChange={(e) => setColor(e.target.value)}
+                                >
+                                  <option value={null}>{"Select Color"}</option>
                                   {DisplayProduct?.colors?.map((col, index) => (
                                     <option key={index} value={col}>
                                       {col}
                                     </option>
                                   ))}
                                 </SelectField>
-                                {/* <HorizontalFlexedWrapper
-                                  width={"30%"}
-                                  height={"100%"}
-                                  smallWidth={"100%"}
-                                  elements={
-                                    <>
-                                      <Text>Wine Only</Text>
-                                    </>
-                                  }
-                                />
-                              </TextField> */}
                               </>
                             }
                           />
@@ -747,137 +673,135 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                     }
                   />
 
-                  <HorizontalFlexedWrapper
-                    align={"flex-start"}
-                    width={"100%"}
-                    height={"18%"}
-                    elements={
-                      <>
-                        <SelectWrap>
-                          <HorizontalFlexedWrapper
-                            width={"100%"}
-                            height={"100%"}
-                            elements={
-                              <>
-                                <Text
-                                  width={"10%"}
-                                  height={"50%"}
-                                  align={"left"}
-                                  smallWidth={"40%"}
-                                >
-                                  Thigh
-                                </Text>
-                                <TextField />
-                                {/* <HorizontalFlexedWrapper
-                                  width={"30%"}
-                                  height={"100%"}
-                                  smallWidth={"100%"}
-                                  elements={
-                                    <>
-                                      <Text>Please Select</Text>
-                                      <ImageWrapper
-                                        image={DropDownIcon}
-                                        width={30}
-                                        height={30}
-                                      />
-                                    </>
-                                  }
-                                />
-                              </TextField> */}
-                              </>
-                            }
-                          />
-                        </SelectWrap>
-                      </>
-                    }
-                  />
+                  {orderType === "Beespoke Order" &&
+                    DisplayProduct?.sizeTag.map((tag, index) => (
+                      <HorizontalFlexedWrapper
+                        key={index}
+                        align={"flex-start"}
+                        width={"100%"}
+                        height={"18%"}
+                        elements={
+                          <>
+                            <SelectWrap>
+                              <HorizontalFlexedWrapper
+                                width={"100%"}
+                                height={"100%"}
+                                elements={
+                                  <>
+                                    <Text
+                                      width={"10%"}
+                                      height={"50%"}
+                                      align={"left"}
+                                      smallWidth={"40%"}
+                                    >
+                                      {tag}
+                                    </Text>
+                                    <TextField
+                                      placeholder={`Please enter the size`}
+                                    />
+                                  </>
+                                }
+                              />
+                            </SelectWrap>
+                          </>
+                        }
+                      />
+                    ))}
 
-                  <HorizontalFlexedWrapper
-                    align={"flex-start"}
-                    width={"100%"}
-                    height={"18%"}
-                    elements={
-                      <>
-                        <SelectWrap>
-                          <HorizontalFlexedWrapper
-                            width={"100%"}
-                            height={"100%"}
-                            elements={
-                              <>
-                                <Text
-                                  align={"left"}
-                                  width={"10%"}
-                                  height={"50%"}
-                                  smallWidth={"40%"}
-                                >
-                                  Waist
-                                </Text>
-                                <TextField />
-                                {/* <HorizontalFlexedWrapper
-                                  width={"30%"}
-                                  height={"100%"}
-                                  smallWidth={"100%"}
-                                  elements={
-                                    <>
-                                      <Text>Please Select</Text>
-                                      <ImageWrapper
-                                        image={DropDownIcon}
-                                        width={30}
-                                        height={30}
-                                      />
-                                    </>
-                                  }
-                                />
-                              </TextField> */}
-                              </>
-                            }
-                          />
-                        </SelectWrap>
-                      </>
-                    }
-                  />
+                  {orderType === "Retail Order" && (
+                    <>
+                      <HorizontalFlexedWrapper
+                        align={"flex-start"}
+                        width={"100%"}
+                        height={"18%"}
+                        elements={
+                          <>
+                            <SelectWrap>
+                              <HorizontalFlexedWrapper
+                                width={"100%"}
+                                height={"100%"}
+                                elements={
+                                  <>
+                                    <Text
+                                      width={"20%"}
+                                      height={"50%"}
+                                      align={"left"}
+                                      smallWidth={"40%"}
+                                    >
+                                      Size:
+                                    </Text>
+                                    <SelectField
+                                      width={"80%"}
+                                      onChange={(e) =>
+                                        setSelectedSizes(e.target.value)
+                                      }
+                                    >
+                                      <option value={null}>
+                                        {"Select your size"}
+                                      </option>
+                                      <option value={"XL"}>
+                                        {"XL (Extra Large)"}
+                                      </option>
+                                      <option value={"L"}>{"L (Large)"}</option>
+                                      <option value={"M"}>
+                                        {"M (Medium)"}
+                                      </option>
+                                      <option value={"S"}>{"S (Small)"}</option>
+                                      <option value={"XS"}>
+                                        {"XS (Extra Small)"}
+                                      </option>
+                                    </SelectField>
+                                  </>
+                                }
+                              />
+                            </SelectWrap>
+                          </>
+                        }
+                      />
+                    </>
+                  )}
 
-                  <HorizontalFlexedWrapper
-                    align={"flex-start"}
+                  <VerticalFlexedWrapper
+                    margin={"10px"}
+                    justify={"center"}
+                    align={"center"}
                     width={"100%"}
-                    height={"18%"}
+                    height={"100%"}
                     elements={
                       <>
-                        <SelectWrap>
+                        <WrappedBox width={"35%"} smallWidth={"50%"}>
                           <HorizontalFlexedWrapper
                             width={"100%"}
-                            height={"100%"}
+                            height={"fit-content"}
                             elements={
                               <>
-                                <Text
-                                  width={"20%"}
-                                  height={"50%"}
-                                  align={"left"}
-                                  smallWidth={"40%"}
-                                >
-                                  Trouser Length
-                                </Text>
-                                <TextField />
-                                {/* <HorizontalFlexedWrapper
+                                <StyledButton
+                                  padding={"0px"}
                                   width={"30%"}
-                                  height={"100%"}
-                                  smallWidth={"100%"}
-                                  elements={
-                                    <>
-                                      <Text>Please Select</Text>
-                                      <ImageWrapper
-                                        image={DropDownIcon}
-                                        width={30}
-                                        height={30}
-                                      />
-                                    </>
-                                  }
+                                  bgColor={"transparent"}
+                                  text={"-"}
+                                  onPress={() => handleDecrease()}
                                 />
-                              </TextField> */}
+                                <Text line={"0px"} padding={"0px 0px 0px 0px"}>
+                                  {count}
+                                </Text>
+                                <StyledButton
+                                  padding={"0px"}
+                                  width={"30%"}
+                                  text={"+"}
+                                  onPress={() => handleIncrease()}
+                                />
                               </>
                             }
                           />
-                        </SelectWrap>
+                        </WrappedBox>
+                        <StyledButton
+                          bgColor={"#D6D6D6"}
+                          width={"10%"}
+                          text={"Add to cart"}
+                          loading={loading}
+                          onPress={handleAddToCart}
+                        />
                       </>
                     }
                   />
@@ -893,8 +817,29 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
   );
 };
 
+const WrappedBox = styled.div`
+  text-align: center;
+  border: 2px solid #000000;
+  padding-right: 10px;
+  font-family: Josefin Sans;
+  width: ${(props) => (props.width ? props.width : "100%")};
+  color: #000000;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  height: fit-content;
+
+  @media (max-width: 1400px) {
+    font-size: ${(props) => (props.fontSmall ? props.fontSmall : "14px")};
+    width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
+    padding: 5px;
+  }
+`;
+
 const TextField = styled.input`
-  width: 70%;
+  width: 80%;
   height: 100%;
   border-bottom: 1px solid #000000;
   font-size: 18px;
