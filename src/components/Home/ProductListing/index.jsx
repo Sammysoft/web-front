@@ -3,7 +3,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ProductHeader from "./Header";
-import { BoxedButton, HorizontalFlexedWrapper } from "../../Elements";
+import {
+  BoxedButton,
+  HorizontalFlexedWrapper,
+  VerticalFlexedWrapper,
+} from "../../Elements";
 
 import Prod1 from "../../../assets/Images/prod1.svg";
 import Prod2 from "../../../assets/Images/prod2.svg";
@@ -16,16 +20,17 @@ import Prod8 from "../../../assets/Images/prod8.svg";
 import Prod9 from "../../../assets/Images/prod9.svg";
 import ProductDataService from "../../../Services/ProductDataService";
 import { Loader } from "semantic-ui-react";
+import { Colors } from "../../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   width: 100%;
   height: fit-content;
-  padding: 5%;
+  // padding: 5%;
 
   @media (max-width: 1400px) {
     margin-bottom: 10vh;
     width: 100%;
-    padding: 20px;
+    // padding: 20px;
   }
 `;
 
@@ -56,11 +61,11 @@ const ProductListing = () => {
     <>
       <Wrapper>
         <ProductHeader />
-        <ListingMenu />
+        {/* <ListingMenu /> */}
         <ProductCatalogue />
       </Wrapper>
       <ButtonWrappings>
-        <BoxedButton width={"10%"} text={"See More"} />
+        <BoxedButton width={"30%"} text={"View More >"} />
       </ButtonWrappings>
     </>
   );
@@ -84,7 +89,7 @@ const MenuWrapper = styled.div`
   height: 100%;
   text-align: center;
   font-size: 1rem;
-  font-family: Josefin Sans;
+  font-family: Poppins;
   border-bottom: ${(props) => (props.border ? "2px solid #fd9017" : "")};
   text-transform: capitalize;
   cursor: pointer;
@@ -92,15 +97,24 @@ const MenuWrapper = styled.div`
 `;
 
 const Text = styled.p`
-  font-weight: bolder;
-  font-family: Josefin Sans;
-  color: #efefef;
-  font-size: 2rem;
-  text-transform: uppercase;
+  font-family: Poppins;
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  padding: 40px 10px 0px 10px;
 
-  @media (min-width: 1400px) {
-    display: none;
-  }
+  // @media (min-width: 1400px) {
+  //   display: none;
+  // }
+`;
+
+const BoldText = styled.p`
+  color: #003459;
+  font-family: Poppins;
+  font-size: 1.6rem;
+  text-transform: capitalize;
+  padding: 5px 10px 5px 10px;
+  font-weight: 700;
+  text-transform: capitalize;
 `;
 
 const ListingMenu = () => {
@@ -111,7 +125,7 @@ const ListingMenu = () => {
     try {
       const response = await ProductDataService.getCategory();
       if (response) {
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setCategories([{ name: "All Products" }, ...response.data.data]);
       }
     } catch (error) {
@@ -179,7 +193,8 @@ const ProductCatalogue = () => {
 
   return (
     <>
-      <Text>Product Listings</Text>
+      <Text>What's New?</Text>
+      <BoldText>Take a look at other collections</BoldText>
       <HorizontalFlexedWrapper
         align={"flex-start"}
         width={"100%"}
@@ -200,16 +215,29 @@ const ProductCatalogue = () => {
                     <ProductBadge>New</ProductBadge>
                   </ProductWrapping>
                 )) */}
-                  {ProductList.length > 0 &&
+                  {ProductList?.length > 0 &&
                     ProductList?.map((prod, index) => (
-                      <ProductWrapping
-                        background={`'${prod.images[0]}'`}
-                        key={index}
-                      >
-                        <ProductBadge>New</ProductBadge>
+                      <ProductWrapping key={index}>
+                        <VerticalFlexedWrapper
+                          justify={"space-between"}
+                          width={"100%"}
+                          smallWidth={"100%"}
+                          align={"flex-start"}
+                          elements={
+                            <>
+                              <ProductBadge
+                                background={`'${prod.images[0]}'`}
+                              ></ProductBadge>
+                              <LightText>{prod?.category}</LightText>
+                              <SolidText>{prod?.name}</SolidText>
+                              <SolidText>${prod?.price}</SolidText>
+                              <AddToCartBtn>ADD TO CART {">"}</AddToCartBtn>
+                            </>
+                          }
+                        />
                       </ProductWrapping>
                     ))}
-                  {ProductList.length <= 0 && (
+                  {ProductList?.length <= 0 && (
                     <>
                       <Text>No Products yet!</Text>
                     </>
@@ -223,6 +251,30 @@ const ProductCatalogue = () => {
     </>
   );
 };
+
+const AddToCartBtn = styled.div`
+font-family: Poppins;
+font-size: 1rem;
+font-weight: 600;
+color: ${Colors.ORANGE};
+text-align: right;
+width: 100%;
+`
+
+const LightText = styled.p`
+font-family: Poppins;
+font-size: 1rem;
+text-align: left;
+opacity: 0.7;
+font-weight: 600;
+`;
+
+const SolidText = styled.p`
+font-family: Poppins;
+font-size: 1.2rem;
+text-align: left;
+font-weight: 700;
+`
 
 const ButtonWrappings = styled.div`
   width: 100%;
@@ -240,6 +292,8 @@ const ProductWrapper = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  height: fit-content;
+  margin-bottom: 10vh;
 
   @media (max-width: 1400px) {
     width: 100%;
@@ -251,35 +305,37 @@ const ProductWrapper = styled.div`
 `;
 
 const ProductWrapping = styled.div`
-  position: relative;
-  width: 30%;
+  width: 100%;
   height: 350px;
-  object-fit: contain;
-  background: url(${(props) =>
-    props.background ? props.background : props.background});
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
-  margin: 20px;
-
+  // margin: 20px;
+  background: #ffffff;
+  box-shadow: -11px 21px 53px 0px #8787871a, -45px 86px 97px 0px #87878717,
+    -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
+    -284px 536px 170px 0px #87878700;
+  padding: 10px;
+  border-radius: 10px;
   @media (max-width: 1400px) {
-    background-position: cover;
-    background-size: 200%;
-    height: 200px;
-    width: 100%;
-    margin: 0px;
   }
 `;
 
 const ProductBadge = styled.div`
-  position: absolute;
-  padding: 10px;
-  text-align: center;
-  color: #ffffff;
-  font-family: Josefin Sans;
-  background-color: red;
-  top: 10px;
-  right: 10px;
+  // object-fit: cover;
+  background: url(${(props) =>
+    props.background ? props.background : props.background});
+  background-repeat: no-repeat;
+  background-position: contain;
+  background-size: 100%;
+  width: 100%;
+  height: 55%;
+  border-radius: 10px;
+
+  @media (max-width: 1400px) {
+    background-position: contain;
+    background-size: 100%;
+    height: 55%;
+    width: 100%;
+    margin: 0px;
+  }
 `;
 
 const LeftText = styled.div`

@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { HorizontalFlexedWrapper } from "../../Elements";
+import {
+  HorizontalFlexedWrapper,
+  StyledButton,
+  VerticalFlexedWrapper,
+} from "../../Elements";
 
-import productH1 from "../../../assets/Images/product-h1.svg";
-import productH2 from "../../../assets/Images/product-h2.svg";
+import productH1 from "../../../assets/Images/producth1.svg";
+import productH2 from "../../../assets/Images/producth2.svg";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -15,14 +19,52 @@ const ProductHeader = () => {
       <Wrapper>
         <HorizontalFlexedWrapper
           invert={true}
-          smallWidth={'100%'}
+          smallWidth={"100%"}
           elements={
             <>
               <CustomImageWrapper background={productH1}>
-                <Text>Product listing 01</Text>
+                <WrapperText>
+                  <VerticalFlexedWrapper
+                    align={"center"}
+                    justify={"center"}
+                    elements={
+                      <>
+                        <BoldText>
+                          <i>Ajéré</i>
+                        </BoldText>
+                        <LightText>CAPSULE COLLECTION</LightText>
+                        <StyledButton
+                          text={"Explore"}
+                          bgColor={"transparent"}
+                          color={"#FFFFFF"}
+                          bdColor={'1px solid #FFFFFF'}
+                        />
+                      </>
+                    }
+                  />
+                </WrapperText>
               </CustomImageWrapper>
               <CustomImageWrapper background={productH2}>
-                <Text>Product listing 02</Text>
+                <WrapperText>
+                <VerticalFlexedWrapper
+                    align={"center"}
+                    justify={"center"}
+                    elements={
+                      <>
+                        <BoldText>
+                          <i>Renouvele</i>
+                        </BoldText>
+                        <LightText>CAPSULE COLLECTION</LightText>
+                        <StyledButton
+                          text={"Explore"}
+                          bgColor={"transparent"}
+                          color={"#FFFFFF"}
+                          bdColor={'1px solid #FFFFFF'}
+                        />
+                      </>
+                    }
+                  />
+                </WrapperText>
               </CustomImageWrapper>
             </>
           }
@@ -43,24 +85,36 @@ const CustomImageWrapper = styled.div`
   width: 50%;
 
   @media (max-width: 1400px) {
-    height: 35vh;
+    height: 30vh;
     width: 100%;
   }
 `;
 
-const Text = styled.p`
-  font-weight: 900;
-  font-family: Josefin Sans;
+const WrapperText = styled.p`
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  height: 100%;
+  width: 100%;
   z-index: 9999;
   color: #ffffff;
-  font-size: 2rem;
+  text-align: center;
 
   @media (max-width: 1400px) {
     font-size: 1rem;
   }
+`;
+
+const BoldText = styled.p`
+  font-weight: 700;
+  font-family: Poppins;
+  font-size: 2rem;
+`;
+
+const LightText = styled.p`
+  font-weight: 200;
+  font-family: Poppins;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 50%;
 `;
 
 export default ProductHeader;

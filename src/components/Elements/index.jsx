@@ -199,11 +199,12 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  border-radius: 50px;
 
   @media (max-width: 1400px) {
     font-size: ${(props) => (props.fontSmall ? props.fontSmall : "15px")};
     width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
-    padding: 5px;
+    padding: 10px;
   }
 `;
 
@@ -221,6 +222,7 @@ export const StyledButton = ({
   loading,
   margin,
   padding,
+  bdColor
 }) => {
   return (
     <>
@@ -231,6 +233,7 @@ export const StyledButton = ({
         onClick={onPress}
         margin={margin}
         padding={padding}
+        bdColor={bdColor}
       >
         {loading ? <Loader active={loading} inline={"centered"} /> : text}
       </StyledButtonWrapper>
@@ -243,12 +246,14 @@ const StyledButtonWrapper = styled.div`
   color: ${(props) => (props.color ? props.color : "#000000")};
   padding: ${(props) => (props.padding ? props.padding : "15px")};
   text-align: center;
-  font-family: Josefin Sans;
+  font-family: Poppins;
+  border-radius: 57px;
   font-weight: bolder;
   font-size: 16px;
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#FFFFFF")};
   margin: ${(props) => (props.margin ? props.margin : "2vh 0px 2vh 0px")};
   cursor: pointer;
+  border: ${(props)=>props.bdColor ? props.bdColor : ""};
 
   @media (max-width: 1400px) {
     font-size: 12px;

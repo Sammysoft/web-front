@@ -8,14 +8,20 @@ import Header from "../components/Home/Header";
 import ProductListing from "../components/Home/ProductListing";
 import HomeBlogs from "../components/Home/Blogs";
 import Footer from "../components/Footer";
+import { Colors } from "../assets/Res/fonts";
+import AdvertCard from "../components/Cards/Index";
 
 const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-image: url(${BackgroundImage});
+  // background-size: cover;
+  // background-position: center;
+  // background-repeat: no-repeat;
+  background-color: ${Colors.PRIMARY};
+
+  @media (max-width: 1400px){
+    height: 90vh;
+  }
 
 `;
 
@@ -23,13 +29,14 @@ const Wrapper = styled.div`
 const HomePage = () => {
   return (
     <>
-      <NavBar />
+      {/* <NavBar />
       <Wrapper>
         <Header />
       </Wrapper>
       <ProductListing />
+      <AdvertCard />
       <HomeBlogs />
-      <Footer />
+      <Footer /> */}
     </>
   );
 };

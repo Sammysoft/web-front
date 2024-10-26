@@ -95,13 +95,21 @@ const NavBar = () => {
           width={"100%"}
           elements={
             <>
+             <ImageWrapper
+                      onClick={() => {
+                        setToggle(!toggle);
+                      }}
+                      image={HarmbuggerSVG}
+                      width={"30px"}
+                      height={"30px"}
+                    />
               <ImageWrapper
                 image={LogoSVG}
                 width={"80px"}
                 height={"80px"}
                 onClick={() => handleLogout()}
               />
-              <HorizontalFlexedWrapper
+              {/* <HorizontalFlexedWrapper
                 width={"50%"}
                 elements={
                   <>
@@ -126,23 +134,17 @@ const NavBar = () => {
                       height={"20px"}
                     />
                     <LoginText>{items.length}</LoginText>
-                    <ImageWrapper
-                      onClick={() => {
-                        setToggle(!toggle);
-                      }}
-                      image={HarmbuggerSVG}
-                      width={"30px"}
-                      height={"30px"}
-                    />
+
                   </>
                 }
                 align={"center"}
                 // justify={"center"}
-              />
+              /> */}
             </>
           }
         />
       </MobileWrapper>
+
       {toggle ? (
         <MobileNavCapsule toggle={toggle} setToggle={setToggle} />
       ) : null}

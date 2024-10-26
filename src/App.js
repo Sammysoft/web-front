@@ -25,7 +25,7 @@ function App() {
       />
       <Routes>
         <Route path="/" exact element={<HomePage />} />
-        <Route path="/product" exact element={<ProductsPage />} />
+        {/* <Route path="/product" exact element={<ProductsPage />} />
         <Route path="/product/*" exact element={<ProductsDetails />} />
         <Route path="/blog" exact element={<Blogs />} />
         <Route path="/contact" exact element={<ContactPage />} />
@@ -35,7 +35,7 @@ function App() {
         <Route path="/checkout-success" exact element={<SuccessPage />} />
         <Route path="/checkout-failed" exact element={<FailurePage />} />
         <Route path="/admin" exact element={<AdminDashboard />} />
-        <Route path="/verify/*" exact element={<VerificationPage />} />
+        <Route path="/verify/*" exact element={<VerificationPage />} /> */}
       </Routes>
     </>
   );

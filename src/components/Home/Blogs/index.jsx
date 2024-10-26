@@ -126,7 +126,7 @@ const BlogHead = styled.div`
 `;
 
 export const Text = styled.div`
-  font-family: Josefin Sans;
+  font-family: Poppins;
   font-size: ${(props) => (props.size ? props.size : "18px")};
   color: ${(props) => (props.color ? props.color : "#000000")};
   padding: ${(props) => (props.padding ? props.padding : "20px 0px 20px 0px")};
