@@ -6,6 +6,17 @@ import Footer from "../components/Footer";
 import Header from "../components/Product/Details/Header";
 import ProductDetail from "../components/Product/Details";
 import { useLocation } from "react-router-dom";
+import AdvertCard from "../components/Cards/Index";
+import styled from "styled-components";
+
+const DesktopSpacer = styled.div`
+  height: 10vh;
+  width: 100%;
+
+  @media (max-width: 1400px) {
+    display: none;
+  }
+`;
 
 const ProductsDetails = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -35,7 +46,9 @@ const ProductsDetails = () => {
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
       />
-      {/* <Footer /> */}
+      <DesktopSpacer />
+      <AdvertCard />
+      <Footer />
     </>
   );
 };

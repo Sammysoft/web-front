@@ -52,6 +52,7 @@ const Failure = () => {
                   text={"Try again"}
                   bgColor={"#FD9017"}
                   color={"#FFFFFF"}
+                  width={'20%'}
                 />
               </>
               {/* )} */}

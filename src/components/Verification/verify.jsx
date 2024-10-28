@@ -77,6 +77,7 @@ const Verify = () => {
                     text={"Login"}
                     bgColor={"#FD9017"}
                     color={"#FFFFFF"}
+                    width={'20%'}
                   />
                 </>
               )}

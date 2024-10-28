@@ -21,6 +21,7 @@ import Prod9 from "../../../assets/Images/prod9.svg";
 import ProductDataService from "../../../Services/ProductDataService";
 import { Loader } from "semantic-ui-react";
 import { Colors } from "../../../assets/Res/fonts";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -57,6 +58,7 @@ const ProductMenu = [
 ];
 
 const ProductListing = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Wrapper>
@@ -65,7 +67,12 @@ const ProductListing = () => {
         <ProductCatalogue />
       </Wrapper>
       <ButtonWrappings>
-        <BoxedButton width={"30%"} text={"View More >"} />
+        <BoxedButton
+          smallWdth={"30%"}
+          text={"View More >"}
+          width={"15%"}
+          onPress={() => navigate("/product")}
+        />
       </ButtonWrappings>
     </>
   );
@@ -100,21 +107,29 @@ const Text = styled.p`
   font-family: Poppins;
   font-size: 1.5rem;
   text-transform: capitalize;
-  padding: 40px 10px 0px 10px;
+  padding: 5px 10px 5px 7.5%;
 
-  // @media (min-width: 1400px) {
-  //   display: none;
-  // }
+  @media (max-width: 1400px) {
+    padding: 5px 10px 5px 10px;
+  }
 `;
 
 const BoldText = styled.p`
   color: #003459;
+  width: 85%;
   font-family: Poppins;
   font-size: 1.6rem;
   text-transform: capitalize;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 10px 5px 7.5%;
   font-weight: 700;
   text-transform: capitalize;
+  marigin-left: 7.5%;
+
+  @media (max-width: 1400px) {
+    margin-left: 0px;
+    padding: 5px 10px 5px 10px;
+    width: 100%;
+  }
 `;
 
 const ListingMenu = () => {
@@ -191,6 +206,8 @@ const ProductCatalogue = () => {
     fetchAllProducts();
   }, []);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <Text>What's New?</Text>
@@ -202,27 +219,21 @@ const ProductCatalogue = () => {
         height={"fit-content"}
         elements={
           <>
-            <LeftText>
-              <LongName>Product listings</LongName>
-            </LeftText>
             <ProductWrapper>
               {loading ? (
                 <Loader inline={"centered"} active={loading} />
               ) : (
                 <>
-                  {/* ProductList.length >= 0 && ProductList?.map((prod, index) => (
-                  <ProductWrapping background={`'${prod.images[0]}'`} key={index}>
-                    <ProductBadge>New</ProductBadge>
-                  </ProductWrapping>
-                )) */}
                   {ProductList?.length > 0 &&
                     ProductList?.map((prod, index) => (
                       <ProductWrapping key={index}>
                         <VerticalFlexedWrapper
+                          onClick={() => navigate("/product")}
                           justify={"space-between"}
                           width={"100%"}
                           smallWidth={"100%"}
                           align={"flex-start"}
+                          height={"100%"}
                           elements={
                             <>
                               <ProductBadge
@@ -253,28 +264,29 @@ const ProductCatalogue = () => {
 };
 
 const AddToCartBtn = styled.div`
-font-family: Poppins;
-font-size: 1rem;
-font-weight: 600;
-color: ${Colors.ORANGE};
-text-align: right;
-width: 100%;
-`
+  font-family: Poppins;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${Colors.ORANGE};
+  text-align: right;
+  width: 100%;
+`;
 
 const LightText = styled.p`
-font-family: Poppins;
-font-size: 1rem;
-text-align: left;
-opacity: 0.7;
-font-weight: 600;
+  font-family: Poppins;
+  font-size: 1rem;
+  text-align: left;
+  opacity: 0.7;
+  font-weight: 600;
+  // line-height: 0px;
 `;
 
 const SolidText = styled.p`
-font-family: Poppins;
-font-size: 1.2rem;
-text-align: left;
-font-weight: 700;
-`
+  font-family: Poppins;
+  font-size: 1.2rem;
+  text-align: left;
+  font-weight: 700;
+`;
 
 const ButtonWrappings = styled.div`
   width: 100%;
@@ -286,35 +298,40 @@ const ButtonWrappings = styled.div`
 `;
 
 const ProductWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   height: fit-content;
+  row-gap: 20px;
+  column-gap: 20px;
   margin-bottom: 10vh;
+  margin-left: 7.5%;
 
   @media (max-width: 1400px) {
     width: 100%;
     display: grid;
-    grid-template-columns: 45% 45%;
+    grid-template-columns: 48% 48%;
     column-gap: 2.5%;
-    row-gap: 2.5%;
+    row-gap: 1%;
+    margin-left: 0px;
   }
 `;
 
 const ProductWrapping = styled.div`
-  width: 100%;
+  width: 20%;
   height: 350px;
-  // margin: 20px;
   background: #ffffff;
-  box-shadow: -11px 21px 53px 0px #8787871a, -45px 86px 97px 0px #87878717,
-    -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
-    -284px 536px 170px 0px #87878700;
+  box-shadow: 0px 0px 20px 5px #8787871a, 0px 0px 40px 10px #87878717,
+    0px 0px 60px 15px #8787870d, 0px 0px 80px 20px #87878703,
+    0px 0px 100px 25px #87878700;
   padding: 10px;
   border-radius: 10px;
+
   @media (max-width: 1400px) {
+    width: 100%;
   }
 `;
 
@@ -323,10 +340,10 @@ const ProductBadge = styled.div`
   background: url(${(props) =>
     props.background ? props.background : props.background});
   background-repeat: no-repeat;
-  background-position: contain;
+  background-position: cover;
   background-size: 100%;
   width: 100%;
-  height: 55%;
+  height: 100%;
   border-radius: 10px;
 
   @media (max-width: 1400px) {

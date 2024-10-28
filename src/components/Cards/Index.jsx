@@ -1,43 +1,95 @@
+/* eslint-disable */
+
 import React from "react";
 import styled from "styled-components";
 import { Colors } from "../../assets/Res/fonts";
-import { VerticalFlexedWrapper } from "../Elements";
+import { HorizontalFlexedWrapper, VerticalFlexedWrapper } from "../Elements";
 import Advert1 from "../../assets/Images/advert1.svg";
+import { StyledButton } from "../Elements";
 
 const Wrapper = styled.div`
   width: 90%;
   border-radius: 10px;
-  background-color: ${Colors.FAINT_ORANGE};
+  background-color: ${Colors.PRIMARY};
   margin: 5%;
-  padding: 20px;
+  padding: 20px 0px 0px 0px;
 `;
 
 const BoldText = styled.p`
   font-weight: 700;
   font-family: Poppins;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  text-align: center;
+  text-transform: capitalize;
 `;
 
 const LightText = styled.p`
-  font-weight: 200;
+  font-weight: 500;
   font-family: Poppins;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   text-align: center;
-  width: 50%;
+  width: 100%;
+  text-transform: capitalize;
+`;
+
+const SimpleText = styled.div`
+  font-weight: 300;
+  font-family: Poppins;
+  font-size: 1rem;
+  text-align: center;
+  width: 90%;
 `;
 
 const AdvertCard = () => {
   return (
     <>
       <Wrapper>
-        <VerticalFlexedWrapper
+        <HorizontalFlexedWrapper
+          invert={true}
+          align={"flex-end"}
+          height={"40vh"}
+          smallHeight={"100%"}
           elements={
             <>
-              <BoldText>Style that speaks for you</BoldText>
+              <VerticalFlexedWrapper
+                width={"100%"}
+                height={"100%"}
+                align={"center"}
+                justify={"center"}
+                elements={
+                  <>
+                    <DesktopWrapper>
+                      <BoldText>
+                        <i>Style that speaks for you</i>
+                      </BoldText>
+                      <LightText>
+                        Make a statement without saying a word
+                      </LightText>
+                      <SimpleText>
+                        At 928 Apparels, we believe in giving you the freedom to
+                        express your individuality through fashion. Discover
+                        pieces that match your vibe
+                      </SimpleText>
+                      <StyledButton
+                        text={"Explore"}
+                        bgColor={"#003459"}
+                        color={"#FFFFFF"}
+                        width={'20%'}
+                      />
+                    </DesktopWrapper>
+                  </>
+                }
+              />
               <img
                 src={Advert1}
                 alt="advert1"
-                style={{ bottom: "0px", width: "95%", height: "auto" }}
+                style={{
+                  bottom: "0px",
+                  width: "100%",
+                  height: "auto",
+                  borderBottomLeftRadius: "10px",
+                  borderBottomRightRadius: "10px",
+                }}
               />
             </>
           }
@@ -46,5 +98,16 @@ const AdvertCard = () => {
     </>
   );
 };
+const DesktopWrapper = styled.div`
+  width: 100%;
+  height: 70%;
+  justify-content: left;
+
+  @media (max-width: 1400px) {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+`;
 
 export default AdvertCard;

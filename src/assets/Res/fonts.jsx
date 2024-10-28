@@ -9,7 +9,7 @@ export const Sizes = {
 
 export const Colors = {
     PRIMARY:"#FCEED5",
-    DEEP_BLUE:"#003459",
+    DEEP_BLUE:"#003459", 
     ORANGE:"#FD9017",
-    FAINT_ORANGE:"#FFB775"
+    FAINT_ORANGE:"#FFB775",
 }

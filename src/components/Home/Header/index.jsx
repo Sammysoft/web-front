@@ -4,20 +4,21 @@ import {
   HorizontalFlexedWrapper,
   ImageWrapper,
   StyledButton,
+  VerticalFlexedWrapper,
 } from "../../Elements";
 
 import Left from "../../../assets/Icons/svg/chevron-left.svg";
 import Right from "../../../assets/Icons/svg/chevron-right.svg";
 
-import HomeHero from "../../../assets/Images/home-hero.svg";
+import HomeHero from "../../../assets/Images/home_header.svg";
 import MobileHero from "../../../assets/Images/home_mobile_img.svg";
 import { Text } from "../Blogs";
 import { Colors } from "../../../assets/Res/fonts";
 
 const Wrapper = styled.div`
-  height: 80vh;
+  height: 60vh;
   width: 90%;
-  padding-top: 50vh;
+  padding-top: 30vh;
   margin: 0px 5% 0px 5%;
 
   @media (max-width: 1400px) {
@@ -36,18 +37,75 @@ const MobileWrapper = styled.div`
   }
 `;
 
+const BoldText = styled.p`
+  font-weight: 700;
+  font-family: Poppins;
+  font-size: 4rem;
+  text-align: left;
+  color: ${Colors.DEEP_BLUE};
+  width: 100%;
+
+    @media (max-width: 1400px) {
+    font-size: 1.5rem;
+    margin-top: 0px;
+    color: black;
+  }
+`;
+
+const LightText = styled.p`
+  font-weight: 500;
+  font-family: Poppins;
+  font-size: 3rem;
+  text-align: left;
+  width: 100%;
+  color: ${Colors.DEEP_BLUE};
+  text-transform: capitalize;
+`;
+
+const SimpleText = styled.div`
+  font-weight: 400;
+  font-family: Poppins;
+  font-size: 1.7rem;
+  text-align: left;
+  width: 75%;
+  line-height: 3rem;
+`;
+
 const Header = () => {
   return (
     <>
       <Wrapper>
         <HorizontalFlexedWrapper
+          align={"center"}
           justify={"space-between"}
           width={"100%"}
           elements={
             <>
-              <ImageWrapper image={Left} width={"2.5%"} height={"2.5%"} />
+              <VerticalFlexedWrapper
+                justify={"flex-start"}
+                align={"flex-start"}
+                width={"55%"}
+                height={"100%"}
+                elements={
+                  <>
+                    <BoldText>
+                      <i>African Tailoring...</i>
+                    </BoldText>
+                    <LightText>Timeless - Universal Appeal</LightText>
+                    <SimpleText>
+                      Unlock the confidence that only premium fashion can
+                      deliver with our exclusive collection.
+                    </SimpleText>
+                    <StyledButton
+                      text={"Shop now >"}
+                      color={"#ffffff"}
+                      bgColor={Colors.DEEP_BLUE}
+                      width={'20%'}
+                    />
+                  </>
+                }
+              />
               <OverLayImage />
-              <ImageWrapper image={Right} width={"2.5%"} height={"2.5%"} />
             </>
           }
         />
@@ -130,20 +188,20 @@ const ItalizedText = styled.p`
   }
 `;
 
-const BoldText = styled.p`
-  font-size: 5rem;
-  font-family: Poppins;
-  font-weight: 700;
-  color: #000000;
-  // font-style: italize;
-  text-align: left;
-  text-transform: capitalize;
+// const BoldText = styled.p`
+//   font-size: 5rem;
+//   font-family: Poppins;
+//   font-weight: 700;
+//   color: #000000;
+//   // font-style: italize;
+//   text-align: left;
+//   text-transform: capitalize;
 
-  @media (max-width: 1400px) {
-    font-size: 1.5rem;
-    margin-top: 0px;
-  }
-`;
+//   @media (max-width: 1400px) {
+//     font-size: 1.5rem;
+//     margin-top: 0px;
+//   }
+// `;
 
 const OverLayImage = () => {
   return (
@@ -151,17 +209,15 @@ const OverLayImage = () => {
       <HorizontalFlexedWrapper
         elements={
           <>
-            <ItalizedText>928</ItalizedText>
             <OverLayWrapper>
               <OverLayInnerWrapper>
                 <ImageWrapper image={HomeHero} height={"100%"} width={"100%"} />
               </OverLayInnerWrapper>
             </OverLayWrapper>
-            <ItalizedText>Apparels</ItalizedText>
           </>
         }
         height={"100%"}
-        width={"50%"}
+        width={"40%"}
       />
     </>
   );

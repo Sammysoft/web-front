@@ -52,6 +52,7 @@ const Success = () => {
                     text={"View Order"}
                     bgColor={"#FD9017"}
                     color={"#FFFFFF"}
+                    width={'20%'}
                   />
                 </>
               {/* )} */}

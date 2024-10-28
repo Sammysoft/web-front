@@ -19,22 +19,50 @@ import Blog4 from "../../../assets/Images/blog4.svg";
 import Right from "../../../assets/Icons/svg/right.svg";
 import BlogDataService from "../../../Services/BlogDataService";
 import { addEllipsis } from "../../../utils";
+import { Colors } from "../../../assets/Res/fonts";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
-  background: url(${background});
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: center;
+  // background: url(${background});
+  // background-repeat: no-repeat;
+  // background-size: 100%;
+  // background-position: center;
   padding: 10%;
   height: fit-content;
 
   @media (max-width: 1400px) {
-    background-position: contain;
-    background-size: cover;
+    // background-position: contain;
+    // background-size: cover;
     padding: 5% 0% 5% 0%;
     width: 100%;
   }
+`;
+
+const BoldText = styled.p`
+  font-weight: 700;
+  font-family: Poppins;
+  font-size: 1.5rem;
+  text-align: left;
+  color: ${Colors.DEEP_BLUE};
+  width: 100%;
+`;
+
+const LightText = styled.p`
+  font-weight: 500;
+  font-family: Poppins;
+  font-size: 1.2rem;
+  text-align: left;
+  width: 100%;
+  text-transform: capitalize;
+`;
+
+const SimpleText = styled.div`
+  font-weight: 300;
+  font-family: Poppins;
+  font-size: 1rem;
+  text-align: center;
+  width: 90%;
 `;
 
 const BlogItems = [
@@ -74,30 +102,8 @@ const HomeBlogs = () => {
               width={"100%"}
               elements={
                 <>
-                  <Text size={"18px"} color="#fd9017">
-                    928 Blog
-                  </Text>
-                  <Text
-                    size={"30px"}
-                    color={"#000000"}
-                    width={"25%"}
-                    smallWidth={"80%"}
-                  >
-                    Fashion tales from an 'eye' in the frenzy
-                  </Text>
-                  <Text
-                    width={"30%"}
-                    color={"#696969"}
-                    size={"20px"}
-                    smallLine={"22px"}
-                    fontSmall={"14px"}
-                    align={"center"}
-                    smallWidth={"80%"}
-                  >
-                    Ornare nec placerat in elit convallis rutrum pellentesque.
-                    Ac dis volutpat pellentesque et tortor elementum consequat.
-                    Venenatis elit.
-                  </Text>
+                  <LightText>928 Blog</LightText>
+                  <BoldText>Catch up with the latest gists</BoldText>
                 </>
               }
             />
@@ -123,6 +129,7 @@ const BlogWrapper = styled.div`
 
 const BlogHead = styled.div`
   width: 100%;
+  padding: 0px 0px 0px 5%;
 `;
 
 export const Text = styled.div`
@@ -161,6 +168,8 @@ export const BlogCards = () => {
     fetchBlogs();
   }, [reLoad]);
 
+  const navigate = useNavigate();
+
   return (
     <>
       <BlogCardWrapper>
@@ -176,6 +185,7 @@ export const BlogCards = () => {
                       height={"70%"}
                       width={"90%"}
                       image={blog.thumbnail}
+                      rounded={true}
                     />
                     <HorizontalFlexedWrapper
                       height={"30%"}
@@ -183,20 +193,10 @@ export const BlogCards = () => {
                       elements={
                         <>
                           <VerticalFlexedWrapper
-                            width={"65%"}
+                            width={"100%"}
                             elements={
                               <>
-                                <Text
-                                  color={"#000000"}
-                                  size={"24px"}
-                                  weight={"bolder"}
-                                  width={"100%"}
-                                  align={"left"}
-                                  line={"30px"}
-                                  smallLine={"30px"}
-                                >
-                                  {blog.title}
-                                </Text>
+                                <BoldText>{blog.title}</BoldText>
                                 <Text
                                   color={"#696969"}
                                   size={"18px"}
@@ -211,13 +211,6 @@ export const BlogCards = () => {
                               </>
                             }
                           />
-                          <Next>
-                            <ImageWrapper
-                              image={Right}
-                              width={"25%"}
-                              height={"25%"}
-                            />
-                          </Next>
                         </>
                       }
                     />
@@ -231,7 +224,11 @@ export const BlogCards = () => {
           width={"100%"}
           elements={
             <>
-              <BoxedButton width={"10%"} text={"Read More"} />
+              <BoxedButton
+                width={"10%"}
+                text={"View More  >"}
+                onPress={() => navigate("/blog")}
+              />
             </>
           }
         />
@@ -259,10 +256,18 @@ const BlogCapsule = styled.div`
   width: 45%;
   height: 60vh;
   margin: 2vh 0px 2vh 0px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  box-shadow: -11px 21px 53px 0px #8787871a, -45px 86px 97px 0px #87878717,
+    -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
+    -284px 536px 170px 0px #87878700;
 
   @media (max-width: 1400px) {
-    width: 100%;
-    margin: 2vh 0px 2vh 0px;
+    width: 95%;
+    margin: 2vh 2.5% 2vh 2.5%;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 10px 0px 10px 0px;
   }
 `;
 

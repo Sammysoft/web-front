@@ -38,6 +38,7 @@ const ProductHeader = () => {
                           bgColor={"transparent"}
                           color={"#FFFFFF"}
                           bdColor={'1px solid #FFFFFF'}
+                          width={'30%'}
                         />
                       </>
                     }
@@ -60,6 +61,7 @@ const ProductHeader = () => {
                           bgColor={"transparent"}
                           color={"#FFFFFF"}
                           bdColor={'1px solid #FFFFFF'}
+                          width={'30%'}
                         />
                       </>
                     }

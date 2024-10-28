@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import styled from "styled-components";
 import {
@@ -8,21 +10,24 @@ import {
 } from "../Elements";
 import { Text } from "../Home/Blogs";
 
-import Logo from "../../assets/Icons/svg/logo-white.svg";
+import Logo from "../../assets/Icons/svg/logo-black.svg";
 
-import Facebook from "../../assets/Icons/svg/facebook.svg";
-import Youtube from "../../assets/Icons/svg/youtube.svg";
-import Instagram from "../../assets/Icons/svg/instagram.svg";
-import LinkedIn from "../../assets/Icons/svg/linkedin.svg";
+import Facebook from "../../assets/Icons/svg/fb.svg";
+import Youtube from "../../assets/Icons/svg/yt.svg";
+import Instagram from "../../assets/Icons/svg/ig.svg";
+import LinkedIn from "../../assets/Icons/svg/x.svg";
+import { Colors } from "../../assets/Res/fonts";
 
 const Wrapper = styled.div`
   width: 100%;
-  background: #221602;
+  background: ${Colors.PRIMARY};
   padding: 5% 10% 5% 10%;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     width: 100%;
-    padding: 5%
+    padding: 5%;
   }
 `;
 
@@ -35,80 +40,18 @@ const Footer = () => {
           height={"fit-content"}
           elements={
             <>
-              <Text color="#FFFFFF" width={"100%"} weight={"800"}>
-                928 APPARELS
-              </Text>
-              <Text
-                color={"#FFFFFF"}
-                weight={"900"}
-                width={"100%"}
-                size={"55px"}
-              >
-                We’d love to hear from you!
-              </Text>
-              <Text color={"#FFFFFF"} width={"35%"} smallLine={'28px'}>
-                <i>
-                  Tortor orci at laoreet eget consectetur et. Id amet dui
-                  venenatis id proin lectus. Elementum sed ultricies at diam
-                  lorem. Diam orci.
-                </i>
-              </Text>
-              <StyledButton
-                mobileWidth={"40%"}
-                width={"20%"}
-                text={"Contact Us"}
-                bgColor={"#FD9017"}
-                color={"#FFFFFF"}
-              />
-              <Text color={"#FFFFFF"} size={"14px"}>
-                <i>© 2019 Lift Media, LLC</i>
-              </Text>
-              <Line></Line>
               <HorizontalFlexedWrapper
                 elements={
                   <>
-                    <ImageWrapper image={Logo} width={"20%"} height={"100px"} />
                     <HorizontalFlexedWrapper
-                      width={"40%"}
+                      width={"100%"}
                       height={"fit-content"}
                       elements={
                         <>
-                          <Menu>
-                            <i>Products</i>
-                          </Menu>
-                          <Menu>
-                            <i>Blogs</i>
-                          </Menu>
-                          <Menu>
-                            <i>Contact</i>
-                          </Menu>
-                        </>
-                      }
-                    />
-                    <HorizontalFlexedWrapper
-                      width={"20%"}
-                      elements={
-                        <>
-                          <ImageWrapper
-                            image={Facebook}
-                            width={"20%"}
-                            height={"50px"}
-                          />
-                          <ImageWrapper
-                            image={Youtube}
-                            width={"20%"}
-                            height={"50px"}
-                          />
-                          <ImageWrapper
-                            image={Instagram}
-                            width={"20%"}
-                            height={"50px"}
-                          />
-                          <ImageWrapper
-                            image={LinkedIn}
-                            width={"20%"}
-                            height={"50px"}
-                          />
+                          <Menu>Home</Menu>
+                          <Menu>Products</Menu>
+                          <Menu>Blogs</Menu>
+                          <Menu>Contact</Menu>
                         </>
                       }
                     />
@@ -117,6 +60,50 @@ const Footer = () => {
                 width={"100%"}
                 height={"fit-content"}
               />
+              <HorizontalFlexedWrapper
+                margin={"40px 0px 40px 0px"}
+                width={"60%"}
+                elements={
+                  <>
+                    <ImageWrapper
+                      image={Facebook}
+                      width={"10%"}
+                      height={"30px"}
+                    />
+                    <ImageWrapper
+                      image={Youtube}
+                      width={"10%"}
+                      height={"30px"}
+                    />
+                    <ImageWrapper
+                      image={Instagram}
+                      width={"10%"}
+                      height={"30px"}
+                    />
+                    <ImageWrapper
+                      image={LinkedIn}
+                      width={"10%"}
+                      height={"30px"}
+                    />
+                  </>
+                }
+              />
+              <Line></Line>
+              {/* <Text color="#FFFFFF" width={"100%"} weight={"800"}>
+                928 APPARELS
+              </Text> */}
+              <ImageWrapper image={Logo} width={"25%"} height={"150px"} />
+
+              {/* <StyledButton
+                mobileWidth={"40%"}
+                width={"20%"}
+                text={"Contact Us"}
+                bgColor={"#FD9017"}
+                color={"#FFFFFF"}
+              /> */}
+              <Text color={"#000000"} size={"14px"} fontSmall={'10px'}>
+                © 2024 928apparels, All Rights Reserved
+              </Text>
             </>
           }
         />
@@ -127,21 +114,21 @@ const Footer = () => {
 
 const Line = styled.div`
   width: 100%;
-  background-color: #ffffff;
+  background-color: #000000;
   height: 0.5px;
 `;
 
 const Menu = styled.div`
-  color: #ffffff;
-  font-family: Josefin Sans;
+  color: #000000;
+  font-family: Poppins;
+
   font-size: 25px;
   text-align: center;
   width: 25%;
   cursor: pointer;
 
-
-  @media (max-width: 1400px){
-    font-size: 12px;
+  @media (max-width: 1400px) {
+    font-size: 15px;
   }
 `;
 

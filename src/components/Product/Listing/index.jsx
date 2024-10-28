@@ -24,6 +24,7 @@ import Prod8 from "../../../assets/Images/prod8.svg";
 import { useNavigate } from "react-router";
 import ProductDataService from "../../../Services/ProductDataService";
 import { Loader } from "semantic-ui-react";
+import { Colors } from "../../../assets/Res/fonts";
 import { TruncateText } from "../../../utils";
 
 const Wrapper = styled.div`
@@ -193,8 +194,9 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
                 elements={
                   <>
                     <DropDownButton
-                      text={"LATEST PIECES"}
+                      text={"BONGEE"}
                       width={"70%"}
+                      list={[{ name: "BONGEE" }]}
                       bgColor={"#D9D9D9"}
                       Icon={
                         <>
@@ -207,8 +209,9 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
                       }
                     />
                     <DropDownButton
-                      text={"CATEGORY 1"}
+                      text={"AJERE"}
                       width={"70%"}
+                      list={[{ name: "AJERE" }]}
                       bgColor={"#D9D9D9"}
                       Icon={
                         <>
@@ -221,7 +224,8 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
                       }
                     />
                     <DropDownButton
-                      text={"CATEGORY 2"}
+                      text={"RENOUVELE"}
+                      list={[{ name: "RENOUVELE" }]}
                       width={"70%"}
                       bgColor={"#D9D9D9"}
                       Icon={
@@ -402,153 +406,56 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
         <Loader active={loading} inline="centered" />
       ) : selectedProduct?.name === undefined ||
         selectedProduct?.name === "All Products" ? (
-        ProductList.map((product, index) => (
-          <VerticalFlexedWrapper
-            onClick={() => setSelectedProduct(product)}
-            width={"28%"}
-            height={"45vh"}
-            margin={"1%"}
-            mobileWidth={"48%"}
-            elements={
-              <>
-                <ProductImage
-                  background={`'${product.images[0]}'`}
-                  key={index}
-                  onClick={() =>
-                    navigate(
-                      `/product/${product.name}?category=${product.category}&name=${product.name}&price=${product.price}&details=${product.description}&id=${product.id}`
-                    )
-                  }
-                >
-                  <ProductBadge>New</ProductBadge>
-                </ProductImage>
-                <VerticalFlexedWrapper
-                  height={"30%"}
-                  width={"100%"}
-                  justify={"center"}
-                  elements={
-                    <>
-                      <Text
-                        width={"100%"}
-                        line={"0px"}
-                        align={"left"}
-                        fontSmall={"16px"}
-                        smallLine={"20px"}
-                        style={{ fontWeight: "bold" }}
-                      >
-                        {product.name}
-                      </Text>
-                      <Text
-                        line={"18px"}
-                        width={"100%"}
-                        align={"left"}
-                        fontSmall={"14px"}
-                        smallLine={"14px"}
-                      >
-                        {product.category} | {TruncateText(product.description)}
-                      </Text>
-
-                      <HorizontalFlexedWrapper
-                        width={"100%"}
-                        height={"10%"}
-                        justify={"flex-start"}
-                        elements={
-                          <>
-                            <ImageWrapper
-                              image={CartIcon}
-                              width={"30px"}
-                              height={"30px"}
-                            />
-                            <Text
-                              width={"50%"}
-                              align={"left"}
-                              style={{ marginLeft: "10px" }}
-                            >
-                              ${product.price}
-                            </Text>
-                          </>
-                        }
-                      />
-                    </>
-                  }
-                />
-              </>
-            }
-          />
+        ProductList.map((prod, index) => (
+          <ProductWrapping key={index}>
+            <VerticalFlexedWrapper
+              onClick={() => setSelectedProduct(prod)}
+              justify={"space-between"}
+              width={"100%"}
+              smallWidth={"100%"}
+              align={"flex-start"}
+              height={"100%"}
+              elements={
+                <>
+                  <ProductBadge
+                    background={`'${prod.images[0]}'`}
+                  ></ProductBadge>
+                  <LightText>{prod?.category}</LightText>
+                  <SolidText>{prod?.name}</SolidText>
+                  <SolidText>${prod?.price}</SolidText>
+                  <AddToCartBtn>ADD TO CART {">"}</AddToCartBtn>
+                </>
+              }
+            />
+          </ProductWrapping>
         ))
       ) : (
-        ProductFilteredByCategory.map((product, index) => (
-          <VerticalFlexedWrapper
-            width={"28%"}
-            height={"45vh"}
-            margin={"1%"}
-            mobileWidth={"48%"}
-            elements={
-              <>
-                <ProductImage
-                  background={`'${product?.images[0]}'`}
-                  key={index}
-                  onClick={() =>
-                    navigate(
-                      `/product/${product.name}?category=${product.category}&name=${product.name}&price=${product.price}&details=${product.description}&id=${product.id}`
-                    )
-                  }
-                >
-                  <ProductBadge>New</ProductBadge>
-                </ProductImage>
-                <VerticalFlexedWrapper
-                  height={"30%"}
-                  width={"100%"}
-                  justify={"center"}
-                  elements={
-                    <>
-                      <Text
-                        width={"100%"}
-                        line={"0px"}
-                        align={"left"}
-                        fontSmall={"16px"}
-                        smallLine={"20px"}
-                        style={{ fontWeight: "bold" }}
-                      >
-                        {product?.name}
-                      </Text>
-                      <Text
-                        line={"18px"}
-                        width={"100%"}
-                        align={"left"}
-                        fontSmall={"14px"}
-                        smallLine={"14px"}
-                      >
-                         {product.category} | {TruncateText(product.description)}
-                      </Text>
-
-                      <HorizontalFlexedWrapper
-                        width={"100%"}
-                        height={"10%"}
-                        justify={"flex-start"}
-                        elements={
-                          <>
-                            <ImageWrapper
-                              image={CartIcon}
-                              width={"30px"}
-                              height={"30px"}
-                            />
-                            <Text
-                              width={"50%"}
-                              align={"left"}
-                              style={{ marginLeft: "10px" }}
-                            >
-                              {product?.price}
-                            </Text>
-                          </>
-                        }
-                      />
-                    </>
-                  }
-                />
-              </>
-            }
-          />
+        ProductFilteredByCategory.map((prod, index) => (
+          <ProductWrapping key={index}>
+            <VerticalFlexedWrapper
+              onClick={() =>
+                navigate(
+                  `/product/${prod.name}?category=${prod.category}&name=${prod.name}&price=${prod.price}&details=${prod.description}&id=${prod.id}`
+                )
+              }
+              justify={"space-between"}
+              width={"100%"}
+              smallWidth={"100%"}
+              align={"flex-start"}
+              height={"100%"}
+              elements={
+                <>
+                  <ProductBadge
+                    background={`'${prod.images[0]}'`}
+                  ></ProductBadge>
+                  <LightText>{prod?.category}</LightText>
+                  <SolidText>{prod?.name}</SolidText>
+                  <SolidText>${prod?.price}</SolidText>
+                  <AddToCartBtn>ADD TO CART {">"}</AddToCartBtn>
+                </>
+              }
+            />
+          </ProductWrapping>
         ))
       )}
       {/* {selectedProduct !== null &&
@@ -572,29 +479,87 @@ const ProductImage = styled.div`
   }
 `;
 
-const ProductBadge = styled.div`
-  position: absolute;
-  background: red;
-  color: #ffffff;
-  font-family: Josefin Sans;
-  text-transform: capitalize;
-  top: 10px;
-  right: 10px;
-  padding: 8px;
-`;
-
 const ProductWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  justify-content: left;
-  align-items: left;
   height: fit-content;
+  row-gap: 20px;
+  column-gap: 20px;
+  margin-bottom: 10vh;
+  margin-left: 7.5%;
+
+  @media (max-width: 1400px) {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 48% 48%;
+    column-gap: 2.5%;
+    row-gap: 1%;
+    margin-left: 0px;
+  }
+`;
+
+const ProductWrapping = styled.div`
+  width: 20%;
+  height: 350px;
+  background: #ffffff;
+  box-shadow: 0px 0px 20px 5px #8787871a, 0px 0px 40px 10px #87878717,
+    0px 0px 60px 15px #8787870d, 0px 0px 80px 20px #87878703,
+    0px 0px 100px 25px #87878700;
+  padding: 10px;
+  border-radius: 10px;
 
   @media (max-width: 1400px) {
     width: 100%;
   }
+`;
+
+const ProductBadge = styled.div`
+  // object-fit: cover;
+  background: url(${(props) =>
+    props.background ? props.background : props.background});
+  background-repeat: no-repeat;
+  background-position: cover;
+  background-size: 100%;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+
+  @media (max-width: 1400px) {
+    background-position: contain;
+    background-size: 100%;
+    height: 55%;
+    width: 100%;
+    margin: 0px;
+  }
+`;
+
+const AddToCartBtn = styled.div`
+  font-family: Poppins;
+  font-size: 1rem;
+  font-weight: 600;
+  color: ${Colors.ORANGE};
+  text-align: right;
+  width: 100%;
+`;
+
+const LightText = styled.p`
+  font-family: Poppins;
+  font-size: 1rem;
+  text-align: left;
+  opacity: 0.7;
+  font-weight: 600;
+  // line-height: 0px;
+`;
+
+const SolidText = styled.p`
+  font-family: Poppins;
+  font-size: 1.2rem;
+  text-align: left;
+  font-weight: 700;
 `;
 
 export default Listings;

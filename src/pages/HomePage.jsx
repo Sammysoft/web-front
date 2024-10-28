@@ -13,10 +13,7 @@ import AdvertCard from "../components/Cards/Index";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100vh;
-  // background-size: cover;
-  // background-position: center;
-  // background-repeat: no-repeat;
+  height: 95vh;
   background-color: ${Colors.PRIMARY};
 
   @media (max-width: 1400px){
@@ -29,14 +26,14 @@ const Wrapper = styled.div`
 const HomePage = () => {
   return (
     <>
-      {/* <NavBar />
+      <NavBar />
       <Wrapper>
         <Header />
       </Wrapper>
       <ProductListing />
       <AdvertCard />
       <HomeBlogs />
-      <Footer /> */}
+      <Footer />
     </>
   );
 };

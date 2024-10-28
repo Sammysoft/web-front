@@ -123,6 +123,7 @@ const IMGWrapper = styled.img`
   height: ${(props) => (props.height ? props.height : "100%")};
   width: ${(props) => (props.width ? props.width : "100%")};
   margin: ${(props) => (props.margin ? props.margin : "")};
+  border-radius: ${(props) => (props.rounded ? "20px" : "")};
 
   @media (max-width: 1400px) {
     width: ${(props) => (props.smallWidth ? props.smallWidth : props.width)};
@@ -140,6 +141,7 @@ export const ImageWrapper = ({
   margin,
   smallWidth,
   smallHeight,
+  rounded,
 }) => {
   return (
     <>
@@ -152,6 +154,7 @@ export const ImageWrapper = ({
         onClick={onClick}
         margin={margin}
         smallHeight={smallHeight}
+        rounded={rounded}
       />
     </>
   );
@@ -191,7 +194,7 @@ const ButtonWrapper = styled.div`
   text-align: center;
   border: 2px solid #000000;
   padding: 10px;
-  font-family: Josefin Sans;
+  font-family: Poppins;
   width: ${(props) => (props.width ? props.width : "100%")};
   color: #000000;
   justify-content: center;
@@ -222,7 +225,7 @@ export const StyledButton = ({
   loading,
   margin,
   padding,
-  bdColor
+  bdColor,
 }) => {
   return (
     <>
@@ -253,7 +256,7 @@ const StyledButtonWrapper = styled.div`
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#FFFFFF")};
   margin: ${(props) => (props.margin ? props.margin : "2vh 0px 2vh 0px")};
   cursor: pointer;
-  border: ${(props)=>props.bdColor ? props.bdColor : ""};
+  border: ${(props) => (props.bdColor ? props.bdColor : "")};
 
   @media (max-width: 1400px) {
     font-size: 12px;
@@ -334,6 +337,7 @@ const DropDownButtonWrapper = styled.select`
   cursor: pointer;
   outline: none;
   font-size: 18px;
+  border-radius: 20px;
   font-family: ${Fonts.PRIMARY};
   option {
     background-color: #ffffff;

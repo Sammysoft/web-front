@@ -3,6 +3,17 @@ import NavBar from "../components/Nabar";
 import Footer from "../components/Footer";
 import Header from "../components/Product/Header";
 import Listings from "../components/Product/Listing";
+import AdvertCard from "../components/Cards/Index";
+import styled from "styled-components";
+
+const DesktopSpacer = styled.div`
+height: 15vh;
+width: 100%;
+
+@media (max-width: 1400px){
+  display: none;
+}
+`
 
 const ProductsPage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -17,6 +28,8 @@ const ProductsPage = () => {
         selectedProduct={selectedProduct}
         setSelectedProduct={setSelectedProduct}
       />
+      <DesktopSpacer />
+      <AdvertCard />
       <Footer />
     </>
   );

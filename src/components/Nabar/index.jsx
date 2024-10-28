@@ -7,6 +7,7 @@ import {
   BoxedButton,
   HorizontalFlexedWrapper,
   ImageWrapper,
+  StyledButton,
 } from "../Elements";
 
 import LogoSVG from "../../assets/Icons/svg/logo-black.svg";
@@ -14,7 +15,7 @@ import PersonSVG from "../../assets/Icons/svg/person-black.svg";
 import ChartSVG from "../../assets/Icons/svg/chart-black.svg";
 import HarmbuggerSVG from "../../assets/Icons/svg/harmbugger.svg";
 
-import { Fonts, Sizes } from "../../assets/Res/fonts";
+import { Colors, Fonts, Sizes } from "../../assets/Res/fonts";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../Home/Blogs";
 import { useDispatch, useSelector } from "react-redux";
@@ -77,13 +78,20 @@ const NavBar = () => {
           width={"100%"}
           elements={
             <>
-              <ImageWrapper
-                image={LogoSVG}
-                height={"150px"}
-                width={"150px"}
-                onClick={() => handleLogout()}
+              <HorizontalFlexedWrapper
+                width={"50%"}
+                elements={
+                  <>
+                    <ImageWrapper
+                      image={LogoSVG}
+                      height={"150px"}
+                      width={"150px"}
+                      onClick={() => handleLogout()}
+                    />
+                    <MenuItems navigate={navigate} />
+                  </>
+                }
               />
-              <MenuItems navigate={navigate} />
               <MenuDetails navigate={navigate} />
             </>
           }
@@ -95,14 +103,14 @@ const NavBar = () => {
           width={"100%"}
           elements={
             <>
-             <ImageWrapper
-                      onClick={() => {
-                        setToggle(!toggle);
-                      }}
-                      image={HarmbuggerSVG}
-                      width={"30px"}
-                      height={"30px"}
-                    />
+              <ImageWrapper
+                onClick={() => {
+                  setToggle(!toggle);
+                }}
+                image={HarmbuggerSVG}
+                width={"30px"}
+                height={"30px"}
+              />
               <ImageWrapper
                 image={LogoSVG}
                 width={"80px"}
@@ -194,7 +202,7 @@ const MenuItems = ({ navigate }) => {
   return (
     <>
       <HorizontalFlexedWrapper
-        width={"40%"}
+        width={"60%"}
         elements={
           <>
             <MenuList
@@ -218,7 +226,14 @@ const MenuItems = ({ navigate }) => {
             >
               Blog
             </MenuList>
-            <MenuList onClick={() => navigate("/contact")}>Contact</MenuList>
+            <MenuList
+              onClick={() => {
+                navigate("/contact");
+              }}
+            >
+              Contact
+            </MenuList>
+            <MenuList></MenuList>
           </>
         }
       />
@@ -230,6 +245,8 @@ const MenuList = styled.p`
   font-family: ${Fonts.PRIMARY};
   font-size: ${Sizes.PRIMARY};
   cursor: pointer;
+  color: ${Colors.DEEP_BLUE};
+  font-weight: 500;
 `;
 
 const LoginText = styled.p`
@@ -265,7 +282,14 @@ const MenuDetails = ({ navigate }) => {
               <LoginText>{addEllipsis(profile?.fullName, 8)}</LoginText>
             )}
             {!profile?.fullName && (
-              <LoginText onClick={() => navigate("/login")}>Login</LoginText>
+              // <LoginText onClick={() => navigate("/login")}>Login</LoginText>
+              <StyledButton
+                text={"Login"}
+                bgColor={Colors.DEEP_BLUE}
+                color={"#ffffff"}
+                // width={"10%"}
+                onPress={() => navigate("/login")}
+              />
             )}
             <div onClick={() => navigate("/checkout")}>
               <ImageWrapper image={ChartSVG} height={"30px"} width={"30px"} />

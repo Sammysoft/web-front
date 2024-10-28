@@ -147,7 +147,6 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
     }
   };
 
-
   return (
     <>
       <Wrapper>
@@ -193,7 +192,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                 elements={
                   <>
                     <DropDownButton
-                      text={"LATEST PIECES"}
+                      text={"BONGEE"}
+                      list={[{ name: "BONGEE" }]}
                       width={"70%"}
                       bgColor={"#D9D9D9"}
                       Icon={
@@ -207,7 +207,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                       }
                     />
                     <DropDownButton
-                      text={"CATEGORY 1"}
+                      text={"AGERE"}
+                      list={[{ name: "AGERE" }]}
                       width={"70%"}
                       bgColor={"#D9D9D9"}
                       Icon={
@@ -221,7 +222,8 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                       }
                     />
                     <DropDownButton
-                      text={"CATEGORY 2"}
+                      text={"RENOUVELE"}
+                      list={[{ name: "RENOUVELE" }]}
                       width={"70%"}
                       bgColor={"#D9D9D9"}
                       Icon={
