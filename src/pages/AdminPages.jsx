@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { useEffect } from "react";
 import Header from "../components/Admin/Header";
 import NavBar from "../components/Nabar";

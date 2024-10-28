@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import styled from "styled-components";
 import {
@@ -14,6 +16,7 @@ import HomeHero from "../../../assets/Images/home_header.svg";
 import MobileHero from "../../../assets/Images/home_mobile_img.svg";
 import { Text } from "../Blogs";
 import { Colors } from "../../../assets/Res/fonts";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   height: 60vh;
@@ -45,7 +48,7 @@ const BoldText = styled.p`
   color: ${Colors.DEEP_BLUE};
   width: 100%;
 
-    @media (max-width: 1400px) {
+  @media (max-width: 1400px) {
     font-size: 1.5rem;
     margin-top: 0px;
     color: black;
@@ -72,6 +75,7 @@ const SimpleText = styled.div`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Wrapper>
@@ -100,7 +104,8 @@ const Header = () => {
                       text={"Shop now >"}
                       color={"#ffffff"}
                       bgColor={Colors.DEEP_BLUE}
-                      width={'20%'}
+                      width={"20%"}
+                      onPress={() => navigate("/product")}
                     />
                   </>
                 }
