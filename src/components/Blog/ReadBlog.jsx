@@ -52,6 +52,8 @@ const ReadBlog = () => {
     <>
       <Wrapper>
         <VerticalFlexedWrapper
+        justify={'center'}
+        align={'center'}
           elements={
             <>
               <Text color={"#696969"} size={"16px"} width={"100%"}>
@@ -59,7 +61,7 @@ const ReadBlog = () => {
               </Text>
               <Text
                 color={"#2A1C03"}
-                size={"44px"}
+                size={"50px"}
                 width={"100%"}
                 style={{ textTransform: "capitalize" }}
               >
@@ -76,15 +78,16 @@ const ReadBlog = () => {
                 elements={
                   <>
                     <VerticalFlexedWrapper
-                      width={"70%"}
+                      width={"100%"}
                       mobileWidth={"100%"}
                       height={"fit-content"}
+                      align={'center'}
                       elements={
                         <>
                           <Text
                             color={"#000000"}
-                            size={"25px"}
-                            weight={"800"}
+                            size={"50px"}
+                            weight={"900"}
                             align={"left"}
                             smallLine={"30px"}
                           >
@@ -96,6 +99,7 @@ const ReadBlog = () => {
                             align={"justify"}
                             fontSmall={"14px"}
                             smallLine={"28px"}
+
                           >
                             {Blog[0]?.post}
                           </Text>

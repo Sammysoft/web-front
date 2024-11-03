@@ -206,7 +206,10 @@ export const BlogCards = () => {
               <BoxedButton
                 width={"10%"}
                 text={"View More  >"}
-                onPress={() => navigate("/blog")}
+                onPress={() => {
+                  navigate("/blog");
+                  window.scrollTo(0, 0);
+                }}
               />
             </>
           }

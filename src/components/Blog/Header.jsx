@@ -19,10 +19,11 @@ const Wrapper = styled.div`
 `;
 
 const Header = () => {
+  const [showAll, setShowAll] = React.useState(Boolean);
 
-  const handleShowAll = ()=>{
-    setShowAll
-  }
+  const handleShowAll = () => {
+    setShowAll(!showAll);
+  };
 
   const post = `"Hey gentlemen! When it comes to style, shoes can
   make or break your outfit. Whether you're dressing
@@ -90,7 +91,7 @@ const Header = () => {
   longer and feel better. At 928 Apparels, we're
   committed to providing high-quality footwear that
   combines comfort, durability, and style."
-`
+`;
   return (
     <>
       <Wrapper>
@@ -136,18 +137,20 @@ const Header = () => {
                             fontSmall={"14px"}
                             smallLine={"28px"}
                           >
-                          {showAll ? post : addEllipsis(post, 1200)}
+                            {showAll ? post : addEllipsis(post, 1200)}
                           </Text>
                         </>
                       }
                     />
-                   {!showAll &&  <StyledButton
-                    onPress={handleShowAll}
-                      width={"20%"}
-                      bgColor={"#D6D6D6"}
-                      text={"Read More"}
-                      color={"#000000"}
-                    />}
+                    {!showAll && (
+                      <StyledButton
+                        onPress={handleShowAll}
+                        width={"20%"}
+                        bgColor={"#D6D6D6"}
+                        text={"Read More"}
+                        color={"#000000"}
+                      />
+                    )}
                   </>
                 }
                 width={"100%"}
