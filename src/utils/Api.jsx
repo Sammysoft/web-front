@@ -1,14 +1,16 @@
 import axios from "axios";
 
+
+
 export const apiCall = axios.create({
-    baseURL: "https://store-api-pyo1.onrender.com/api/v1",
+    baseURL: " https://store-api-pyo1.onrender.com/api/v1",
     headers: {
       "Content-type": "application/json",
     },
   });
 
 export const tokenApiCall = axios.create({
-    baseURL: "https://store-api-pyo1.onrender.com/api/v1",
+    baseURL: " https://store-api-pyo1.onrender.com/api/v1",
     headers: {
       "Content-type": "application/json",
     },

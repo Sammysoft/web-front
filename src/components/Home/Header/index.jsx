@@ -56,7 +56,7 @@ const BoldText = styled.p`
 `;
 
 const LightText = styled.p`
-  font-weight: 500;
+  font-weight: 600;
   font-family: Poppins;
   font-size: 3rem;
   text-align: left;
@@ -93,7 +93,7 @@ const Header = () => {
                 elements={
                   <>
                     <BoldText>
-                      <i>African Tailoring...</i>
+                      <i>African Tailoring</i>
                     </BoldText>
                     <LightText>Timeless - Universal Appeal</LightText>
                     <SimpleText>
@@ -101,11 +101,11 @@ const Header = () => {
                       deliver with our exclusive collection.
                     </SimpleText>
                     <StyledButton
+                      onPress={() => navigate("/product")}
                       text={"Shop now >"}
                       color={"#ffffff"}
                       bgColor={Colors.DEEP_BLUE}
                       width={"20%"}
-                      onPress={() => navigate("/product")}
                     />
                   </>
                 }
@@ -127,6 +127,7 @@ const Header = () => {
           unique designs, and elevated basics crafted to perfection.
         </Text>
         <StyledButton
+          onPress={() => navigate("/product")}
           text={"Shop now"}
           bgColor={Colors.DEEP_BLUE}
           color={"#FFFFFF"}

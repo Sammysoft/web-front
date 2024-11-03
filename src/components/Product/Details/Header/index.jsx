@@ -37,7 +37,7 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
               >
                 {selectedProduct && `928 ${selectedProduct?.category}`}
               </Text>
-              <Text
+              {/* <Text
                 color={"#696969"}
                 width={"60%"}
                 size={"20px"}
@@ -48,7 +48,7 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum
                 consequat. Venenatis elit.{" "}
-              </Text>
+              </Text> */}
               <DropDownButton
                 width={"14%"}
                 text={"Change Currency"}

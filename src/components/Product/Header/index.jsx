@@ -10,7 +10,6 @@ import {
 } from "../../Elements";
 import { Text } from "../../Home/Blogs";
 
-
 import Prod1 from "../../../assets/Images/prodM1.svg";
 import Prod2 from "../../../assets/Images/prodM2.svg";
 import Prod3 from "../../../assets/Images/prodM3.svg";
@@ -65,30 +64,17 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
                 style={{ textTransform: "capitalize" }}
               >
                 {selectedProduct === null && " Our Product Lineup"}
-                {selectedProduct && `928 ${selectedProduct?.name}`}
+                {selectedProduct &&
+                  `928 ${selectedProduct?.name} Collection` }
               </Text>
-              <Text
-                color={"#696969"}
-                width={"60%"}
-                size={"20px"}
-                fontSmall={"14px"}
-                smallLine={"28px"}
-              >
-                Ornare nec placerat in elit convallis rutrum pellentesque. Ac
-                dis volutpat pellentesque et tortor elementum consequat.
-                Venenatis elit. Ac dis volutpat pellentesque et tortor elementum
-                consequat. Venenatis elit.{" "}
-              </Text>
+
               <DropDownButton
                 width={"14%"}
                 text={"Change Currency"}
                 bgColor={"#D9D9D9"}
                 smallWidth={"65%"}
                 change={currency}
-                list={[
-                  { name: "Dollar" },
-                  { name: "Naira" },
-                ]}
+                list={[{ name: "Dollar" }, { name: "Naira" }]}
                 onSelect={(option, index) => {
                   setCurrency(option.name);
                 }}

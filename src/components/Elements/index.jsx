@@ -228,6 +228,7 @@ export const StyledButton = ({
   margin,
   padding,
   bdColor,
+  smallWidth
 }) => {
   return (
     <>
@@ -239,6 +240,7 @@ export const StyledButton = ({
         margin={margin}
         padding={padding}
         bdColor={bdColor}
+        smallWidth={smallWidth}
       >
         {loading ? <Loader active={loading} inline={"centered"} /> : text}
       </StyledButtonWrapper>
@@ -262,7 +264,7 @@ const StyledButtonWrapper = styled.div`
 
   @media (max-width: 1400px) {
     font-size: 12px;
-    width: 50%;
+    width: ${(props)=> props.smallWidth ? props.smallWidth : "50%"};
   }
 `;
 

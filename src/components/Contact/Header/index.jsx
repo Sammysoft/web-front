@@ -33,7 +33,7 @@ const Header = () => {
               >
                 Have an inquiry or special request?
               </Text>
-              <Text
+              {/* <Text
                 color={"#696969"}
                 width={"70%"}
                 size={"18px"}
@@ -44,7 +44,7 @@ const Header = () => {
                 dis volutpat pellentesque et tortor elementum consequat.
                 Venenatis elit. Ac dis volutpat pellentesque et tortor elementum
                 consequat. Venenatis elit.
-              </Text>
+              </Text> */}
             </>
           }
         />

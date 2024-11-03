@@ -37,8 +37,8 @@ const Wrapper = styled.div`
 `;
 
 const MobileWrapper = styled.div`
-  width: 80%;
-  margin: 5% 10% 5% 10%;
+  width: 95%;
+  margin: 2.5%;
 
   @media (min-width: 1400px) {
     display: none;
@@ -57,74 +57,7 @@ const ListingMenuWrapper = styled.div`
   }
 `;
 
-const MenuList = [
-  { name: "All Products", text: "All Products" },
-  { name: "Best Sellers", text: "Best Sellers" },
-  { name: "Kaftan", text: "Kaftan" },
-  { name: "Athleisure", text: "Athleisure" },
-  { name: "Agbada", text: "Agbada" },
-  { name: "Suits", text: "Suits" },
-  { name: "Art", text: "Art" },
-];
 
-const ProductListing = [
-  {
-    name: "Jacquard wine kaftan",
-    details: "Kaftan | Wine",
-    price: "$125.00",
-    image: Prod1,
-    category: "Kaftan",
-  },
-  {
-    name: "Coastline Jacket + Fedora",
-    details: "Jackets | Brown",
-    price: "$200.00",
-    image: Prod2,
-    category: "Athleisure",
-  },
-  {
-    name: "White Double Breasted Suit",
-    details: "Suits | White",
-    price: "$450.00",
-    image: Prod3,
-    category: "Kaftan",
-  },
-  {
-    name: "Jacquard wine kaftan",
-    details: "Kaftan | Wine",
-    price: "$120.00",
-    image: Prod4,
-    category: "Kaftan",
-  },
-  {
-    name: "Coastline Jacket + Fedora",
-    details: "Jackets | Brown",
-    price: "$99.99",
-    image: Prod5,
-    category: "Kaftan",
-  },
-  {
-    name: "White Double Breasted Suit",
-    details: "Suits | White",
-    price: "$45.09",
-    image: Prod6,
-    category: "Suits",
-  },
-  {
-    name: "Jacquard wine kaftan",
-    details: "Kaftan | Wine",
-    price: "$100.09",
-    image: Prod7,
-    category: "Kaftan",
-  },
-  {
-    name: "Coastline Jacket + Fedora",
-    details: "Jackets | Brown",
-    price: "$560.99",
-    image: Prod8,
-    category: "Agbada",
-  },
-];
 
 const Listings = ({ selectedProduct, setSelectedProduct }) => {
   console.log(selectedProduct);
@@ -261,6 +194,7 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
           text={"All Products"}
           onSelect={(option, index) => {
             setSelectedProduct(option);
+            window.scrollTo(0, 0);
           }}
         />
         <ProductWrapper>
@@ -409,7 +343,11 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
         ProductList.map((prod, index) => (
           <ProductWrapping key={index}>
             <VerticalFlexedWrapper
-              onClick={() => setSelectedProduct(prod)}
+              onClick={() =>
+                navigate(
+                  `/products/${prod.name}?category=${prod.category}&name=${prod.name}&price=${prod.price}&details=${prod.description}&id=${prod.id}`
+                )
+              }
               justify={"space-between"}
               width={"100%"}
               smallWidth={"100%"}
@@ -435,7 +373,7 @@ const ProductCard = ({ selectedProduct, setSelectedProduct }) => {
             <VerticalFlexedWrapper
               onClick={() =>
                 navigate(
-                  `/product/${prod.name}?category=${prod.category}&name=${prod.name}&price=${prod.price}&details=${prod.description}&id=${prod.id}`
+                  `/products/${prod.name}?category=${prod.category}&name=${prod.name}&price=${prod.price}&details=${prod.description}&id=${prod.id}`
                 )
               }
               justify={"space-between"}

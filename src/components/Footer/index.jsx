@@ -9,11 +9,12 @@ import {
   VerticalFlexedWrapper,
 } from "../Elements";
 import { Text } from "../Home/Blogs";
+import { useNavigate } from "react-router";
 
 import Logo from "../../assets/Icons/svg/logo-black.svg";
 
 import Facebook from "../../assets/Icons/svg/fb.svg";
-import Youtube from "../../assets/Icons/svg/yt.svg";
+import Twitter from "../../assets/Icons/svg/twitter.svg";
 import Instagram from "../../assets/Icons/svg/ig.svg";
 import LinkedIn from "../../assets/Icons/svg/x.svg";
 import { Colors } from "../../assets/Res/fonts";
@@ -32,6 +33,7 @@ const Wrapper = styled.div`
 `;
 
 const Footer = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Wrapper>
@@ -48,10 +50,14 @@ const Footer = () => {
                       height={"fit-content"}
                       elements={
                         <>
-                          <Menu>Home</Menu>
-                          <Menu>Products</Menu>
-                          <Menu>Blogs</Menu>
-                          <Menu>Contact</Menu>
+                          <Menu onClick={() => navigate("/")}>Home</Menu>
+                          <Menu onClick={() => navigate("/product")}>
+                            Products
+                          </Menu>
+                          <Menu onClick={() => navigate("/blog")}>Blogs</Menu>
+                          <Menu onClick={() => navigate("/contact")}>
+                            Contact
+                          </Menu>
                         </>
                       }
                     />
@@ -66,25 +72,46 @@ const Footer = () => {
                 elements={
                   <>
                     <ImageWrapper
+                      onClick={() => {
+                        window.open(
+                          "https://web.facebook.com/928apparels",
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                      }}
                       image={Facebook}
                       width={"10%"}
                       height={"30px"}
                     />
                     <ImageWrapper
-                      image={Youtube}
+                      onClick={() => {
+                        window.open(
+                          "https://www.x.com/928_apparels",
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                      }}
+                      image={Twitter}
                       width={"10%"}
                       height={"30px"}
                     />
                     <ImageWrapper
+                      onClick={() => {
+                        window.open(
+                          "https://www.instagram.com/928apparels",
+                          "_blank",
+                          "noopener,noreferrer"
+                        );
+                      }}
                       image={Instagram}
                       width={"10%"}
                       height={"30px"}
                     />
-                    <ImageWrapper
+                    {/* <ImageWrapper
                       image={LinkedIn}
                       width={"10%"}
                       height={"30px"}
-                    />
+                    /> */}
                   </>
                 }
               />
@@ -101,7 +128,7 @@ const Footer = () => {
                 bgColor={"#FD9017"}
                 color={"#FFFFFF"}
               /> */}
-              <Text color={"#000000"} size={"14px"} fontSmall={'10px'}>
+              <Text color={"#000000"} size={"14px"} fontSmall={"10px"}>
                 © 2024 928apparels, All Rights Reserved
               </Text>
             </>

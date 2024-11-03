@@ -13,7 +13,7 @@ import AdvertCard from "../components/Cards/Index";
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 95vh;
+  height: 90vh;
   background-color: ${Colors.PRIMARY};
 
   @media (max-width: 1400px){

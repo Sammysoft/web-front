@@ -11,12 +11,14 @@ import { Text } from "../Home/Blogs";
 
 import FormImg from "../../assets/Images/form_img.svg";
 import { Fonts } from "../../assets/Res/fonts";
+import toast from "react-hot-toast";
 
 const Wrapper = styled.div`
   height: 60vh;
   padding-left: 20px;
   width: 70%;
   margin: 5% 15% 10% 15%;
+  border-radius: 40px;
   background: #ffffff;
   box-shadow: -11px 21px 53px 0px #8787871a, -45px 86px 97px 0px #87878717,
     -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
@@ -31,6 +33,10 @@ const Wrapper = styled.div`
 `;
 
 const ContactForm = () => {
+  const handleSubmit = () => {
+    toast.success("message sent successfully");
+  };
+
   return (
     <>
       <Wrapper>
@@ -77,22 +83,6 @@ const ContactForm = () => {
                                           Name
                                         </Text>
                                         <TextField />
-                                          {/* <HorizontalFlexedWrapper
-                                            width={"50%"}
-                                            height={"100%"}
-                                            mobileWidth={"70%"}
-                                            elements={
-                                              <>
-                                                <Text
-                                                  fontSmall={"14px"}
-                                                  smallLine={"28px"}
-                                                >
-                                                  Enter your full name
-                                                </Text>
-                                              </>
-                                            }
-                                          />
-                                        </TextField> */}
                                       </>
                                     }
                                   />
@@ -129,7 +119,7 @@ const ContactForm = () => {
                                           Phone
                                         </Text>
                                         <TextField />
-                                          {/* <HorizontalFlexedWrapper
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"60%"}
@@ -180,7 +170,7 @@ const ContactForm = () => {
                                           Email
                                         </Text>
                                         <TextField />
-                                          {/* <HorizontalFlexedWrapper
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"60%"}
@@ -232,7 +222,7 @@ const ContactForm = () => {
                                           Message
                                         </Text>
                                         <TextField />
-                                          {/* <HorizontalFlexedWrapper
+                                        {/* <HorizontalFlexedWrapper
                                             width={"50%"}
                                             height={"100%"}
                                             smallWidth={"60%"}
@@ -260,9 +250,11 @@ const ContactForm = () => {
                     />
                     <ButtonWrap>
                       <StyledButton
+                        onPress={handleSubmit}
                         bgColor={"#8787871A"}
                         text={"Send message"}
                         width={"30%"}
+                        smallWidth={'100%'}
                       />
                     </ButtonWrap>
                   </>
@@ -287,7 +279,7 @@ const ButtonWrap = styled.div`
   text-align: left;
   margin-top: 20px;
 
-  @media (max-width: 1400px){
+  @media (max-width: 1400px) {
     width: 50%;
     margin-left: auto;
   }
@@ -299,9 +291,11 @@ const FormImage = styled.div`
   background-size: 100%;
   background-repeat: no-repeat;
   height: 60vh;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
   width: 40%;
 
-   @media (max-width: 1400px) {
+  @media (max-width: 1400px) {
     width: 100%;
     height: 40vh;
   }

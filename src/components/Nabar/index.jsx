@@ -174,6 +174,8 @@ const MobileNavCapsule = ({ setToggle, toggle }) => {
         <BoxedButton text={"Products"} onPress={() => navigate("/product")} />
         <BoxedButton text={"Blog"} onPress={() => navigate("/blog")} />
         <BoxedButton text={"Contact"} onPress={() => navigate("/contact")} />
+        <BoxedButton text={"My Cart"} onPress={() => navigate("/checkout")} />
+        <BoxedButton text={"Login"} onPress={() => navigate("/login")} />
       </NavCapsuleWrapper>
     </>
   );

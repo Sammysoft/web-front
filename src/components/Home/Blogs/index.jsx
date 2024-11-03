@@ -65,33 +65,6 @@ const SimpleText = styled.div`
   width: 90%;
 `;
 
-const BlogItems = [
-  {
-    image: Blog1,
-    textHead: "Choosing the right corporate style: A modern noob’s approach",
-    textBody:
-      "Ornare nec placerat in elit convallis rutrum pellentesque. Ac dis volut.",
-  },
-  {
-    image: Blog2,
-    textHead: "The great colour debate Flashy? Too fun?",
-    textBody:
-      "Ornare nec placerat in elit convallis rutrum pellentesque. Ac dis volut.",
-  },
-  {
-    image: Blog3,
-    textHead: "The great colour debate - Too Flashy? Too fun?",
-    textBody:
-      "Ornare nec placerat in elit convallis rutrum pellentesque. Ac dis volut.",
-  },
-  {
-    image: Blog4,
-    textHead: "Choosing the right corporate style: A modern noob’s approach",
-    textBody:
-      "Ornare nec placerat in elit convallis rutrum pellentesque. Ac dis volut.",
-  },
-];
-
 const HomeBlogs = () => {
   return (
     <>
@@ -102,8 +75,8 @@ const HomeBlogs = () => {
               width={"100%"}
               elements={
                 <>
-                  <LightText>928 Blog</LightText>
-                  <BoldText>Catch up with the latest gists</BoldText>
+                  <BoldText>928 Blog</BoldText>
+                  {/* <BoldText>Catch up with the latest gists</BoldText> */}
                 </>
               }
             />
@@ -177,6 +150,12 @@ export const BlogCards = () => {
           Blogs.map((blog, index) => (
             <BlogCapsule key={index}>
               <VerticalFlexedWrapper
+                onClick={() => {
+                  navigate(
+                    `/blog/read?title=${blog.title}&thumbnail=${blog.thumbnail}&post=${blog.post}&id=${blog._id}`
+                  );
+                  window.scrollTo(0, 0);
+                }}
                 width={"100%"}
                 elements={
                   <>
@@ -242,8 +221,9 @@ const BlogCardWrapper = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: space-between;
+  column-gap: 4%;
 
   @media (max-width: 1400px) {
     flex-direction: column;

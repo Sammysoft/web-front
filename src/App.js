@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import { Routes, Route } from "react-router-dom";
@@ -15,6 +17,8 @@ import { Fonts } from "./assets/Res/fonts";
 import VerificationPage from "./pages/VerificationPage";
 import SuccessPage from "./pages/SuccessPage";
 import FailurePage from "./pages/FailurePage";
+import BlogReadPage from "./pages/BlogReadPage";
+import ScrollToTop from "./utils/Utils";
 
 function App() {
   return (
@@ -23,11 +27,13 @@ function App() {
         // position="top-right"
         toastOptions={{ style: { fontFamily: Fonts.PRIMARY } }}
       />
+      <ScrollToTop />
       <Routes>
         <Route path="/" exact element={<HomePage />} />
+        <Route path="/products/*" exact element={<ProductsDetails />} />
         <Route path="/product" exact element={<ProductsPage />} />
-        <Route path="/product/*" exact element={<ProductsDetails />} />
         <Route path="/blog" exact element={<Blogs />} />
+        <Route path="/blog/*" exact element={<BlogReadPage />} />
         <Route path="/contact" exact element={<ContactPage />} />
         <Route path="/login" exact element={<LoginPage />} />
         <Route path="/signup" exact element={<SignupPage />} />

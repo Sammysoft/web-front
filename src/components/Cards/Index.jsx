@@ -6,19 +6,20 @@ import { Colors } from "../../assets/Res/fonts";
 import { HorizontalFlexedWrapper, VerticalFlexedWrapper } from "../Elements";
 import Advert1 from "../../assets/Images/advert1.svg";
 import { StyledButton } from "../Elements";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
-  width: 90%;
+  width: 80%;
   border-radius: 10px;
   background-color: ${Colors.PRIMARY};
-  margin: 5%;
+  margin: 10% 10% 1% 10%;
   padding: 20px 0px 0px 0px;
 `;
 
 const BoldText = styled.p`
   font-weight: 700;
   font-family: Poppins;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
   text-transform: capitalize;
 `;
@@ -26,7 +27,7 @@ const BoldText = styled.p`
 const LightText = styled.p`
   font-weight: 500;
   font-family: Poppins;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   text-align: center;
   width: 100%;
   text-transform: capitalize;
@@ -41,13 +42,14 @@ const SimpleText = styled.div`
 `;
 
 const AdvertCard = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Wrapper>
         <HorizontalFlexedWrapper
           invert={true}
           align={"flex-end"}
-          height={"40vh"}
+          height={"30vh"}
           smallHeight={"100%"}
           elements={
             <>
@@ -65,12 +67,13 @@ const AdvertCard = () => {
                       <LightText>
                         Make a statement without saying a word
                       </LightText>
-                      <SimpleText>
+                      {/* <SimpleText>
                         At 928 Apparels, we believe in giving you the freedom to
                         express your individuality through fashion. Discover
                         pieces that match your vibe
-                      </SimpleText>
+                      </SimpleText> */}
                       <StyledButton
+                        onPress={()=> navigate('/product')}
                         text={"Explore"}
                         bgColor={"#003459"}
                         color={"#FFFFFF"}
@@ -100,7 +103,7 @@ const AdvertCard = () => {
 };
 const DesktopWrapper = styled.div`
   width: 100%;
-  height: 70%;
+  height: 50%;
   justify-content: left;
 
   @media (max-width: 1400px) {

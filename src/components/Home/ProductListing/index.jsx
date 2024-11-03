@@ -228,7 +228,11 @@ const ProductCatalogue = () => {
                     ProductList?.map((prod, index) => (
                       <ProductWrapping key={index}>
                         <VerticalFlexedWrapper
-                          onClick={() => navigate("/product")}
+                          onClick={() =>
+                            navigate(
+                              `/products/${prod.name}?category=${prod.category}&name=${prod.name}&price=${prod.price}&details=${prod.description}&id=${prod.id}`
+                            )
+                          }
                           justify={"space-between"}
                           width={"100%"}
                           smallWidth={"100%"}
