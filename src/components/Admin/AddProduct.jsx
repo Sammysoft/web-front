@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   width: 80%;
   padding: 5%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1000px) {
     width: 95%;
     padding: 10px;
   }
@@ -796,7 +796,7 @@ const TextField = styled.input`
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1000px) {
     font-size: 14px;
   }
 `;
@@ -833,7 +833,7 @@ const SelectField = styled.select`
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 14px;
   }
 `;
@@ -846,7 +846,7 @@ const SelectWrap = styled.div`
   width: 100%;
   height: 100%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     padding-top: 10px;
     padding-bottom: 20px;
   }

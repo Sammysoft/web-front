@@ -16,7 +16,7 @@ const HFWrapper = styled.div`
     props.justify ? props.justify : "space-between"};
   margin: ${(props) => (props.margin ? props.margin : "")};
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     flex-direction: ${(props) => (props.invert ? "column" : "row")};
     height: ${(props) =>
       props.smallHeight ? props.smallHeight : "fit-content"};
@@ -74,7 +74,7 @@ const VFWrapper = styled.div`
   height: ${(props) => (props.height ? props.height : "100%")};
   margin: ${(props) => (props.margin ? props.margin : "")};
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: ${(props) => (props.mobileWidth ? props.mobileWidth : "100%")};
     flex-direction: ${(props) => (props.invert ? "row" : "column")};
     height: ${(props) =>
@@ -127,7 +127,7 @@ const IMGWrapper = styled.img`
   margin: ${(props) => (props.margin ? props.margin : "")};
   border-radius: ${(props) => (props.rounded ? "20px" : "")};
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: ${(props) => (props.smallWidth ? props.smallWidth : props.width)};
     height: ${(props) =>
       props.smallHeight ? props.smallHeight : props.height};
@@ -177,6 +177,7 @@ export const BoxedButton = ({
   onPress,
   fontSmall,
   loading,
+  margin
 }) => {
   return (
     <>
@@ -185,6 +186,7 @@ export const BoxedButton = ({
         smallWidth={smallWidth}
         onClick={onPress}
         fontSmall={fontSmall}
+        margin={margin}
       >
         {loading ? <Loader active={loading} inline="centered" /> : text}
       </ButtonWrapper>
@@ -205,8 +207,9 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   cursor: pointer;
   border-radius: 50px;
+  margin: ${(props)=> props.margin ? props.margin : ""};
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: ${(props) => (props.fontSmall ? props.fontSmall : "15px")};
     width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
     padding: 10px;
@@ -262,7 +265,7 @@ const StyledButtonWrapper = styled.div`
   cursor: pointer;
   border: ${(props) => (props.bdColor ? props.bdColor : "")};
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 12px;
     width: ${(props)=> props.smallWidth ? props.smallWidth : "50%"};
   }
@@ -354,7 +357,7 @@ const DropDownButtonWrapper = styled.select`
     background-color: #fd9017;
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: ${(props) => (props.smallWidth ? props.smallWidth : props.width)};
   }
 `;
@@ -374,7 +377,7 @@ export const BackgroundImage = styled.div`
   height: ${(props) => (props.height ? props.height : "100%")};
   width: ${(props) => (props.width ? props.width : "100%")};
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     height: ${(props) => (props.smallHeight ? props.smallHeight : "100%")};
     width: ${(props) => (props.smallWidth ? props.smallWidth : "100%")};
   }

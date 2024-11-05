@@ -23,7 +23,7 @@ const Wrapper = styled.div`
   width: 80%;
   padding: 5%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1000px) {
     width: 95%;
     padding: 10px;
   }
@@ -410,7 +410,7 @@ const SelectWrap = styled.div`
   width: 100%;
   height: 100%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 1000px) {
     padding-top: 10px;
     padding-bottom: 20px;
   }

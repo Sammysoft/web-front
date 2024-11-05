@@ -10,7 +10,7 @@ const DesktopSpacer = styled.div`
 height: 15vh;
 width: 100%;
 
-@media (max-width: 1400px){
+@media (max-width: 900px){
   display: none;
 }
 `

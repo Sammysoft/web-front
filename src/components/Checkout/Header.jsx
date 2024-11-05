@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   width: 80%;
   margin: 15vh 10% 2% 10%;
 
-  @media (max-width: 1400px){
+  @media (max-width: 900px){
     // margin-top: 20vh;
     margin: 10vh 10% 2% 10%;
   }

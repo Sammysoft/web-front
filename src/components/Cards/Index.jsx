@@ -14,6 +14,11 @@ const Wrapper = styled.div`
   background-color: ${Colors.PRIMARY};
   margin: 10% 10% 1% 10%;
   padding: 20px 0px 0px 0px;
+
+  @media (max-width: 9000px){
+    width: 90%;
+    margin: 10% 5% 1% 5%;
+  }
 `;
 
 const BoldText = styled.p`
@@ -22,6 +27,10 @@ const BoldText = styled.p`
   font-size: 2rem;
   text-align: center;
   text-transform: capitalize;
+
+  @media (max-width: 900px){
+    font-size: 2.2rem;
+  }
 `;
 
 const LightText = styled.p`
@@ -31,6 +40,10 @@ const LightText = styled.p`
   text-align: center;
   width: 100%;
   text-transform: capitalize;
+
+  @media (max-width: 900px){
+    font-size: 1.7rem;
+  }
 `;
 
 const SimpleText = styled.div`
@@ -67,11 +80,6 @@ const AdvertCard = () => {
                       <LightText>
                         Make a statement without saying a word
                       </LightText>
-                      {/* <SimpleText>
-                        At 928 Apparels, we believe in giving you the freedom to
-                        express your individuality through fashion. Discover
-                        pieces that match your vibe
-                      </SimpleText> */}
                       <StyledButton
                         onPress={()=> navigate('/product')}
                         text={"Explore"}
@@ -106,7 +114,7 @@ const DesktopWrapper = styled.div`
   height: 50%;
   justify-content: left;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 100%;
     height: 100%;
     justify-content: center;

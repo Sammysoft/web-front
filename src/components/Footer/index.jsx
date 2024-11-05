@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 100%;
     padding: 5%;
   }
@@ -154,7 +154,7 @@ const Menu = styled.div`
   width: 25%;
   cursor: pointer;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 15px;
   }
 `;

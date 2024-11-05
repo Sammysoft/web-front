@@ -88,7 +88,7 @@ const CustomImageWrapper = styled.div`
   background-position: center;
   width: 50%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     height: 30vh;
     width: 100%;
   }
@@ -102,7 +102,7 @@ const WrapperText = styled.p`
   color: #ffffff;
   text-align: center;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 1rem;
   }
 `;

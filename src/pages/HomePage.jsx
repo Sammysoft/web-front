@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   height: 90vh;
   background-color: ${Colors.PRIMARY};
 
-  @media (max-width: 1400px){
+  @media (max-width: 900px){
     height: 90vh;
   }
 

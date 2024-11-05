@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   height: 50vh;
   margin-top: 10vh;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 90%;
     height: 70vh;
     margin: 5%;

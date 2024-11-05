@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   padding-top: 30vh;
   margin: 0px 5% 0px 5%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;
@@ -35,7 +35,7 @@ const MobileWrapper = styled.div`
   padding-top: 15vh;
   margin: 0px 5% 0px 5%;
 
-  @media (min-width: 1400px) {
+  @media (min-width: 900px) {
     display: none;
   }
 `;
@@ -48,7 +48,7 @@ const BoldText = styled.p`
   color: ${Colors.DEEP_BLUE};
   width: 100%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 1.5rem;
     margin-top: 0px;
     color: black;
@@ -152,7 +152,7 @@ const OverLayWrapper = styled.div`
   height: 100%;
   position: relative;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     height: 100%;
     width: 100%;
     position: relative;
@@ -166,7 +166,7 @@ const OverLayInnerWrapper = styled.div`
   top: -30vh;
   right: -30vw;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     height: 70vh;
     width: 100%;
     right: 0px;
@@ -188,7 +188,7 @@ const ItalizedText = styled.p`
   text-align: left;
   text-transform: capitalize;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 2rem;
     margin-top: 1rem;
   }
@@ -203,7 +203,7 @@ const ItalizedText = styled.p`
 //   text-align: left;
 //   text-transform: capitalize;
 
-//   @media (max-width: 1400px) {
+//   @media (max-width: 900px) {
 //     font-size: 1.5rem;
 //     margin-top: 0px;
 //   }

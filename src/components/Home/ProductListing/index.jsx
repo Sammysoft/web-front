@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   height: fit-content;
   // padding: 5%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     margin-bottom: 10vh;
     width: 100%;
     // padding: 20px;
@@ -85,7 +85,7 @@ const ListingMenuWrapper = styled.div`
   overflow-x: auto;
   white-space: no-wrap;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;
@@ -109,7 +109,7 @@ const Text = styled.p`
   text-transform: capitalize;
   padding: 5px 10px 5px 7.5%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     padding: 5px 10px 5px 10px;
   }
 `;
@@ -125,7 +125,7 @@ const BoldText = styled.p`
   text-transform: capitalize;
   marigin-left: 7.5%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     margin-left: 0px;
     padding: 5px 10px 5px 10px;
     width: 100%;
@@ -314,7 +314,7 @@ const ProductWrapper = styled.div`
   margin-bottom: 10vh;
   margin-left: 7.5%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 100%;
     display: grid;
     grid-template-columns: 48% 48%;
@@ -334,7 +334,7 @@ const ProductWrapping = styled.div`
   padding: 10px;
   border-radius: 10px;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 100%;
   }
 `;
@@ -350,7 +350,7 @@ const ProductBadge = styled.div`
   height: 100%;
   border-radius: 10px;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     background-position: contain;
     background-size: 100%;
     height: 55%;
@@ -365,7 +365,7 @@ const LeftText = styled.div`
   margin-top: 20vh;
   position: relative;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;

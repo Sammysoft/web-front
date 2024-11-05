@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   padding: 10%;
   height: fit-content;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     // background-position: contain;
     // background-size: cover;
     padding: 5% 0% 5% 0%;
@@ -95,7 +95,7 @@ const BlogWrapper = styled.div`
   height: fit-content;
   opacity: 0.9;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     padding: 0px;
   }
 `;
@@ -116,7 +116,7 @@ export const Text = styled.div`
   text-align: ${(props) => (props.align ? props.align : "center")};
   cursor: ${(props) => (props.cursor ? props.cursor : "")};
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: ${(props) => (props.smallWidth ? props.smallWidth : "100%")};
     line-height: ${(props) => (props.smallLine ? props.smallLine : "45px")};
     font-size: ${(props) => (props.fontSmall ? props.fontSmall : "18px")};
@@ -228,7 +228,7 @@ const BlogCardWrapper = styled.div`
   align-items: space-between;
   column-gap: 4%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
@@ -245,7 +245,7 @@ const BlogCapsule = styled.div`
     -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
     -284px 536px 170px 0px #87878700;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 95%;
     margin: 2vh 2.5% 2vh 2.5%;
     border-radius: 20px;

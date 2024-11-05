@@ -20,7 +20,7 @@ const ProductWrapping = styled.div`
   background-position: center;
   background-size: 100%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     background-position: cover;
     background-size: 300%;
     height: 45vh;

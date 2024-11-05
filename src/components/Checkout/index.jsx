@@ -32,7 +32,7 @@ const Wrapper = styled.div`
     -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
     -284px 536px 170px 0px #87878700;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 95%;
     margin: 5% 2.5% 5% 2.5%;
   }
@@ -517,7 +517,7 @@ const CardWrapper = styled.div`
   height: 40vh;
   margin: 30px 0px 30px 0px;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     height: 50vh;
     margin: 5px;
   }
@@ -546,7 +546,7 @@ const WrappedBox = styled.div`
   cursor: pointer;
   height: fit-content;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: ${(props) => (props.fontSmall ? props.fontSmall : "14px")};
     width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
     padding: 5px;
@@ -578,7 +578,7 @@ const TextField = styled.input`
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 14px;
   }
 `;
@@ -615,7 +615,7 @@ const SelectField = styled.select`
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 14px;
   }
 `;

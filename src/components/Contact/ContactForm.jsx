@@ -24,7 +24,7 @@ const Wrapper = styled.div`
     -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
     -284px 536px 170px 0px #87878700;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 90%;
     margin: 10% 5% 5% 5%;
     height: fit-content;
@@ -279,7 +279,7 @@ const ButtonWrap = styled.div`
   text-align: left;
   margin-top: 20px;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 50%;
     margin-left: auto;
   }
@@ -295,7 +295,7 @@ const FormImage = styled.div`
   border-bottom-right-radius: 40px;
   width: 40%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 100%;
     height: 40vh;
   }
@@ -333,7 +333,7 @@ const SelectWrap = styled.div`
   width: 100%;
   height: 100%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     padding-top: 10px;
     padding-bottom: 20px;
   }

@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   margin: 5% 10% 15% 10%;
   height: fit-content;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;
@@ -36,8 +36,9 @@ const Wrapper = styled.div`
 const MobileWrapper = styled.div`
   width: 90%;
   margin: 5%;
+  height: fit-content;
 
-  @media (min-width: 1400px) {
+  @media (min-width: 900px) {
     display: none;
   }
 `;
@@ -49,7 +50,7 @@ const ListingMenuWrapper = styled.div`
   overflow-x: auto;
   white-space: no-wrap;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     height: 25%;
   }
 `;
@@ -810,7 +811,7 @@ const ProductDetail = ({ selectedProduct, setSelectedProduct }) => {
                 </>
               }
               width={"100%"}
-              height={"50vh"}
+              height={"fit-content"}
             />
           </ProductWrapper>
         )}
@@ -833,7 +834,7 @@ const WrappedBox = styled.div`
   cursor: pointer;
   height: fit-content;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: ${(props) => (props.fontSmall ? props.fontSmall : "14px")};
     width: ${(props) => (props.smallWidth ? props.smallWidth : "60%")};
     padding: 5px;
@@ -865,7 +866,7 @@ const TextField = styled.input`
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 14px;
   }
 `;
@@ -902,7 +903,7 @@ const SelectField = styled.select`
     border-bottom: 2px solid #000; /* Ensures the bottom border remains on active state */
   }
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     font-size: 14px;
   }
 `;
@@ -916,7 +917,7 @@ const ProductImage = styled.div`
   width: 100%;
   margin-bottom: 40px;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     height: 40vh;
   }
 `;
@@ -945,7 +946,7 @@ const ProductWrapper = styled.div`
   align-items: left;
   height: fit-content;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     width: 100%;
   }
 `;

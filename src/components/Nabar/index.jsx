@@ -34,7 +34,7 @@ const Wrapper = styled.div`
   left: 0;
   margin: 0px 5vw 0px 5vw;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     display: none;
   }
 `;
@@ -48,7 +48,7 @@ const MobileWrapper = styled.div`
   left: 0;
   margin: 0px 5vw 0px 5vw;
 
-  @media (min-width: 1400px) {
+  @media (min-width: 900px) {
     display: none;
   }
 `;
@@ -117,37 +117,6 @@ const NavBar = () => {
                 height={"80px"}
                 onClick={() => handleLogout()}
               />
-              {/* <HorizontalFlexedWrapper
-                width={"50%"}
-                elements={
-                  <>
-                    <ImageWrapper
-                      // onClick={() => handleLogout()}
-                      image={PersonSVG}
-                      width={"20px"}
-                      height={"20px"}
-                    />
-                    {!profile?.fullName && (
-                      <LoginText onClick={() => navigate("/login")}>
-                        Login
-                      </LoginText>
-                    )}
-                    {profile?.fullName && (
-                      <LoginText>{addEllipsis(profile?.fullName, 6)}</LoginText>
-                    )}
-                    <ImageWrapper
-                      onClick={() => navigate("/checkout")}
-                      image={ChartSVG}
-                      width={"20px"}
-                      height={"20px"}
-                    />
-                    <LoginText>{items.length}</LoginText>
-
-                  </>
-                }
-                align={"center"}
-                // justify={"center"}
-              /> */}
             </>
           }
         />
@@ -170,12 +139,36 @@ const MobileNavCapsule = ({ setToggle, toggle }) => {
             x
           </Text>
         </Cancel>
-        <BoxedButton text={"Home"} onPress={() => navigate("/")} />
-        <BoxedButton text={"Products"} onPress={() => navigate("/product")} />
-        <BoxedButton text={"Blog"} onPress={() => navigate("/blog")} />
-        <BoxedButton text={"Contact"} onPress={() => navigate("/contact")} />
-        <BoxedButton text={"My Cart"} onPress={() => navigate("/checkout")} />
-        <BoxedButton text={"Login"} onPress={() => navigate("/login")} />
+        <BoxedButton
+          text={"Home"}
+          margin={"10px 0px 10px 0px"}
+          onPress={() => navigate("/")}
+        />
+        <BoxedButton
+          text={"Products"}
+          margin={"10px 0px 10px 0px"}
+          onPress={() => navigate("/product")}
+        />
+        <BoxedButton
+          text={"Blog"}
+          margin={"10px 0px 10px 0px"}
+          onPress={() => navigate("/blog")}
+        />
+        <BoxedButton
+          text={"Contact"}
+          margin={"10px 0px 10px 0px"}
+          onPress={() => navigate("/contact")}
+        />
+        <BoxedButton
+          text={"My Cart"}
+          margin={"10px 0px 10px 0px"}
+          onPress={() => navigate("/checkout")}
+        />
+        <BoxedButton
+          text={"Login"}
+          margin={"10px 0px 10px 0px"}
+          onPress={() => navigate("/login")}
+        />
       </NavCapsuleWrapper>
     </>
   );
@@ -183,7 +176,7 @@ const MobileNavCapsule = ({ setToggle, toggle }) => {
 
 const NavCapsuleWrapper = styled.div`
   width: 100%;
-  height: 40vh;
+  height: fit-content;
   background: #ffffff;
   position: fixed;
   top: 0px;

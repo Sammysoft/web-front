@@ -47,7 +47,7 @@ const Wrapper = styled.div`
     -102px 193px 131px 0px #8787870d, -182px 343px 155px 0px #87878703,
     -284px 536px 170px 0px #87878700;
 
-  @media (max-width: 1400px) {
+  @media (max-width:900px) {
     width: 95%;
     margin: 2.5%;
     padding: 0px;
@@ -313,7 +313,7 @@ const GridWrapper = styled.div`
   //   background: red;
   height: fit-content;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     display: block;
     margin: 10px;
     width: 90%;
@@ -449,7 +449,7 @@ const ProductWrapping = styled.div`
   background-position: center;
   background-size: 100%;
 
-  @media (max-width: 1400px) {
+  @media (max-width: 900px) {
     background-position: cover;
     background-size: 200%;
     height: 40vh;
