@@ -10,12 +10,14 @@ import {
 
 import productH1 from "../../../assets/Images/producth1.svg";
 import productH2 from "../../../assets/Images/producth2.svg";
+import { useNavigate } from "react-router";
 
 const Wrapper = styled.div`
   width: 100%;
 `;
 
 const ProductHeader = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Wrapper>
@@ -39,8 +41,9 @@ const ProductHeader = () => {
                           text={"Explore"}
                           bgColor={"transparent"}
                           color={"#FFFFFF"}
-                          bdColor={'1px solid #FFFFFF'}
-                          width={'30%'}
+                          bdColor={"1px solid #FFFFFF"}
+                          width={"30%"}
+                          onPress={() => navigate(`/product?name=Ajere`)}
                         />
                       </>
                     }
@@ -49,7 +52,7 @@ const ProductHeader = () => {
               </CustomImageWrapper>
               <CustomImageWrapper background={productH2}>
                 <WrapperText>
-                <VerticalFlexedWrapper
+                  <VerticalFlexedWrapper
                     align={"center"}
                     justify={"center"}
                     elements={
@@ -62,8 +65,9 @@ const ProductHeader = () => {
                           text={"Explore"}
                           bgColor={"transparent"}
                           color={"#FFFFFF"}
-                          bdColor={'1px solid #FFFFFF'}
-                          width={'30%'}
+                          bdColor={"1px solid #FFFFFF"}
+                          width={"30%"}
+                          onPress={() => navigate(`/product?name=Renouvele`)}
                         />
                       </>
                     }

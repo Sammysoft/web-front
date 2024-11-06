@@ -26,6 +26,7 @@ import ProductDataService from "../../../Services/ProductDataService";
 import { Loader } from "semantic-ui-react";
 import { Colors } from "../../../assets/Res/fonts";
 import { TruncateText } from "../../../utils";
+import { useSearchParams } from "react-router-dom";
 
 const Wrapper = styled.div`
   width: 80%;
@@ -57,10 +58,8 @@ const ListingMenuWrapper = styled.div`
   }
 `;
 
-
-
 const Listings = ({ selectedProduct, setSelectedProduct }) => {
-  console.log(selectedProduct);
+  // console.log(selectedProduct);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(Boolean);
 
@@ -211,6 +210,9 @@ const Listings = ({ selectedProduct, setSelectedProduct }) => {
 const Menu = ({ selectedProduct, setSelectedProduct }) => {
   const [clicked, setClicked] = useState("all");
 
+  const [searchParams] = useSearchParams();
+  const productCategory = searchParams.get("name");
+
   const [loading, setLoading] = useState(Boolean);
   const [categories, setCategories] = useState([]);
 
@@ -221,6 +223,11 @@ const Menu = ({ selectedProduct, setSelectedProduct }) => {
       if (response) {
         console.log(response.data.data);
         setCategories(response.data.data);
+        if (productCategory && response.data.data.length > 0) {
+          setSelectedProduct(
+            response.data.data.find((item) => item["name"] === productCategory)
+          );
+        }
       } else {
         console.log("Could not get categories");
       }

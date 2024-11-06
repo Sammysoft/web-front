@@ -9,7 +9,6 @@ import {
   HorizontalFlexedWrapper,
 } from "../../Elements";
 import { Text } from "../../Home/Blogs";
-
 import Prod1 from "../../../assets/Images/prodM1.svg";
 import Prod2 from "../../../assets/Images/prodM2.svg";
 import Prod3 from "../../../assets/Images/prodM3.svg";
@@ -65,7 +64,7 @@ const Header = ({ selectedProduct, setSelectedProduct }) => {
               >
                 {selectedProduct === null && " Our Product Lineup"}
                 {selectedProduct &&
-                  `928 ${selectedProduct?.name} Collection` }
+                  `928 ${selectedProduct?.name } Collection` }
               </Text>
 
               <DropDownButton
